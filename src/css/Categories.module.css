@@ -1,0 +1,14 @@
+
+.categories h1{
+    color: white;
+    font-size: 1.5em;
+    margin-bottom: 1em;
+    margin-left: 2em;
+}
+.categories > div{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 200px);
+    column-gap: 1.5rem;
+    justify-content: center;
+    
+}

@@ -1,0 +1,27 @@
+.home {
+    display: grid;
+    grid-template-areas:
+        "nav head"
+        "nav main"
+        "foot foot";
+    grid-template-rows: 7vh 85vh 8vh;
+    grid-template-columns: 22vw 78vw;
+}
+
+.home > nav {
+    grid-area: nav;
+
+}
+
+.home > header {
+    grid-area: head;
+
+}
+
+.home > main {
+    grid-area: main;
+}
+
+.home > footer {
+    grid-area: foot;
+}

@@ -1,0 +1,79 @@
+.navbar {
+    background-color: #000000;
+    min-width: 20em;
+    height: 100%;
+    width: 100%;
+    padding: 1.5em;
+}
+
+.navbar img {
+    width: 45%;
+    background-color: black;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+}
+
+.menu div {
+    display: flex;
+    flex-direction: column;
+}
+
+.menu .headMenu {
+    margin-bottom: 2em;
+}
+
+.menuLink {
+    display: flex;
+    margin-top: 1em;
+    text-decoration: none;
+    color: white;
+}
+
+.menuLink {
+    font-size: 1.5em;
+    font-weight: bold;
+    opacity: 0.7;
+}
+
+.menuLink:hover {
+    opacity: 1;
+    color: white;
+}
+
+.menuLink:active {
+    opacity: 1;
+    color: white;
+    font-size: 1.4em;
+}
+
+.menuLink span {
+    margin-left: 1em;
+    font-size: 1rem;
+}
+
+.footNav {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    bottom: 7em;
+}
+
+.footNav a {
+    text-decoration: none;
+    color: white;
+    opacity: 0.7;
+}
+.footNav a:hover{
+    text-decoration: underline;
+}
+
+/* .showPopup{
+    display: block;
+} */
+.navbar .hidePopup{
+    display: none;
+   
+}

@@ -1,0 +1,33 @@
+.tracks{
+    background-color: #333131;
+    border-radius: 5px;
+    width: 12em;
+    height: 18em;
+    color: white;
+    overflow: hidden;
+}
+.tracks:hover{
+    background-color: #444343;
+}
+
+.tracks > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+.tracks img{
+    margin-bottom: 10px;
+    width: 160px;
+    width: 160px;
+}
+
+.tracks h6{
+    margin-bottom: 10px;
+}
+
+.tracks p{
+    opacity: 0.8;
+}
