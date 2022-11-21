@@ -111,7 +111,6 @@ const playListSlice = createSlice({
             .addCase(getCategorie.fulfilled, (state, action) => {
                 state.loading = false;
                 const [trending, mood] = action.payload
-                console.log('trending',trending);
 
                 const trendingItem = [];
                 trending.playlists.items.map((item) => {

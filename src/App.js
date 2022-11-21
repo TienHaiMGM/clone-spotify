@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { getToken, getUsers } from './redux/features/loginSlice';
+import { login, logout, getUsers } from './redux/features/loginSlice';
 import { getCategories, getCategorie, getAlbums } from './redux/features/playListSlice'
+import { getCurrentlyPlaying, getPlayer } from './redux/features/currentlyPlayingSlice'
 
 import Header from './components/Header';
 import Playlists from './pages/Playlists';
@@ -15,26 +16,27 @@ import PopupLogin from './components/PopupLogin';
 
 
 function App() {
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState();
 
   const stateLogin = useSelector((state) => state.loginReducer)
-  const statePlaylist = useSelector((state)=>state.playListRuducer)
-  console.log("alb",statePlaylist)
+  const statePlaylist = useSelector((state) => state.playListRuducer)
   const dispatch = useDispatch();
 
   useEffect(() => {
     const hash = getTokenFromUrl();
-    // window.location.hash = "";
+    window.location.hash = "";
     const _token = hash.access_token;
 
     if (_token) {
       setToken(_token);
-      dispatch(getToken(_token));
-      dispatch(getUsers({_token}));
-      dispatch(getCategories());
-      dispatch(getCategorie());
-      dispatch(getAlbums());
+      dispatch(login(_token));
+      dispatch(getUsers({ _token }));
     }
+    dispatch(getCategories());
+    dispatch(getCategorie());
+    dispatch(getAlbums());
+    dispatch(getCurrentlyPlaying());
+    dispatch(getPlayer());
   }, [])
 
   return (

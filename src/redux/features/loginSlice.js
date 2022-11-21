@@ -1,12 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-
+import { getTokenFromUrl } from '../../data/spotify';
 
 const initialState = {
     loading: false,
     data: {
-        token:"",
-        user:null,
+        token:localStorage.getItem('token'),
+        user:JSON.parse(localStorage.getItem('user')),
     },
     error: false,
 }
@@ -31,9 +31,15 @@ const loginSlice = createSlice({
     name: 'loginSlice',
     initialState,
     reducers: {
-        getToken: (state, action) => {
+        login: (state, action) => {
+            localStorage.setItem('token', action.payload);
             const token = action.payload
             state.data.token = token;
+        },
+        logout: (state, action) => {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            state.data.token = null;
         },
     },
     extraReducers: (builder) => {
@@ -43,6 +49,7 @@ const loginSlice = createSlice({
                 state.error = false;
             })
             .addCase(getUsers.fulfilled, (state, action) => {
+                localStorage.setItem('user',JSON.stringify(action.payload));
                 const user = action.payload
                 state.loading = false;
                 state.data.user = user;
@@ -54,6 +61,6 @@ const loginSlice = createSlice({
     }
 })
 
-export const { getToken } = loginSlice.actions;
+export const { login, logout } = loginSlice.actions;
 
 export default loginSlice.reducer;

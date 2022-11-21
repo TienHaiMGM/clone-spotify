@@ -1,23 +1,78 @@
-.footer{
+.footerLogin {
     background-color: blue;
-    background: linear-gradient(90deg, rgba(174,41,151,1) 0%, rgba(9,9,121,1) 49%, rgba(81,154,244,1) 100%);
+    background: linear-gradient(90deg, rgba(174, 41, 151, 1) 0%, rgba(9, 9, 121, 1) 49%, rgba(81, 154, 244, 1) 100%);
     width: 100%;
     height: 100%;
     color: white;
-    padding: 15px 0px 15px 40px;
+    padding: 20px 0px 15px 40px;
     line-height: 0.5em;
-    display: flex;
+    display: none;
     justify-content: space-between;
 }
 
-.footer button{
+.footerLogin button {
     margin-right: 2em;
     border-radius: 2em;
     width: 10em;
-    height: 100%;
+    height: 2.8em;
     border: none;
     font-weight: bold;
 }
+
+.footerLogin button:hover {
+    width: 10.5em;
+    height: 2.9em;
+}
+
+.footerUser {
+    background-color: #181818;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 25vw 50vw 25vw;
+    align-items: center;
+}
+
+.currentlyPlaying {
+    padding: 16px;
+    display: flex;
+    color: white;
+    font-size: 0.8em;
+    align-items: center;
+}
+
+.currentlyPlaying img {
+    width: 60px;
+    height: 60px;
+    margin-right: 15px;
+}
+
+.currentlyPlaying div p {
+    opacity: 0.6;
+}
+
+
+.iconButton > button {
+    margin-right: 1em;
+    border-radius: 10px;
+}
+
+.buttonPlayers{
+    display: flex;
+    justify-content: center;
+}
+.buttonPlayers > button {
+    background: none;
+    border: none;
+    color: white;
+    opacity: 0.8;
+    font-size: 1.2em;
+    margin-right: 1em;
+}
+.buttonPlayers .buttonPlay {
+    font-size: 2em;
+}
+
 
 .footer button:hover{
     width: 10.5em;
