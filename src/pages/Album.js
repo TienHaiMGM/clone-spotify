@@ -1,7 +1,6 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
-import Frames from '../components/Frames';
-
+import React from "react";
+import { useParams } from "react-router-dom";
+import Frames from "../components/Frames";
 
 export default function Album() {
   const params = useParams();
@@ -10,5 +9,5 @@ export default function Album() {
     <div>
       <Frames></Frames>
     </div>
-  )
+  );
 }
