@@ -4,7 +4,6 @@ import styles from '../css/Tracks.module.css'
 
 export default function Tracks(props) {
     const link = `/${props.value.type}/${props.value.id}`
-    console.log(link)
     return (
         <div className={styles.tracks}>
             <Link to={link}>

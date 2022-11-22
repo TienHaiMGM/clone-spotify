@@ -40,7 +40,7 @@ export default function MainListTracks(props) {
             </div>
             <div className={styles.info}>
                 <p>{tracks.track.album.name}</p>
-                <p>{convertDaysAdded(tracks.daysAdd)}</p>
+                <p>{convertDaysAdded(tracks.daysAdd)} days ago</p>
                 <p>{converMToMS(tracks.track.duration)}</p>
             </div>
         </div>
