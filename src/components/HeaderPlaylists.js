@@ -1,8 +1,8 @@
-import React from 'react'
-import styles from '../css/HeaderPlaylists.module.css'
+import React from "react";
+import styles from "../css/HeaderPlaylists.module.css";
 
 export default function HeaderPlaylists(props) {
-  const dataPlaylists = props.statePlaylists.data.playList
+  const dataPlaylists = props.statePlaylists.data.playList;
 
   return (
     <div className={styles.headerPlaylist}>
@@ -10,7 +10,7 @@ export default function HeaderPlaylists(props) {
         <img src={dataPlaylists.image} alt={dataPlaylists.name} />
       </div>
       <div className={styles.contentHeaderPlaylist}>
-        <h6>{(dataPlaylists.type)?.toUpperCase()}</h6>
+        <h6>{dataPlaylists.type?.toUpperCase()}</h6>
         <h1>{dataPlaylists.name}</h1>
         <p>{dataPlaylists.description}</p>
         <div>
@@ -21,5 +21,5 @@ export default function HeaderPlaylists(props) {
         </div>
       </div>
     </div>
-  )
+  );
 }
