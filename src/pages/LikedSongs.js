@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
+import '../css/Frames.css';
 import styles from '../css/LikedSongs.module.css';
-import '../css/Frames.css'
 
-import Header from '../components/Header';
-import Playlists from '../pages/Playlists';
 import Footer from '../components/Footer';
+import Header from '../components/Header';
 import Navbar from '../components/Navbar';
+import Playlists from '../pages/Playlists';
 
 export default function LikedSongs() {
   return (

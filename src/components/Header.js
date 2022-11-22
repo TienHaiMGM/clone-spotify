@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react'
+import { faAngleLeft, faAngleRight, faRightFromBracket, faSortDown, faUser } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAngleRight, faAngleLeft, faSortDown, faUser, faRightFromBracket, } from '@fortawesome/free-solid-svg-icons'
+import React, { useEffect, useRef, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { useSelector, useDispatch } from 'react-redux'
 import styles from '../css/Header.module.css'
 import { loginUrl } from '../data/spotify'
 import { logout } from '../redux/features/loginSlice'

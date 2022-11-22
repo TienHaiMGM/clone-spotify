@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Nav } from 'react-bootstrap';
+import { faHouse, faMagnifyingGlass, faPlus, faShieldHeart, faTableList } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHouse, faMagnifyingGlass, faTableList, faShieldHeart, faPlus } from '@fortawesome/free-solid-svg-icons';
+import React, { useState } from 'react';
+import { Nav } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 import Logo from '../assets/images/Logo.png';
 import styles from '../css/Navbar.module.css';
-import PopupLogin from './PopupLogin';
 
 
 export default function Navbar({ token }) {

@@ -1,15 +1,14 @@
-import React from 'react'
-import '../css/Frames.css'
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
+import { createUseStyles } from 'react-jss';
+import '../css/Frames.css';
 import styles from '../css/Search.module.css';
 
-import { createUseStyles } from 'react-jss'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-
-import Header from '../components/Header';
-import Playlists from '../pages/Playlists';
 import Footer from '../components/Footer';
+import Header from '../components/Header';
 import Navbar from '../components/Navbar';
+import Playlists from '../pages/Playlists';
 
 const useStyles = createUseStyles({
   inputSearch: {

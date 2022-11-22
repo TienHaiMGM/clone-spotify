@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
 
-import '../css/Frames.css'
-import Header from './Header';
+import '../css/Frames.css';
 import Footer from './Footer';
+import Header from './Header';
 import Navbar from './Navbar';
 
 export default function Frames(props) {

@@ -1,8 +1,7 @@
-import React from 'react'
+import React from 'react';
+import { useSelector } from 'react-redux';
 import Categories from '../components/Categories';
-import Tracks from '../components/Tracks';
 import styles from '../css/Playlists.module.css';
-import { useSelector, useDispatch } from 'react-redux';
 
 export default function Playlists() {
   const stateCategories = useSelector((state)=>state.categoriesReducer)

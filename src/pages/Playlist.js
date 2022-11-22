@@ -1,12 +1,12 @@
-import React , {useEffect}from 'react'
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
 
 import Frames from '../components/Frames';
 import HeaderPlaylists from '../components/HeaderPlaylists';
-import styles from '../css/Playlist.module.css'
-import {getPlaylist} from '../redux/features/playlistsSlice'
 import MainPlaylist from '../components/MainPlaylist';
+import styles from '../css/Playlist.module.css';
+import { getPlaylist } from '../redux/features/playlistsSlice';
 
 export default function Playlist() {
   const params = useParams();

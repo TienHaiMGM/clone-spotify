@@ -1,7 +1,7 @@
+import { faCirclePlay, faClock, faEllipsis, faHeart } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import styles from '../css/MainPlaylist.module.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCirclePlay, faEllipsis, faHeart, faClock } from '@fortawesome/free-solid-svg-icons'
 import MainListTracks from './MainListTracks'
 
 export default function MainPlaylist(props) {
