@@ -7,8 +7,8 @@ const initialState = {
     error: false,
     data: {
         actions: {},
-        items:{},
-        player:{},
+        items: {},
+        player: {},
     }
 }
 
@@ -62,28 +62,30 @@ const currentlyPlayingSlice = createSlice({
             .addCase(getCurrentlyPlaying.fulfilled, (state, action) => {
                 state.loading = false;
                 const track = action.payload.item;
-                const items = {
-                    title: track.name,
-                    id: track.id,
-                    type: track.type,
-                    image: track.album.images[1].url,
-                    artists: track.artists[0].name,
+                if (track) {
+                    const items = {
+                        title: track.name,
+                        id: track.id,
+                        type: track.type,
+                        image: track.album.images[1].url,
+                        artists: track.artists[0].name,
+                    }
+                    state.data.items = items;
                 }
-                state.data.items = items;
             })
             .addCase(getCurrentlyPlaying.rejected, (state, action) => {
                 state.loading = false;
                 state.error = true;
             })
 
-             //Player
-             .addCase(getPlayer.pending, (state, action) => {
+            //Player
+            .addCase(getPlayer.pending, (state, action) => {
                 state.loading = true;
                 state.error = false;
             })
             .addCase(getPlayer.fulfilled, (state, action) => {
                 state.loading = false;
-                console.log("player",action.payload)
+                console.log("player", action.payload)
             })
             .addCase(getPlayer.rejected, (state, action) => {
                 state.loading = false;
@@ -92,6 +94,6 @@ const currentlyPlayingSlice = createSlice({
     }
 })
 
-export const {  } = currentlyPlayingSlice.actions;
+export const { } = currentlyPlayingSlice.actions;
 
 export default currentlyPlayingSlice.reducer;

@@ -5,12 +5,18 @@
     height: 18em;
     color: white;
     overflow: hidden;
+    cursor: pointer;
 }
 .tracks:hover{
     background-color: #444343;
 }
 
-.tracks > div {
+.tracks a{
+    text-decoration: none;
+    color: inherit;
+}
+
+.tracks div {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -31,3 +37,4 @@
 .tracks p{
     opacity: 0.8;
 }
+

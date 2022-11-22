@@ -1,5 +1,7 @@
 import React from 'react'
+import '../css/Frames.css'
 import styles from '../css/Search.module.css';
+
 import { createUseStyles } from 'react-jss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
@@ -33,7 +35,7 @@ const useStyles = createUseStyles({
 export default function Search() {
   const classes = useStyles()
   return (
-    <div className={styles.search}>
+    <div className={`${styles.search} Frames`}>
       <nav><Navbar /></nav>
       <header>
         <Header >

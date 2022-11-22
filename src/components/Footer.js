@@ -6,7 +6,7 @@ import { faHeart, faImage, faCirclePause, faCirclePlay, faShuffle, faForwardStep
 import I_Knew_You_Were_Trouble_Taylor from '../assets/audios/I_Knew_You_Were_Trouble_Taylor.mp3'
 
 export default function Footer() {
-  const stateCurrentlyPlaying = useSelector((state) => state.currentlyPlayingRuducer);
+  const stateCurrentlyPlaying = useSelector((state) => state.currentlyPlayingReducer);
   const currentlyPlaying = stateCurrentlyPlaying.data.items;
 
   return (

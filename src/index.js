@@ -10,6 +10,11 @@ import App from './App';
 import Search from './pages/Search';
 import YourLibrary from './pages/YourLibrary';
 import LikedSongs from './pages/LikedSongs';
+import Playlist from './pages/Playlist';
+import Album from './pages/Album';
+import Episode from './pages/Episode'
+import Track from './pages/Track'
+import Show from './pages/Show'
 
 const router = createBrowserRouter([
   {
@@ -27,6 +32,26 @@ const router = createBrowserRouter([
   {
     path: "/collection/tracks",
     element: <LikedSongs />,
+  },
+  {
+    path: "/playlist/:playlistId",
+    element: <Playlist />,
+  },
+  {
+    path: "/album/:albumtId",
+    element: <Album />,
+  },
+  {
+    path: "/track/:trackId",
+    element: <Track />,
+  },
+  {
+    path: "/show/:showId",
+    element: <Show />,
+  },
+  {
+    path: "/episode/:episodetId",
+    element: <Episode />,
   },
 
 ])

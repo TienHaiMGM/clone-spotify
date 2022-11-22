@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { login, logout, getUsers } from './redux/features/loginSlice';
-import { getCategories, getCategorie, getAlbums } from './redux/features/playListSlice'
+import { getCategories, getCategorie, getAlbums } from './redux/features/categoriesSlice'
 import { getCurrentlyPlaying, getPlayer } from './redux/features/currentlyPlayingSlice'
 
 import Header from './components/Header';
@@ -19,7 +19,7 @@ function App() {
   const [token, setToken] = useState();
 
   const stateLogin = useSelector((state) => state.loginReducer)
-  const statePlaylist = useSelector((state) => state.playListRuducer)
+  const stateCategories = useSelector((state) => state.categoriesReducer)
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -41,7 +41,7 @@ function App() {
 
   return (
     <div className="home">
-      <nav><Navbar token={token} /></nav>
+      <nav><Navbar /></nav>
       <header><Header ></Header ></header>
       <main><Playlists >
       </Playlists ></main>

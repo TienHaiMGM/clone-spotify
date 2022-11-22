@@ -1,0 +1,32 @@
+import React , {useEffect}from 'react'
+import { useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+
+import Frames from '../components/Frames';
+import HeaderPlaylists from '../components/HeaderPlaylists';
+import styles from '../css/Playlist.module.css'
+import {getPlaylist} from '../redux/features/playlistsSlice'
+import MainPlaylist from '../components/MainPlaylist';
+
+export default function Playlist() {
+  const params = useParams();
+  const playlistId = params.playlistId;
+  const backgroundColor = '#e26521'
+  const dispatch = useDispatch();
+  const statePlaylists = useSelector((state) => state.playlistsReducer)
+  useEffect(()=>{
+    dispatch(getPlaylist({playlistId}));
+  },[])
+  return (
+    <Frames backgroundHeader={backgroundColor}>
+      <div className={styles.playlist}>
+        <div className={styles.headerPlaylists} style={{ backgroundColor: backgroundColor }}>
+          <HeaderPlaylists statePlaylists={statePlaylists}/>
+        </div>
+        <div className={styles.mainPlaylists}>
+          <MainPlaylist statePlaylists={statePlaylists}/>
+        </div>
+      </div>
+    </Frames>
+  )
+}

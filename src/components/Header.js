@@ -13,7 +13,6 @@ export default function Header(props) {
     const dispatch = useDispatch();
     const token = stateLogin.data.token;
     const user = stateLogin.data.user;
-
     //Detect click outside element and setDropdown(false)
     const useOutsideLarter = (ref) => {
         useEffect(() => {
@@ -32,7 +31,7 @@ export default function Header(props) {
     useOutsideLarter(wrapperRef)
 
     return (
-        <div className={styles.header}>
+        <div className={styles.header} style={{backgroundColor:props.backgroundHeader}}>
             <div className={styles.forwardAndBackward}>
                 <span><FontAwesomeIcon icon={faAngleLeft} /></span>
                 <span><FontAwesomeIcon icon={faAngleRight} /></span>
@@ -44,7 +43,7 @@ export default function Header(props) {
                 ? (
                     <div className={styles.headerUser}>
                         <button className={styles.upgradeBtn} type='button'>
-                            <a href="https://www.spotify.com/vn-vi/premium/?utm_source=app&utm_medium=desktop&utm_campaign=upgrade">Upgrade</a>
+                            <a href="https://www.spotify.com/vn-vi/premium/?utm_source=app&utm_medium=desktop&utm_campaign=upgrade" target="blank">Upgrade</a>
                         </button>
                         <div
                             ref={wrapperRef}

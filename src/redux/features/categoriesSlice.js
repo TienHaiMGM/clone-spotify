@@ -20,7 +20,7 @@ const initialState = {
 }
 
 export const getCategories = createAsyncThunk(
-    'playList/getCategories',
+    'categories/getCategories',
     async (arg, thunkApI) => {
         const token = thunkApI.getState().loginReducer.data.token;
         const res = await axios.get(
@@ -37,7 +37,7 @@ export const getCategories = createAsyncThunk(
 )
 
 export const getCategorie = createAsyncThunk(
-    'playList/getCategorie',
+    'categories/getCategorie',
     async (arg, thunkApI) => {
         const token = thunkApI.getState().loginReducer.data.token;
         const trending = await axios.get(
@@ -64,7 +64,7 @@ export const getCategorie = createAsyncThunk(
 
 /*************ALBUM*********/
 export const getAlbums = createAsyncThunk(
-    'playList/getAlbums',
+    'categories/getAlbums',
     async (arg, thunkApI) => {
         const token = thunkApI.getState().loginReducer.data.token;
         const res = await axios.get(
@@ -81,8 +81,8 @@ export const getAlbums = createAsyncThunk(
 )
 
 
-const playListSlice = createSlice({
-    name: 'playListSlice',
+const categoriesSlice = createSlice({
+    name: 'categoriesSlice',
     initialState,
     reducers: {
     },
@@ -168,6 +168,6 @@ const playListSlice = createSlice({
     }
 })
 
-export const { } = playListSlice.actions;
+export const { } = categoriesSlice.actions;
 
-export default playListSlice.reducer;
+export default categoriesSlice.reducer;

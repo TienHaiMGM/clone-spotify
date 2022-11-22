@@ -1,5 +1,6 @@
 import React from 'react'
 import { createUseStyles } from 'react-jss'
+import '../css/Frames.css'
 
 import styles from '../css/YourLibrary.module.css';
 import Header from '../components/Header';
@@ -29,7 +30,7 @@ const useStyles = createUseStyles({
 export default function YourLibrary() {
   const classes = useStyles()
   return (
-    <div className={styles.yourLibrary}>
+    <div className='Frames'>
       <nav><Navbar /></nav>
       <header>
         <Header>
