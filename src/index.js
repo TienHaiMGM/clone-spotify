@@ -16,6 +16,8 @@ import Episode from "./pages/Episode";
 import Track from "./pages/Track";
 import Show from "./pages/Show";
 import Artist from "./pages/Artist";
+import Genre from "./components/Search/Genre";
+import ResultUserSearch from "./components/Search/ResultUserSearch";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +27,14 @@ const router = createBrowserRouter([
   {
     path: "/search",
     element: <Search />,
+  },
+  {
+    path: "/search/:searchId",
+    element: <ResultUserSearch />,
+  },
+  {
+    path: "/genre/:genreId",
+    element: <Genre />,
   },
   {
     path: "/collection/playlists",

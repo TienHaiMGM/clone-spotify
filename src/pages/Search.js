@@ -1,38 +1,20 @@
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
-import { createUseStyles } from "react-jss";
-import "../css/Frames.css";
-import styles from "../css/Search.module.css";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Navbar from "../components/Navbar";
-import HomePlaylists from "../pages/HomePlaylists";
-
-const useStyles = createUseStyles({
-  inputSearch: {
-    display: "flex",
-    padding: "0.7em",
-    backgroundColor: "white",
-    width: "60%",
-    height: "2.5em",
-    borderRadius: "2em",
-    "& input": {
-      width: "100%",
-      border: "none",
-      outline: "none",
-      paddingLeft: "1.2em",
-    },
-    "& .iconSearch": {
-      fontSize: "1.3em",
-      color: "#3C3B3B",
-    },
-  },
-});
+import InputSearch from "../components/Search/InputSearch";
+import MainSearch from "../components/Search/MainSearch";
+import "../css/Frames.css";
+import styles from "../css/Search/Search.module.css";
+import { getBrowse } from "../redux/features/searchSlice";
 
 export default function Search() {
-  const classes = useStyles();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getBrowse());
+  }, []);
   return (
     <div className={`${styles.search} Frames`}>
       <nav>
@@ -40,14 +22,11 @@ export default function Search() {
       </nav>
       <header>
         <Header>
-          <div className={classes.inputSearch}>
-            <FontAwesomeIcon className="iconSearch" icon={faMagnifyingGlass} />
-            <input placeholder="What do you want to listen to?"></input>
-          </div>
+          <InputSearch />
         </Header>
       </header>
-      <main>
-        <HomePlaylists />
+      <main className={styles.MainSearch}>
+        <MainSearch />
       </main>
       <footer>
         <Footer />

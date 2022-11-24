@@ -6,7 +6,7 @@ import {
   getCategories,
   getCategorie,
   getAlbums,
-  getArtist,
+  getArtists,
 } from "./redux/features/categoriesSlice";
 import {
   getCurrentlyPlaying,
@@ -39,9 +39,9 @@ function App() {
       dispatch(getUsers({ _token }));
     }
     dispatch(getCategories());
-    dispatch(getArtist());
     dispatch(getCategorie());
     dispatch(getAlbums());
+    dispatch(getArtists());
     dispatch(getCurrentlyPlaying());
     dispatch(getPlayer());
   }, []);

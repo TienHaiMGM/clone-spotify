@@ -10,8 +10,8 @@ const initialState = {
       mood: [],
     },
     albums: [],
-    artist: {},
-    episode: {},
+    artists: [],
+    episode: [],
   },
 };
 
@@ -32,8 +32,8 @@ export const getCategories = createAsyncThunk(
   }
 );
 
-export const getArtist = createAsyncThunk(
-  "categories/getArtist",
+export const getArtists = createAsyncThunk(
+  "categories/getArtists",
   async (arg, thunkApI) => {
     const token = thunkApI.getState().loginReducer.data.token;
     const res = await axios.get(
@@ -113,26 +113,25 @@ const categoriesSlice = createSlice({
       })
 
       //Get Artist
-      .addCase(getArtist.pending, (state, action) => {
+      .addCase(getArtists.pending, (state, action) => {
         state.loading = true;
         state.error = false;
       })
-      .addCase(getArtist.fulfilled, (state, action) => {
+      .addCase(getArtists.fulfilled, (state, action) => {
         state.loading = false;
         const artists = action.payload.artists;
         const artist = [];
-        artists.map((item) => {
+        artists?.map((item) => {
           artist.push({
-            name: item.name,
+            title: item.name,
             images: item.images[0].url,
             id: item.id,
             type: item.type,
           });
         });
-        console.log("artists", artists);
-        console.log("artist", artist);
+        state.data.artists = artist;
       })
-      .addCase(getArtist.rejected, (state, action) => {
+      .addCase(getArtists.rejected, (state, action) => {
         state.loading = false;
         state.error = true;
       })

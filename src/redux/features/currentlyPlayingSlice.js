@@ -68,7 +68,6 @@ const currentlyPlayingSlice = createSlice({
           };
           state.data.items = items;
         }
-        console.log("tracks", action.payload);
       })
       .addCase(getCurrentlyPlaying.rejected, (state, action) => {
         state.loading = false;

@@ -8,7 +8,7 @@ export default function Categories(props) {
     <div className={styles.categories}>
       <h1>{props.name}</h1>
       <div>
-        {props.type.map((value, index) => {
+        {props?.type?.map((value, index) => {
           return <Tracks key={index} value={value} />;
         })}
       </div>

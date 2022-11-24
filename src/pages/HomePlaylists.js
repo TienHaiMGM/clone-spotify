@@ -5,6 +5,7 @@ import styles from "../css/HomePlaylists/HomePlaylists.module.css";
 
 export default function HomePlaylists() {
   const stateCategories = useSelector((state) => state.categoriesReducer);
+
   return (
     <div className={styles.playlists}>
       <div>
@@ -21,6 +22,10 @@ export default function HomePlaylists() {
       <div>
         {" "}
         <Categories name="Albums" type={stateCategories.data.albums} />
+      </div>
+      <div>
+        {" "}
+        <Categories name="Artist" type={stateCategories.data.artists} />
       </div>
     </div>
   );

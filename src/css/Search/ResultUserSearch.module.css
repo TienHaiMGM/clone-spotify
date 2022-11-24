@@ -1,0 +1,70 @@
+.resultUserSearch {
+  background-color: #121212;
+  color: white;
+  padding: 40px;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.headerContent {
+  display: grid;
+  grid-template-columns: 35% 65%;
+  margin-bottom: 2em;
+}
+.headerContent h4 {
+  margin-bottom: 1em;
+}
+.topResult {
+  margin-right: 2em;
+}
+.resultInfo {
+  background-color: #181818;
+  padding: 20px;
+}
+.resultInfo:hover {
+  opacity: 1;
+  background-color: #2e2e2e;
+}
+.resultInfo h1 {
+  font-size: 2em;
+}
+.resultInfo p {
+  padding: 15px;
+  background-color: #121212;
+  width: fit-content;
+  line-height: 0.5em;
+  border-radius: 1em;
+  font-weight: bold;
+}
+.resultInfo img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 1.5em;
+}
+
+.mainContent {
+  margin-left: -1.5em;
+}
+/* Styles for SONGS */
+.songs {
+  display: grid;
+}
+.mainSongs {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px;
+  height: 4em;
+}
+.mainSongs:hover {
+  background-color: #2e2e2e;
+}
+.songsInfo {
+  display: flex;
+}
+.songsInfo img {
+  width: 45px;
+  height: 45px;
+  margin-right: 1.5em;
+}
