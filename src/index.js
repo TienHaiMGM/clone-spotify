@@ -1,20 +1,21 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { Provider } from 'react-redux'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Provider } from "react-redux";
 
-import store from './redux/store'
-import reportWebVitals from './reportWebVitals';
-import './index.css';
-import App from './App';
-import Search from './pages/Search';
-import YourLibrary from './pages/YourLibrary';
-import LikedSongs from './pages/LikedSongs';
-import Playlist from './pages/Playlist';
-import Album from './pages/Album';
-import Episode from './pages/Episode'
-import Track from './pages/Track'
-import Show from './pages/Show'
+import store from "./redux/store";
+import reportWebVitals from "./reportWebVitals";
+import "./index.css";
+import App from "./App";
+import Search from "./pages/Search";
+import YourLibrary from "./pages/YourLibrary";
+import LikedSongs from "./pages/LikedSongs";
+import Playlist from "./pages/Playlist";
+import Album from "./pages/Album";
+import Episode from "./pages/Episode";
+import Track from "./pages/Track";
+import Show from "./pages/Show";
+import Artist from "./pages/Artist";
 
 const router = createBrowserRouter([
   {
@@ -38,8 +39,12 @@ const router = createBrowserRouter([
     element: <Playlist />,
   },
   {
-    path: "/album/:albumtId",
+    path: "/album/:albumId",
     element: <Album />,
+  },
+  {
+    path: "/artist/:artistId",
+    element: <Artist />,
   },
   {
     path: "/track/:trackId",
@@ -53,14 +58,13 @@ const router = createBrowserRouter([
     path: "/episode/:episodetId",
     element: <Episode />,
   },
+]);
 
-])
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
     <RouterProvider router={router} />
-  </Provider >,
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

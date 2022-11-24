@@ -1,28 +1,27 @@
 .home {
-    display: grid;
-    grid-template-areas:
-        "nav head"
-        "nav main"
-        "foot foot";
-    grid-template-rows: 7vh 84vh 9vh;
-    grid-template-columns: 22vw 78vw;
-    overflow: hidden;
+  display: grid;
+  grid-template-areas:
+    "nav head"
+    "nav main"
+    "foot foot";
+  grid-template-rows: 7vh 84vh 9vh;
+  grid-template-columns: 22vw 78vw;
+  overflow: hidden;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .home > nav {
-    grid-area: nav;
-
+  grid-area: nav;
 }
 
 .home > header {
-    grid-area: head;
-
+  grid-area: head;
 }
 
 .home > main {
-    grid-area: main;
+  grid-area: main;
 }
 
 .home > footer {
-    grid-area: foot;
+  grid-area: foot;
 }
