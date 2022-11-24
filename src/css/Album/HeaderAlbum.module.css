@@ -1,0 +1,34 @@
+.headerAlbum{
+    display: flex;
+    flex-direction: row;
+}
+
+.imageHeaderAlbum{
+    width: 15em;
+    margin-left: 2em;
+}
+.imageHeaderAlbum img{
+    width: 100%;
+    min-width: 15em;
+}
+
+.contentHeaderAlbum {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin-left: 2em;
+    color: white;
+    font-weight: bold;
+    width: 100%;
+}
+.contentHeaderAlbum h1{
+    font-size: 5em;
+    font-weight: bolder ;
+}
+
+.contentHeaderAlbum p{
+    opacity: 0.8;
+}
+.contentHeaderAlbum span{
+    margin-right: 1em;
+}

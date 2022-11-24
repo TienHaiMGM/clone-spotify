@@ -2,12 +2,11 @@ import React from "react";
 import { createUseStyles } from "react-jss";
 import "../css/Frames.css";
 
-import styles from "../css/YourLibrary.module.css";
-import Header from "../components/Header";
-import Playlists from "../pages/Playlists";
-import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
 import { Link } from "react-router-dom";
+import Footer from "../components/Footer";
+import Header from "../components/Header";
+import Navbar from "../components/Navbar";
+import HomePlaylists from "../pages/HomePlaylists";
 
 const useStyles = createUseStyles({
   headerLibrary: {
@@ -53,7 +52,7 @@ export default function YourLibrary() {
         </Header>
       </header>
       <main>
-        <Playlists />
+        <HomePlaylists />
       </main>
       <footer>
         <Footer />

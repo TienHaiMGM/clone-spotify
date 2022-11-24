@@ -142,7 +142,9 @@ export default function Header(props) {
           </div>
           <div className={styles.signupAndLogin}>
             <button className={styles.signUp} type="button">
-              <a href={""}>Sign up</a>
+              <a href="" alt="">
+                Sign up
+              </a>
             </button>
             <button className={styles.logIn} type="button">
               <a href={loginUrl}>Log in</a>

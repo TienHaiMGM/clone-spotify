@@ -5,7 +5,7 @@ import styles from "../css/LikedSongs.module.css";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Navbar from "../components/Navbar";
-import Playlists from "../pages/Playlists";
+import HomePlaylists from "../pages/HomePlaylists";
 
 export default function LikedSongs() {
   return (
@@ -17,7 +17,7 @@ export default function LikedSongs() {
         <Header />
       </header>
       <main>
-        <Playlists />
+        <HomePlaylists />
       </main>
       <footer>
         <Footer />

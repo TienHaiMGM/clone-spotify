@@ -8,7 +8,7 @@ import styles from "../css/Search.module.css";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Navbar from "../components/Navbar";
-import Playlists from "../pages/Playlists";
+import HomePlaylists from "../pages/HomePlaylists";
 
 const useStyles = createUseStyles({
   inputSearch: {
@@ -47,7 +47,7 @@ export default function Search() {
         </Header>
       </header>
       <main>
-        <Playlists />
+        <HomePlaylists />
       </main>
       <footer>
         <Footer />

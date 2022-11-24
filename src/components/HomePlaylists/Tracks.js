@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styles from "../css/Tracks.module.css";
+import styles from "../../css/HomePlaylists/Tracks.module.css";
 
 export default function Tracks(props) {
   const link = `/${props.value.type}/${props.value.id}`;

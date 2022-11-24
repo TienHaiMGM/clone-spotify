@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../css/HeaderPlaylists.module.css";
+import styles from "../../css/Playlist/HeaderPlaylists.module.css";
 
 export default function HeaderPlaylists(props) {
   const dataPlaylists = props.statePlaylists.data.playList;

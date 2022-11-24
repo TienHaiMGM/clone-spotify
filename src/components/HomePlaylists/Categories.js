@@ -1,6 +1,6 @@
 import React from "react";
 import Tracks from "./Tracks";
-import styles from "../css/Categories.module.css";
+import styles from "../../css/HomePlaylists/Categories.module.css";
 import { faDollarSign } from "@fortawesome/free-solid-svg-icons";
 
 export default function Categories(props) {

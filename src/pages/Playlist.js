@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import Frames from "../components/Frames";
-import HeaderPlaylists from "../components/HeaderPlaylists";
-import MainPlaylist from "../components/MainPlaylist";
-import styles from "../css/Playlist.module.css";
+import HeaderPlaylists from "../components/Playlist/HeaderPlaylists";
+import MainPlaylist from "../components/Playlist/MainPlaylist";
+import styles from "../css/Playlist/Playlist.module.css";
 import { getPlaylist } from "../redux/features/playlistsSlice";
 
 export default function Playlist() {
@@ -14,6 +14,7 @@ export default function Playlist() {
   const backgroundColor = "#e26521";
   const dispatch = useDispatch();
   const statePlaylists = useSelector((state) => state.playlistsReducer);
+  console.log(statePlaylists);
   useEffect(() => {
     dispatch(getPlaylist({ playlistId }));
   }, []);

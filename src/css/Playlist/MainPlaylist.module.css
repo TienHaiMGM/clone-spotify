@@ -1,0 +1,70 @@
+.mainPlaylist {
+  padding: 35px;
+  background-color: #51270f;
+}
+
+.mainPlaylistBtn {
+  color: white;
+  font-size: 2em;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5em;
+}
+
+.mainPlaylistBtn span {
+  margin-right: 1em;
+}
+
+.iconPlay {
+  font-size: 4rem;
+  color: #1ed760;
+  background-color: black;
+  border-radius: 50%;
+}
+
+.headerListTracks,
+.mainListTracks {
+  color: white;
+  opacity: 0.8;
+  display: grid;
+  grid-template-columns: 45% 55%;
+  align-items: center;
+}
+.headerListTracks {
+  height: 2em;
+  border-bottom: 1px solid rgba(185, 185, 185, 0.3);
+}
+.titleHeader {
+  display: flex;
+}
+.info {
+  display: grid;
+  grid-template-columns: 60% 30% 10%;
+}
+
+.titleHeader p,
+.track > p {
+  margin-right: 1em;
+}
+
+.itemMainListTracks {
+  margin-top: 2em;
+}
+
+.mainListTracks {
+  margin-top: 1em;
+}
+
+.track {
+  display: flex;
+  align-items: center;
+  height: 50px;
+}
+.infoTrack {
+  display: flex;
+}
+.infoTrack img {
+  width: 50px;
+  height: 100%;
+  margin-right: 1em;
+}

@@ -1,5 +1,0 @@
-.playlist{
-    display: grid;
-    grid-template-rows: 27vh 63vh;
-    overflow-y: scroll;
-}

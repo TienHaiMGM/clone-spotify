@@ -1,0 +1,96 @@
+.mainAlbum {
+  padding: 35px;
+  background-color: #191919;
+  margin-bottom: 5em;
+}
+
+.mainAlbumBtn {
+  color: white;
+  font-size: 2em;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5em;
+}
+
+.mainAlbumBtn span {
+  margin-right: 1em;
+}
+
+.iconPlay {
+  font-size: 4rem;
+  color: #1ed760;
+  background-color: black;
+  border-radius: 50%;
+}
+
+.headerListTracks,
+.mainListTracks {
+  color: white;
+  opacity: 0.8;
+  display: grid;
+  grid-template-columns: 45% 55%;
+  align-items: center;
+}
+.headerListTracks {
+  height: 2em;
+  border-bottom: 1px solid rgba(185, 185, 185, 0.3);
+}
+.titleHeader {
+  display: flex;
+}
+
+.titleHeader p {
+  margin-right: 1em;
+}
+
+.itemMainListTracks {
+  margin-top: 2em;
+}
+
+.albumListTracks {
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  padding-left: 15px;
+}
+.albumListTracks:hover {
+  background-color: #3e3e3e;
+  border-radius: 5px;
+}
+.albumListTracks:hover .track > span {
+  display: block;
+}
+.albumListTracks:hover .track > p {
+  display: none;
+}
+
+.albumListTracks p {
+  opacity: 0.8;
+}
+
+.track {
+  display: flex;
+  align-items: center;
+  height: 50px;
+}
+.track span {
+  display: none;
+  margin-right: 1em;
+  /* position: relative;
+  left: 10px;
+  top: -5px; */
+}
+.track > p {
+  margin-right: 1em;
+}
+.infoTrack {
+  display: flex;
+  flex-direction: column;
+  line-height: 10px;
+}
+
+.info {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 2em;
+}

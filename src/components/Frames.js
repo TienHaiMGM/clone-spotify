@@ -16,7 +16,11 @@ export default function Frames(props) {
       </header>
       <main>{props.children}</main>
       <footer>
-        <Footer />
+        <Footer
+          stateAlbum={props.stateAlbum}
+          idForUrl={props.idForUrl}
+          getIsPlaying={props.getIsPlaying}
+        />
       </footer>
     </div>
   );

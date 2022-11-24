@@ -1,6 +1,9 @@
 import React from "react";
-import styles from "../css/MainPlaylist.module.css";
-import { convertDaysAdded, converMToMS } from "../utils/convertTime";
+import styles from "../../css/Playlist/MainPlaylist.module.css";
+import {
+  convertDaysAdded,
+  convertMsToMinutesSeconds,
+} from "../../utils/convertTime";
 
 export default function MainListTracks(props) {
   const tracks = {
@@ -41,7 +44,7 @@ export default function MainListTracks(props) {
       <div className={styles.info}>
         <p>{tracks.track.album.name}</p>
         <p>{convertDaysAdded(tracks.daysAdd)} days ago</p>
-        <p>{converMToMS(tracks.track.duration)}</p>
+        <p>{convertMsToMinutesSeconds(tracks.track.duration)}</p>
       </div>
     </div>
   );

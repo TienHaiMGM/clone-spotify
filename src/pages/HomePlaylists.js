@@ -1,9 +1,9 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import Categories from "../components/Categories";
-import styles from "../css/Playlists.module.css";
+import Categories from "../components/HomePlaylists/Categories";
+import styles from "../css/HomePlaylists/HomePlaylists.module.css";
 
-export default function Playlists() {
+export default function HomePlaylists() {
   const stateCategories = useSelector((state) => state.categoriesReducer);
   return (
     <div className={styles.playlists}>

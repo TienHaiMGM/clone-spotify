@@ -1,3 +1,4 @@
+import React from "react";
 import {
   faCirclePlay,
   faClock,
@@ -5,15 +6,15 @@ import {
   faHeart,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
-import styles from "../css/MainPlaylist.module.css";
-import MainListTracks from "./MainListTracks";
+import styles from "../../css/Album/MainAlbum.module.css";
+import AlbumListTracks from "./AlbumListTracks";
 
-export default function MainPlaylist(props) {
-  const items = props.statePlaylists.data.playList.tracks.items;
+export default function MainAlbum(props) {
+  const dataTracks = props?.stateAlbum?.data?.tracks?.items;
+
   return (
-    <div className={styles.mainPlaylist}>
-      <div className={styles.mainPlaylistBtn}>
+    <div className={styles.mainAlbum}>
+      <div className={styles.mainAlbumBtn}>
         <span>
           <FontAwesomeIcon className={styles.iconPlay} icon={faCirclePlay} />
         </span>
@@ -31,18 +32,21 @@ export default function MainPlaylist(props) {
             <p>TITLE</p>
           </div>
           <div className={styles.info}>
-            <p>ALBUM</p>
-            <p>DATE ADDED</p>
             <p>
               <FontAwesomeIcon icon={faClock} />
             </p>
           </div>
         </div>
         <div className={styles.itemMainListTracks}>
-          {items &&
-            items?.map((value, index) => {
+          {dataTracks &&
+            dataTracks.map((data, index) => {
               return (
-                <MainListTracks key={index} tracks={value} number={index + 1} />
+                <AlbumListTracks
+                  key={index}
+                  number={index + 1}
+                  dataTracks={data}
+                  getIdForUrl={props.getIdForUrl}
+                />
               );
             })}
         </div>
