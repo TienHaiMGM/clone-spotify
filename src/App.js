@@ -8,10 +8,6 @@ import {
   getAlbums,
   getArtists,
 } from "./redux/features/categoriesSlice";
-import {
-  getListTrackPlaying,
-  getPlayer,
-} from "./redux/features/currentlyPlayingSlice";
 
 import Header from "./components/Header";
 import HomePlaylists from "./pages/HomePlaylists";
@@ -42,8 +38,6 @@ function App() {
     dispatch(getCategorie());
     dispatch(getAlbums());
     dispatch(getArtists());
-    dispatch(getListTrackPlaying());
-    dispatch(getPlayer());
   }, []);
 
   return (

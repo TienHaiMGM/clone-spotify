@@ -7,6 +7,7 @@ import albumSlice from "./features/albumSlice";
 import searchSlice from "./features/searchSlice";
 import genreSlice from "./features/genreSlice";
 import trackSlice from "./features/trackSlice";
+import listTrackPlayingSlice from "./features/listTrackPlayingSlice";
 
 export default configureStore({
   reducer: {
@@ -18,5 +19,6 @@ export default configureStore({
     searchReducer: searchSlice,
     genreReducer: genreSlice,
     trackReducer: trackSlice,
+    listTrackPlayingReducer: listTrackPlayingSlice,
   },
 });

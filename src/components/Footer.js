@@ -2,10 +2,8 @@ import React, { useEffect, useState, useRef } from "react";
 import styles from "../css/Footer.module.css";
 import ReactAudioPlayer from "react-audio-player";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  getListTrackPlaying,
-  getPlayer,
-} from "../redux/features/currentlyPlayingSlice";
+import { getPlayer } from "../redux/features/currentlyPlayingSlice";
+import { getListTrackPlaying } from "../redux/features/listTrackPlayingSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHeart,
@@ -23,44 +21,66 @@ import {
 export default function Footer(props) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoop, setIsLoop] = useState(false);
-  const [volume, setVolume] = useState(20);
+  const [volume, setVolume] = useState(10);
   const [durations, setDurations] = useState(0);
   const [trackCurrent, setTrackCurrent] = useState(0);
   const [isAutoPlay, setIsAutoPlay] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
+  const [isShuffle, setIsShuffle] = useState(false);
+  const [numberIncrease, setNumberIncrease] = useState(1);
   const audioRef = useRef();
   const inputDurationRef = useRef();
   const dispatch = useDispatch();
   const stateCurrentlyPlaying = useSelector(
     (state) => state.currentlyPlayingReducer
   );
-  const currentlyPlaying = stateCurrentlyPlaying.data.items;
-  const currentlyUrl = currentlyPlaying.url;
-  console.log("currentlyPlaying", currentlyUrl);
-  const stateAlbum = props?.stateAlbum;
-  const tracks = stateAlbum?.data?.tracks?.items;
-  const urlFormTracks = props?.idForUrl;
+  const stateListTracksPlaying = useSelector(
+    (state) => state.listTrackPlayingReducer
+  );
+
+  const currentlyPlaying = stateCurrentlyPlaying?.data?.items;
+  const listTrackPlaying = stateListTracksPlaying?.data?.listTracksPlaying;
+  const currentlyPreviewUrl = currentlyPlaying?.previewUrl;
+  const idCurrently = currentlyPlaying?.id;
+  const tracks = listTrackPlaying;
+
+  // const stateAlbum = props?.stateAlbum;
+  // const tracks = stateAlbum?.data?.tracks?.items;
+  // const urlFormTracks = props?.idForUrl;
 
   useEffect(() => {
-    dispatch(getListTrackPlaying());
-    dispatch(getPlayer());
+    dispatch(getPlayer()).then((valuePlayer) => {
+      dispatch(getListTrackPlaying()).then((valueListTrack) => {
+        getTrackCurrent();
+      });
+    });
   }, []);
 
-  useEffect(() => {
-    tracks?.map((value, index) => {
-      if (urlFormTracks === null) {
-        setIsPlaying(false);
-        setIsAutoPlay(false);
-      }
-      if (urlFormTracks && value?.id === urlFormTracks?.ids) {
-        setTrackCurrent(index);
-        setIsPlaying(true);
-        setIsAutoPlay(true);
-      }
-    });
-  }, [urlFormTracks]);
-  // console.log("urlFormTracks", urlFormTracks);
   // console.log("currentlyPlaying", currentlyPlaying);
+  // console.log("stateListTrackPlaying", listTrackPlaying);
+  // console.log("trackCurrent", trackCurrent);
+
+  function getTrackCurrent() {
+    const indexTrackCurrent = listTrackPlaying?.findIndex(
+      (value) => value?.id === currentlyPlaying?.id
+    );
+    setTrackCurrent(indexTrackCurrent);
+  }
+
+  // useEffect(() => {
+  //   tracks?.map((value, index) => {
+  //     if (urlFormTracks === null) {
+  //       setIsPlaying(false);
+  //       setIsAutoPlay(false);
+  //     }
+  //     if (urlFormTracks && value?.id === urlFormTracks?.ids) {
+  //       setTrackCurrent(index);
+  //       setIsPlaying(true);
+  //       setIsAutoPlay(true);
+  //     }
+  //   });
+  // }, [urlFormTracks]);
+
   useEffect(() => {
     const audioEl = audioRef?.current?.audioEl.current;
     if (isPlaying) {
@@ -90,7 +110,7 @@ export default function Footer(props) {
   const handleClickBackward = () => {
     if (trackCurrent > 0) {
       setTrackCurrent((value) => {
-        return value - 1;
+        return value - numberIncrease;
       });
     }
     setIsAutoPlay(true);
@@ -98,15 +118,20 @@ export default function Footer(props) {
   };
 
   const handleClickForward = () => {
-    if (trackCurrent < tracks?.length - 1) {
+    if (trackCurrent < tracks.length - 1) {
       setTrackCurrent((value) => {
-        return value + 1;
+        return value + numberIncrease;
       });
     }
     setIsAutoPlay(true);
     setIsPlaying(true);
   };
 
+  const handleClickShuffle = () => {
+    // setIsShuffle((value) => !value);
+    // console.log(tracks.length);
+    // setNumberIncrease(Math.floor(Math.random() * tracks.length));
+  };
   return (
     <div className={styles.footer}>
       <div className={styles.footerUser}>
@@ -128,7 +153,7 @@ export default function Footer(props) {
 
         <div className={styles.audio}>
           <div className={styles.buttonPlayers}>
-            <button>
+            <button onClick={() => handleClickShuffle()}>
               <FontAwesomeIcon icon={faShuffle} />
             </button>
             <button onClick={() => handleClickBackward()}>
@@ -164,9 +189,7 @@ export default function Footer(props) {
             </button>
             <ReactAudioPlayer
               ref={audioRef}
-              src={
-                (tracks && tracks[trackCurrent]["preview_url"]) || currentlyUrl
-              }
+              src={tracks[trackCurrent]?.previewUrl || currentlyPreviewUrl}
               volume={volume / 100}
               loop={isLoop}
               muted={isMuted}
@@ -177,9 +200,16 @@ export default function Footer(props) {
                   (value / audioRef?.current?.audioEl?.current.duration) * 100;
                 setDurations(valueTime);
               }}
-              onAbort={(value) => {
-                setIsAutoPlay(true);
+              // onAbort={(value) => {
+              //   setIsAutoPlay(true);
+              //   console.log(value);
+              // }}
+              onEnded={(value) => {
+                handleClickForward();
               }}
+              // onCanPlay={(value) => {
+              //   console.log(value);
+              // }}
             />
           </div>
           <div className={styles.buttonDuration}>

@@ -29,8 +29,8 @@ export default function MainTrack() {
       <div className={styles.lyricsTrack}>
         <h3>Lyrics</h3>
         {lyricsTrack &&
-          lyricsTrack.map((value) => {
-            return <p>{value.words}</p>;
+          lyricsTrack.map((value, index) => {
+            return <p key={index}>{value.words}</p>;
           })}
       </div>
     </div>

@@ -13,7 +13,7 @@ export default function AlbumListTracks(props) {
     name: dataTracks.name,
     ids: dataTracks.id,
     type: dataTracks.type,
-    url: dataTracks["preview_url"],
+    previewUrl: dataTracks["preview_url"],
     duration: dataTracks["duration_ms"],
     artist: dataTracks.artists[0].name,
     artistId: dataTracks.artists[0].id,
