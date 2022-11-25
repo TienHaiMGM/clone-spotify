@@ -88,6 +88,14 @@
   flex-direction: column;
   line-height: 10px;
 }
+.infoTrack a {
+  text-decoration: none;
+  color: white;
+  cursor: default;
+}
+.infoTrack a:hover {
+  text-decoration: underline;
+}
 
 .info {
   display: flex;

@@ -43,7 +43,7 @@ const albumSlice = createSlice({
           type: albums.type,
           copyrights: albums.copyrights,
           id: albums.id,
-          image: albums.images[0].url,
+          image: albums?.images[0]?.url,
           total: albums["total_tracks"],
           artist: {
             id: albums.artists[0].id,

@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock, faPause, faPlay } from "@fortawesome/free-solid-svg-icons";
 import styles from "../../css/Album/MainAlbum.module.css";
 import { convertMsToMinutesSeconds } from "../../utils/convertTime";
+import { Link } from "react-router-dom";
 
 export default function AlbumListTracks(props) {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -15,8 +16,8 @@ export default function AlbumListTracks(props) {
     url: dataTracks["preview_url"],
     duration: dataTracks["duration_ms"],
     artist: dataTracks.artists[0].name,
+    artistId: dataTracks.artists[0].id,
   };
-
   const handleClickPlay = () => {
     props.getIdForUrl(tracks);
     setIsPlaying(true);
@@ -45,7 +46,9 @@ export default function AlbumListTracks(props) {
         <p>{number}</p>
         <div className={styles.infoTrack}>
           <h6>{tracks.name}</h6>
-          <p>{tracks.artist}</p>
+          <p>
+            <Link to={`/artist/${tracks.artistId}`}>{tracks.artist}</Link>
+          </p>
         </div>
       </div>
       <div className={styles.info}>

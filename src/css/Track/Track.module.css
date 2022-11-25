@@ -1,0 +1,6 @@
+.track {
+  display: grid;
+  grid-template-rows: 27vh 73vh;
+  overflow-y: scroll;
+  height: 100%;
+}

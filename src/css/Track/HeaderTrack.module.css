@@ -1,0 +1,39 @@
+.headerTrack {
+  display: flex;
+  flex-direction: row;
+  background-color: #9b9b9b;
+  height: 100%;
+  padding: 2em;
+}
+
+.imageHeaderTrack {
+  width: 15em;
+  flex-direction: column;
+  display: flex;
+  justify-content: flex-end;
+}
+.imageHeaderTrack img {
+  width: 100%;
+  min-width: 15em;
+}
+
+.contentHeaderTrack {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin-left: 2em;
+  color: white;
+  font-weight: bold;
+  width: 100%;
+}
+.contentHeaderTrack h1 {
+  font-size: 6em;
+  font-weight: bolder;
+}
+
+.contentHeaderTrack p {
+  opacity: 0.8;
+}
+.contentHeaderTrack span {
+  margin-right: 1em;
+}

@@ -3,7 +3,7 @@ import styles from "../css/Footer.module.css";
 import ReactAudioPlayer from "react-audio-player";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  getCurrentlyPlaying,
+  getListTrackPlaying,
   getPlayer,
 } from "../redux/features/currentlyPlayingSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -35,13 +35,14 @@ export default function Footer(props) {
     (state) => state.currentlyPlayingReducer
   );
   const currentlyPlaying = stateCurrentlyPlaying.data.items;
-
+  const currentlyUrl = currentlyPlaying.url;
+  console.log("currentlyPlaying", currentlyUrl);
   const stateAlbum = props?.stateAlbum;
   const tracks = stateAlbum?.data?.tracks?.items;
-  const urlFormTracks = props.idForUrl;
+  const urlFormTracks = props?.idForUrl;
 
   useEffect(() => {
-    dispatch(getCurrentlyPlaying());
+    dispatch(getListTrackPlaying());
     dispatch(getPlayer());
   }, []);
 
@@ -91,9 +92,9 @@ export default function Footer(props) {
       setTrackCurrent((value) => {
         return value - 1;
       });
-      setIsAutoPlay(true);
-      setIsPlaying(true);
     }
+    setIsAutoPlay(true);
+    setIsPlaying(true);
   };
 
   const handleClickForward = () => {
@@ -101,9 +102,9 @@ export default function Footer(props) {
       setTrackCurrent((value) => {
         return value + 1;
       });
-      setIsAutoPlay(true);
-      setIsPlaying(true);
     }
+    setIsAutoPlay(true);
+    setIsPlaying(true);
   };
 
   return (
@@ -163,7 +164,9 @@ export default function Footer(props) {
             </button>
             <ReactAudioPlayer
               ref={audioRef}
-              src={tracks && tracks[trackCurrent]["preview_url"]}
+              src={
+                (tracks && tracks[trackCurrent]["preview_url"]) || currentlyUrl
+              }
               volume={volume / 100}
               loop={isLoop}
               muted={isMuted}

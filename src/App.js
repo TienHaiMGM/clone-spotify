@@ -9,7 +9,7 @@ import {
   getArtists,
 } from "./redux/features/categoriesSlice";
 import {
-  getCurrentlyPlaying,
+  getListTrackPlaying,
   getPlayer,
 } from "./redux/features/currentlyPlayingSlice";
 
@@ -42,7 +42,7 @@ function App() {
     dispatch(getCategorie());
     dispatch(getAlbums());
     dispatch(getArtists());
-    dispatch(getCurrentlyPlaying());
+    dispatch(getListTrackPlaying());
     dispatch(getPlayer());
   }, []);
 

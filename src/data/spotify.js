@@ -13,6 +13,10 @@ const scopes = [
   "user-read-playback-state",
   "user-top-read",
   "user-modify-playback-state",
+  "user-read-playback-position",
+  "user-library-modify",
+  "playlist-modify-private",
+  "playlist-modify-public",
 ];
 
 export const getTokenFromUrl = () => {

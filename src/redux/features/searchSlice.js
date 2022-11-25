@@ -133,7 +133,9 @@ const searchSlice = createSlice({
           dataTracks: dataTracks,
         };
         state.data.resultSearch = dataSearch;
+        console.log(action.payload);
       })
+
       .addCase(getSearch.rejected, (state, action) => {
         state.loading = false;
         state.error = true;
