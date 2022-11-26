@@ -1,27 +1,23 @@
 import React, { useState } from "react";
+import styles from "../../css/LikedSongs/MainLikedSongs.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCirclePlay,
-  faClock,
-  faEllipsis,
-  faHeart,
   faCirclePause,
+  faHeart,
+  faEllipsis,
+  faClock,
 } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from "../../css/Track/MainTrack.module.css";
-import { useSelector } from "react-redux";
-
-export default function MainTrack() {
+export default function MainLikedSongs() {
   const [statePlaying, setStatePlaying] = useState(false);
-  const stateTrack = useSelector((state) => state.trackReducer);
-  const lyricsTrack = stateTrack?.data?.lyrics;
   const handleClickTogglePlayPause = () => {
     setStatePlaying((state) => {
       return !state;
     });
   };
   return (
-    <div className={styles.mainTrack}>
-      <div className={styles.mainTrackBtn}>
+    <div className={styles.mainLikedSongs}>
+      <div className={styles.mainLikedSongsBtn}>
         {statePlaying ? (
           <span>
             <FontAwesomeIcon
@@ -46,13 +42,28 @@ export default function MainTrack() {
           <FontAwesomeIcon icon={faEllipsis} />
         </span>
       </div>
-      <div className={styles.lyricsTrack}>
-        <h3>Lyrics</h3>
-        {lyricsTrack
-          ? lyricsTrack.map((value, index) => {
-              return <p key={index}>{value.words}</p>;
-            })
-          : "Lyrics is available in spotify"}
+      <div className={styles.listTracks}>
+        <div className={styles.headerListTracks}>
+          <div className={styles.titleHeader}>
+            <p>#</p>
+            <p>TITLE</p>
+          </div>
+          <div className={styles.info}>
+            <p>ALBUM</p>
+            <p>DATE ADDED</p>
+            <p>
+              <FontAwesomeIcon icon={faClock} />
+            </p>
+          </div>
+        </div>
+        <div className={styles.itemMainListTracks}>
+          {/* {items &&
+        items?.map((value, index) => {
+          return (
+            <MainListTracks key={index} tracks={value} number={index + 1} />
+          );
+        })} */}
+        </div>
       </div>
     </div>
   );

@@ -1,9 +1,9 @@
 .headerTrack {
   display: flex;
   flex-direction: row;
-  background-color: #9b9b9b;
+  background-color: transparent;
   height: 100%;
-  padding: 2em;
+  padding: 1.2em;
 }
 
 .imageHeaderTrack {
@@ -27,7 +27,7 @@
   width: 100%;
 }
 .contentHeaderTrack h1 {
-  font-size: 6em;
+  font-size: 3em;
   font-weight: bolder;
 }
 

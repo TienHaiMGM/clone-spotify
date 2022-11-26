@@ -1,0 +1,33 @@
+.headerLikedSongs {
+  display: flex;
+  flex-direction: row;
+}
+
+.imageHeaderLikedSongs {
+  width: 15em;
+  margin-left: 2em;
+}
+.imageHeaderLikedSongs img {
+  width: 100%;
+  min-width: 12em;
+}
+
+.contentHeaderLikedSongs {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin-left: 2em;
+  color: white;
+  font-weight: bold;
+}
+.contentHeaderLikedSongs h1 {
+  font-size: 5.5em;
+  font-weight: bolder;
+}
+
+.contentHeaderLikedSongs p {
+  opacity: 0.8;
+}
+.contentHeaderLikedSongs span {
+  margin-right: 1em;
+}

@@ -5,4 +5,18 @@
 }
 .infoArtist {
   background-color: black;
+  width: 100%;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-left: 2em;
+}
+.infoArtist h1 {
+  font-size: 5rem;
+  font-weight: bold;
+}
+.verifiedIcon {
+  width: 25px;
+  margin-right: 10px;
 }

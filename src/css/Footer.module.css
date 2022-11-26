@@ -1,3 +1,4 @@
+/* FOOTER LOGIN */
 .footerLogin {
   background-color: blue;
   background: linear-gradient(
@@ -9,13 +10,13 @@
   width: 100%;
   height: 100%;
   color: white;
-  padding: 20px 0px 15px 40px;
+  padding: 20px 0px 20px 40px;
   line-height: 0.5em;
-  display: none;
+  display: flex;
   justify-content: space-between;
 }
 
-.footerLogin button {
+.footerLogin > button {
   margin-right: 2em;
   border-radius: 2em;
   width: 10em;
@@ -23,12 +24,15 @@
   border: none;
   font-weight: bold;
 }
-
-.footerLogin button:hover {
-  width: 10.5em;
-  height: 2.9em;
+.footerLogin > button > a {
+  text-decoration: none;
+  color: black;
+}
+.btnFooterLogin:hover {
+  line-height: 45px;
 }
 
+/* FOOTER USER */
 .footerUser {
   background-color: #181818;
   width: 100%;

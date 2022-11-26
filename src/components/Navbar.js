@@ -6,20 +6,50 @@ import {
   faTableList,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from "react";
+import Driver from "driver.js";
+import "driver.js/dist/driver.min.css";
+import React from "react";
 import { Nav } from "react-bootstrap";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-
 import Logo from "../assets/images/Logo.png";
 import styles from "../css/Navbar.module.css";
+import "../css/PopupLogin.css";
+import {
+  popupLibrary,
+  popupLikedSongs,
+  popupCreatePlaylist,
+} from "../data/popup";
 
-export default function Navbar({ token }) {
-  const [popup, setPopup] = useState(false);
-  const handleClick = (e) => {
-    setPopup(true);
+export default function Navbar() {
+  const stateLogin = useSelector((state) => state.loginReducer);
+  const tokens = stateLogin?.data?.token;
+
+  // HANDLE POPUP
+  const driverLibrary = new Driver();
+  driverLibrary.defineSteps(popupLibrary);
+  const driverLikedSongs = new Driver();
+  driverLikedSongs.defineSteps(popupLikedSongs);
+  const driverCreatePlaylist = new Driver();
+  driverCreatePlaylist.defineSteps(popupCreatePlaylist);
+  const handleClickPopupLibrary = () => {
+    if (tokens === null) {
+      driverLibrary.start();
+    }
   };
+  const handleClickPopupLikedSongs = () => {
+    if (tokens === null) {
+      driverLikedSongs.start();
+    }
+  };
+  const handleClickPopupCreatePlaylist = () => {
+    if (tokens === null) {
+      driverCreatePlaylist.start();
+    }
+  };
+
   return (
-    <div className={styles.navbar}>
+    <div className={`${styles.navbar}`}>
       <img src={Logo} alt="logo" />
       <Nav className={styles.menu}>
         <div className={styles.headMenu}>
@@ -31,24 +61,31 @@ export default function Navbar({ token }) {
             <FontAwesomeIcon icon={faMagnifyingGlass} />
             <span>Search</span>
           </Link>
-          <Link className={styles.menuLink} to="/collection/playlists">
+          <Link
+            id="popupLibrary"
+            onClick={() => handleClickPopupLibrary()}
+            className={styles.menuLink}
+            to="/collection/playlists"
+          >
             <FontAwesomeIcon icon={faTableList} />
             <span>Your Library</span>
           </Link>
-          {/* <div
-            style={{ display: "inline", cursor: "pointer" }}
-            className={styles.menuLink}
-            onClick={(e) => handleClick(e.target)}>
-            <FontAwesomeIcon icon={faTableList} />
-            <span>Your Library</span>
-            <div className={popup ? styles.showPopup : styles.hidePopup}><PopupLogin title="Enjoy Your Library" content="Log in to see saved songs, podcasts, artists, and playlists in Your Library" /></div>
-          </div> */}
           <div className={styles.footMenu}>
-            <Link className={styles.menuLink} to="">
+            <Link
+              id="popupCreatePlaylist"
+              onClick={() => handleClickPopupCreatePlaylist()}
+              className={styles.menuLink}
+              to=""
+            >
               <FontAwesomeIcon icon={faPlus} />
               <span>Create Playlist</span>
             </Link>
-            <Link className={styles.menuLink} to="/collection/tracks">
+            <Link
+              id="popupLikedSongs"
+              onClick={() => handleClickPopupLikedSongs()}
+              className={styles.menuLink}
+              to="/collection/tracks"
+            >
               <FontAwesomeIcon icon={faShieldHeart} />
               <span>Liked Songs</span>
             </Link>

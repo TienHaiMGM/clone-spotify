@@ -10,6 +10,7 @@ import {
   getLyricsTrack,
 } from "../redux/features/trackSlice";
 import { useSelector, useDispatch } from "react-redux";
+import { getRandomRgba } from "../utils/randomColor";
 
 export default function Track() {
   const dispatch = useDispatch();
@@ -17,6 +18,12 @@ export default function Track() {
   console.log("stateTrack", stateTrack);
   const params = useParams();
   const trackId = params.trackId;
+  const backgroundLinear = `linear-gradient(
+    180deg,
+    ${getRandomRgba(0.5)} 10%,
+    rgba(18, 18, 18, 1) 60%
+  )`;
+  console.log(backgroundLinear);
   useEffect(() => {
     dispatch(getTrack({ trackId }));
     dispatch(getAlbumTrack());
@@ -25,7 +32,7 @@ export default function Track() {
   return (
     <div>
       <Frames>
-        <div className={styles.track}>
+        <div className={styles.track} style={{ background: backgroundLinear }}>
           <div className={styles.headerTrack}>
             <HeaderTrack />
           </div>

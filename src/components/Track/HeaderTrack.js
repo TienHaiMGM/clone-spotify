@@ -1,24 +1,27 @@
 import React from "react";
 import styles from "../../css/Track/HeaderTrack.module.css";
+import { useSelector } from "react-redux";
+import {
+  convertMsToMinutesSeconds,
+  convertDateToYear,
+} from "../../utils/convertTime";
 
 export default function HeaderTrack() {
+  const stateTrack = useSelector((state) => state?.trackReducer);
+  const track = stateTrack?.data?.track;
+  console.log(stateTrack);
   return (
     <div className={styles.headerTrack}>
       <div className={styles.imageHeaderTrack}>
-        <img
-          src={
-            "https://i.scdn.co/image/ab67616d0000b27380fa6021c21b4c0a2f3072f7"
-          }
-          alt={""}
-        />
+        <img src={track?.image} alt={track?.title} />
       </div>
       <div className={styles.contentHeaderTrack}>
         <h6>Song</h6>
-        <h1>Forever Young</h1>
+        <h1>{track?.title}</h1>
         <div>
-          <span>Undressd</span>
-          <span>2019</span>
-          <span> 3:21</span>
+          <span>{track?.artists}</span>
+          <span>{convertDateToYear(track?.releaseDate)}</span>
+          <span> {convertMsToMinutesSeconds(track?.duration)}</span>
         </div>
       </div>
     </div>

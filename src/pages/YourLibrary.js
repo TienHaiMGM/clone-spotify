@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Navbar from "../components/Navbar";
-import HomePlaylists from "../pages/HomePlaylists";
+import MainYourLibrary from "../components/YourLibrary/MainYourLibrary";
 
 const useStyles = createUseStyles({
   headerLibrary: {
@@ -52,7 +52,7 @@ export default function YourLibrary() {
         </Header>
       </header>
       <main>
-        <HomePlaylists />
+        <MainYourLibrary />
       </main>
       <footer>
         <Footer />

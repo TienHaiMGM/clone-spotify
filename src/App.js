@@ -15,11 +15,9 @@ import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import "./App.css";
 import { getTokenFromUrl } from "./data/spotify";
-import PopupLogin from "./components/PopupLogin";
 
 function App() {
   const [token, setToken] = useState();
-
   const stateLogin = useSelector((state) => state.loginReducer);
   const stateCategories = useSelector((state) => state.categoriesReducer);
   const dispatch = useDispatch();

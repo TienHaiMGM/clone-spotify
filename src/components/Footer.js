@@ -31,6 +31,8 @@ export default function Footer(props) {
   const audioRef = useRef();
   const inputDurationRef = useRef();
   const dispatch = useDispatch();
+  const stateLogin = useSelector((state) => state.loginReducer);
+  const token = stateLogin.data.token;
   const stateCurrentlyPlaying = useSelector(
     (state) => state.currentlyPlayingReducer
   );
@@ -132,154 +134,164 @@ export default function Footer(props) {
 
   return (
     <div className={styles.footer}>
-      <div className={styles.footerUser}>
-        <div className={styles.currentlyPlaying}>
-          <div className={styles.inforCurrentPlaying}>
-            <img
-              src={tracks[trackCurrent]?.image || currentlyPlaying?.image}
-              alt={tracks[trackCurrent]?.title || currentlyPlaying?.title}
-            />
-            <div>
-              <h6>{tracks[trackCurrent]?.title || currentlyPlaying?.title}</h6>
-              {currentlyPlaying?.artists &&
-                currentlyPlaying?.artists?.map((value, index) => {
-                  return (
-                    <span key={value.id}>
-                      <Link to={`/artist/${value.id}`}>
-                        {" "}
-                        {index && index > 0 ? ", " + value.name : value.name}
-                      </Link>
-                    </span>
-                  );
-                })}
+      {token ? (
+        <div className={styles.footerUser}>
+          <div className={styles.currentlyPlaying}>
+            <div className={styles.inforCurrentPlaying}>
+              <img
+                src={tracks[trackCurrent]?.image || currentlyPlaying?.image}
+                alt={tracks[trackCurrent]?.title || currentlyPlaying?.title}
+              />
+              <div>
+                <h6>
+                  {tracks[trackCurrent]?.title || currentlyPlaying?.title}
+                </h6>
+                {currentlyPlaying?.artists &&
+                  currentlyPlaying?.artists?.map((value, index) => {
+                    return (
+                      <span key={value.id}>
+                        <Link to={`/artist/${value.id}`}>
+                          {" "}
+                          {index && index > 0 ? ", " + value.name : value.name}
+                        </Link>
+                      </span>
+                    );
+                  })}
+              </div>
+            </div>
+            <div className={styles.iconButton}>
+              <button>
+                <FontAwesomeIcon icon={faHeart} />
+              </button>
+              <button>
+                <FontAwesomeIcon icon={faImage} />
+              </button>
             </div>
           </div>
-          <div className={styles.iconButton}>
-            <button>
-              <FontAwesomeIcon icon={faHeart} />
-            </button>
-            <button>
-              <FontAwesomeIcon icon={faImage} />
+
+          <div className={styles.audio}>
+            <div className={styles.buttonPlayers}>
+              <button onClick={() => handleClickShuffle()}>
+                <FontAwesomeIcon
+                  icon={faShuffle}
+                  style={isShuffle && { color: "#1ed760" }}
+                />
+              </button>
+              <button onClick={() => handleClickBackward()}>
+                <FontAwesomeIcon icon={faBackwardStep} />
+              </button>
+              <button
+                onClick={() => handleTogglePlayPause()}
+                className={styles.buttonPlay}
+              >
+                <FontAwesomeIcon
+                  style={isPlaying && { display: "none" }}
+                  icon={faCirclePlay}
+                />
+                <FontAwesomeIcon
+                  style={!isPlaying && { display: "none" }}
+                  icon={faCirclePause}
+                />
+              </button>
+              <button onClick={() => handleClickForward()}>
+                <FontAwesomeIcon icon={faForwardStep} />
+              </button>
+              <button
+                onClick={() =>
+                  setIsLoop((value) => {
+                    return !value;
+                  })
+                }
+              >
+                <FontAwesomeIcon
+                  style={isLoop && { color: "#1ed760" }}
+                  icon={faRotate}
+                />
+              </button>
+              <ReactAudioPlayer
+                ref={audioRef}
+                src={
+                  tracks[trackCurrent]?.previewUrl ||
+                  currentlyPlaying?.previewUrl
+                }
+                volume={volume / 100}
+                loop={isLoop}
+                muted={isMuted}
+                autoPlay={isAutoPlay}
+                listenInterval={100}
+                onListen={(value) => {
+                  const valueTime =
+                    (value / audioRef?.current?.audioEl?.current.duration) *
+                    100;
+                  setDurations(valueTime);
+                }}
+                // onAbort={(value) => {
+                //   setIsAutoPlay(true);
+                //   console.log(value);
+                // }}
+                onEnded={(value) => {
+                  handleClickForward();
+                }}
+                // onCanPlay={(value) => {
+                //   console.log(value);
+
+                // }}
+              />
+            </div>
+            <div className={styles.buttonDuration}>
+              <input
+                ref={inputDurationRef}
+                onChange={(e) => handleOnChangeDuration(Number(e.target.value))}
+                className={styles.duration}
+                style={{
+                  backgroundSize: `${durations}% 100%`,
+                }}
+                type="range"
+                max={"100"}
+                value={durations.toString()}
+              />
+            </div>
+          </div>
+          <div>
+            <button className={styles.buttonVolume} type="button">
+              {isMuted ? (
+                <FontAwesomeIcon
+                  onClick={() => setIsMuted((value) => !value)}
+                  icon={faVolumeXmark}
+                />
+              ) : (
+                <FontAwesomeIcon
+                  onClick={() => setIsMuted((value) => !value)}
+                  icon={faVolumeHigh}
+                />
+              )}
+              <input
+                onChange={(e) => handleOnChangeVolume(Number(e.target.value))}
+                className={styles.volume}
+                value={volume}
+                style={{ backgroundSize: `${volume}% 100%` }}
+                type="range"
+                max="100"
+              />
             </button>
           </div>
         </div>
-
-        <div className={styles.audio}>
-          <div className={styles.buttonPlayers}>
-            <button onClick={() => handleClickShuffle()}>
-              <FontAwesomeIcon
-                icon={faShuffle}
-                style={isShuffle && { color: "#1ed760" }}
-              />
-            </button>
-            <button onClick={() => handleClickBackward()}>
-              <FontAwesomeIcon icon={faBackwardStep} />
-            </button>
-            <button
-              onClick={() => handleTogglePlayPause()}
-              className={styles.buttonPlay}
-            >
-              <FontAwesomeIcon
-                style={isPlaying && { display: "none" }}
-                icon={faCirclePlay}
-              />
-              <FontAwesomeIcon
-                style={!isPlaying && { display: "none" }}
-                icon={faCirclePause}
-              />
-            </button>
-            <button onClick={() => handleClickForward()}>
-              <FontAwesomeIcon icon={faForwardStep} />
-            </button>
-            <button
-              onClick={() =>
-                setIsLoop((value) => {
-                  return !value;
-                })
-              }
-            >
-              <FontAwesomeIcon
-                style={isLoop && { color: "#1ed760" }}
-                icon={faRotate}
-              />
-            </button>
-            <ReactAudioPlayer
-              ref={audioRef}
-              src={
-                tracks[trackCurrent]?.previewUrl || currentlyPlaying?.previewUrl
-              }
-              volume={volume / 100}
-              loop={isLoop}
-              muted={isMuted}
-              autoPlay={isAutoPlay}
-              listenInterval={100}
-              onListen={(value) => {
-                const valueTime =
-                  (value / audioRef?.current?.audioEl?.current.duration) * 100;
-                setDurations(valueTime);
-              }}
-              // onAbort={(value) => {
-              //   setIsAutoPlay(true);
-              //   console.log(value);
-              // }}
-              onEnded={(value) => {
-                handleClickForward();
-              }}
-              // onCanPlay={(value) => {
-              //   console.log(value);
-
-              // }}
-            />
+      ) : (
+        <div className={styles.footerLogin}>
+          <div>
+            <p>PREVIEW OF SPOTIFY</p>
+            <p>
+              Sign up to get unlimited songs and podcasts with occasional ads.
+              No credit card needed
+            </p>
           </div>
-          <div className={styles.buttonDuration}>
-            <input
-              ref={inputDurationRef}
-              onChange={(e) => handleOnChangeDuration(Number(e.target.value))}
-              className={styles.duration}
-              style={{
-                backgroundSize: `${durations}% 100%`,
-              }}
-              type="range"
-              max={"100"}
-              value={durations.toString()}
-            />
-          </div>
-        </div>
-        <div>
-          <button className={styles.buttonVolume} type="button">
-            {isMuted ? (
-              <FontAwesomeIcon
-                onClick={() => setIsMuted((value) => !value)}
-                icon={faVolumeXmark}
-              />
-            ) : (
-              <FontAwesomeIcon
-                onClick={() => setIsMuted((value) => !value)}
-                icon={faVolumeHigh}
-              />
-            )}
-            <input
-              onChange={(e) => handleOnChangeVolume(Number(e.target.value))}
-              className={styles.volume}
-              value={volume}
-              style={{ backgroundSize: `${volume}% 100%` }}
-              type="range"
-              max="100"
-            />
+          <button type="button" className={styles.btnFooterLogin}>
+            <a href="https://www.spotify.com/vn-vi/signup?forward_url=https%3A%2F%2Fopen.spotify.com%2F">
+              Sign up free
+            </a>
           </button>
         </div>
-      </div>
-
-      <div className={styles.footerLogin}>
-        <div>
-          <p>PREVIEW OF SPOTIFY</p>
-          <p>
-            Sign up to get unlimited songs and podcasts with occasional ads. No
-            credit card needed
-          </p>
-        </div>
-        <button type="button">Sign up free</button>
-      </div>
+      )}
     </div>
   );
 }

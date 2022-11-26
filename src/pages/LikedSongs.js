@@ -1,23 +1,35 @@
 import React from "react";
 import "../css/Frames.css";
-import styles from "../css/LikedSongs.module.css";
+import styles from "../css/LikedSongs/LikedSongs.module.css";
 
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Navbar from "../components/Navbar";
-import HomePlaylists from "../pages/HomePlaylists";
+import HeaderLikedSongs from "../components/LikedSongs/HeaderLikedSongs";
+import MainLikedSongs from "../components/LikedSongs/MainLikedSongs";
 
 export default function LikedSongs() {
+  const backgroundColor = "#412f7e";
   return (
-    <div className={`${styles.likedSongs} Frames`}>
+    <div className="Frames">
       <nav>
         <Navbar />
       </nav>
       <header>
-        <Header />
+        <Header backgroundHeader={backgroundColor} />
       </header>
       <main>
-        <HomePlaylists />
+        <div className={styles.likedSongs}>
+          <div
+            className={styles.headerLikedSongs}
+            style={{ backgroundColor: backgroundColor }}
+          >
+            <HeaderLikedSongs />
+          </div>
+          <div className={styles.mainLikedSongs}>
+            <MainLikedSongs />
+          </div>
+        </div>
       </main>
       <footer>
         <Footer />

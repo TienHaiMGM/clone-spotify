@@ -18,6 +18,7 @@ import Show from "./pages/Show";
 import Artist from "./pages/Artist";
 import Genre from "./components/Search/Genre";
 import ResultUserSearch from "./components/Search/ResultUserSearch";
+import ProtectRouter from "./components/ProtectRouter";
 
 const router = createBrowserRouter([
   {
@@ -38,11 +39,19 @@ const router = createBrowserRouter([
   },
   {
     path: "/collection/playlists",
-    element: <YourLibrary />,
+    element: (
+      <ProtectRouter>
+        <YourLibrary />,
+      </ProtectRouter>
+    ),
   },
   {
     path: "/collection/tracks",
-    element: <LikedSongs />,
+    element: (
+      <ProtectRouter>
+        <LikedSongs />,
+      </ProtectRouter>
+    ),
   },
   {
     path: "/playlist/:playlistId",

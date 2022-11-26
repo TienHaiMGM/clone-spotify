@@ -142,7 +142,7 @@ export default function Header(props) {
           </div>
           <div className={styles.signupAndLogin}>
             <button className={styles.signUp} type="button">
-              <a href="" alt="">
+              <a href="https://www.spotify.com/vn-vi/signup?forward_url=https%3A%2F%2Fopen.spotify.com%2F">
                 Sign up
               </a>
             </button>
