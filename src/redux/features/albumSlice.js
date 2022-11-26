@@ -38,6 +38,19 @@ const albumSlice = createSlice({
       .addCase(getAlbum.fulfilled, (state, action) => {
         state.loading = false;
         const albums = action.payload;
+
+        const tracks = [];
+        albums?.tracks?.items?.map((value) => {
+          tracks.push({
+            title: value.name,
+            id: value.id,
+            type: value.type,
+            image: albums?.images[0]?.url,
+            artists: value.artists,
+            duration: value["duration_ms"],
+            previewUrl: value["preview_url"],
+          });
+        });
         const album = {
           name: albums.name,
           type: albums.type,
@@ -50,8 +63,8 @@ const albumSlice = createSlice({
             name: albums.artists[0].name,
             type: albums.artists[0].type,
           },
-          tracks: albums.tracks,
           releaseDate: albums["release_date"],
+          tracks: tracks,
         };
         state.data = album;
       })
@@ -62,6 +75,6 @@ const albumSlice = createSlice({
   },
 });
 
-export const {} = albumSlice.actions;
+export const { getIsPlaying } = albumSlice.actions;
 
 export default albumSlice.reducer;

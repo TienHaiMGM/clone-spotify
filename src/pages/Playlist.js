@@ -25,10 +25,10 @@ export default function Playlist() {
           className={styles.headerPlaylists}
           style={{ backgroundColor: backgroundColor }}
         >
-          <HeaderPlaylists statePlaylists={statePlaylists} />
+          <HeaderPlaylists />
         </div>
         <div className={styles.mainPlaylists}>
-          <MainPlaylist statePlaylists={statePlaylists} />
+          <MainPlaylist />
         </div>
       </div>
     </Frames>

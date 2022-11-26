@@ -41,6 +41,7 @@
 .currentlyPlaying {
   padding: 16px;
   display: flex;
+  justify-content: space-between;
   color: white;
   font-size: 0.8em;
   align-items: center;
@@ -55,7 +56,22 @@
 .currentlyPlaying div p {
   opacity: 0.6;
 }
-
+.currentlyPlaying div h6 {
+  font-size: 1em;
+}
+.inforCurrentPlaying {
+  display: flex;
+}
+.inforCurrentPlaying a {
+  text-decoration: none;
+  color: white;
+}
+.inforCurrentPlaying a:hover {
+  text-decoration: underline;
+}
+.inforCurrentPlaying > div {
+  margin-top: 1em;
+}
 .iconButton > button {
   margin-right: 1em;
   border-radius: 10px;

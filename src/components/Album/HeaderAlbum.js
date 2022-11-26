@@ -4,12 +4,15 @@ import {
   convertDateToYear,
   convertMsToHoursMinutes,
 } from "../../utils/convertTime";
+import { useSelector } from "react-redux";
 
-export default function HeaderAlbum(props) {
-  const dataAlbum = props.stateAlbum.data;
-  const totalDuration = dataAlbum?.tracks?.items?.reduce((total, value) => {
-    return total + value["duration_ms"];
+export default function HeaderAlbum() {
+  const dataAlbumTracks = useSelector((state) => state.albumReducer);
+  const dataAlbum = dataAlbumTracks.data;
+  const totalDuration = dataAlbum?.tracks?.reduce((total, value) => {
+    return total + value.duration;
   }, 0);
+
   return (
     <div>
       <div className={styles.headerAlbum}>

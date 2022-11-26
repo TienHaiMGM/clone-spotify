@@ -44,7 +44,7 @@ const currentlyPlayingSlice = createSlice({
             id: data.item.id,
             type: data.item.type,
             image: data.item.album.images[0].url,
-            artists: data.item.artists[0].name,
+            artists: data.item.artists,
             previewUrl: data.item["preview_url"],
             duration: data.item["duration_ms"],
           };

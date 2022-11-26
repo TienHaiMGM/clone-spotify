@@ -1,8 +1,10 @@
 import React from "react";
 import styles from "../../css/Playlist/HeaderPlaylists.module.css";
+import { useSelector } from "react-redux";
 
-export default function HeaderPlaylists(props) {
-  const dataPlaylists = props.statePlaylists.data.playList;
+export default function HeaderPlaylists() {
+  const statePlaylists = useSelector((state) => state.playlistsReducer);
+  const dataPlaylists = statePlaylists?.data?.playList;
 
   return (
     <div className={styles.headerPlaylist}>

@@ -1,50 +1,65 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../../css/Playlist/MainPlaylist.module.css";
 import {
   convertDaysAdded,
   convertMsToMinutesSeconds,
 } from "../../utils/convertTime";
-
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPause, faPlay } from "@fortawesome/free-solid-svg-icons";
 export default function MainListTracks(props) {
-  const tracks = {
-    daysAdd: props.tracks["added_at"],
-    track: {
-      name: props.tracks.track.name,
-      type: props.tracks.track.type,
-      id: props.tracks.track.id,
-      artists: props.tracks.track.artists,
-      duration: props.tracks.track["duration_ms"],
-      album: {
-        name: props.tracks.track.album.name,
-        id: props.tracks.track.album.id,
-        image: props.tracks.track.album.images[0].url,
-        type: props.tracks.track.album.type,
-      },
-    },
+  console.log(props.tracks);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const handleClickPlay = () => {
+    setIsPlaying(true);
   };
-  const artist = props.tracks.track.artists?.reduce((artist, value) => {
-    artist.push(value.name);
-    return artist;
-  }, []);
-
-  // console.log(props.tracks)
-  // console.log('tracks',tracks)
+  const handleClickPause = () => {
+    setIsPlaying(false);
+  };
+  const tracks = props.tracks;
   return (
     <div className={styles.mainListTracks}>
       <div className={styles.track}>
+        {isPlaying ? (
+          <span onClick={() => handleClickPause()}>
+            <FontAwesomeIcon icon={faPause} />
+          </span>
+        ) : (
+          <span
+            onClick={() => {
+              handleClickPlay();
+            }}
+          >
+            <FontAwesomeIcon icon={faPlay} />
+          </span>
+        )}
         <p>{props.number}</p>
         <div className={styles.infoTrack}>
-          <img src={tracks.track.album.image} alt="" />
+          <img src={tracks.image} alt="" />
           <div>
-            <h6>{tracks.track.name}</h6>
-            <p>{artist.join(", ")}</p>
+            <h6>
+              <Link to={`/track/${tracks.id}`}>{tracks.title}</Link>
+            </h6>
+            {tracks?.artists &&
+              tracks?.artists?.map((value, index) => {
+                return (
+                  <span key={value.id}>
+                    <Link to={`/artist/${value.id}`}>
+                      {" "}
+                      {index && index > 0 ? ", " + value.name : value.name}
+                    </Link>
+                  </span>
+                );
+              })}
           </div>
         </div>
       </div>
       <div className={styles.info}>
-        <p>{tracks.track.album.name}</p>
+        <p>
+          <Link to={`/album/${tracks.album.id}`}>{tracks.album.name}</Link>
+        </p>
         <p>{convertDaysAdded(tracks.daysAdd)} days ago</p>
-        <p>{convertMsToMinutesSeconds(tracks.track.duration)}</p>
+        <p>{convertMsToMinutesSeconds(tracks.duration)}</p>
       </div>
     </div>
   );

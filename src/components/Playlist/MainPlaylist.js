@@ -1,22 +1,44 @@
 import {
   faCirclePlay,
+  faCirclePause,
   faClock,
   faEllipsis,
   faHeart,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { useState } from "react";
 import styles from "../../css/Playlist/MainPlaylist.module.css";
 import MainListTracks from "./MainListTracks";
-
-export default function MainPlaylist(props) {
-  const items = props.statePlaylists.data.playList.tracks.items;
+import { useSelector } from "react-redux";
+export default function MainPlaylist() {
+  const [statePlaying, setStatePlaying] = useState(false);
+  const statePlaylists = useSelector((state) => state.playlistsReducer);
+  const items = statePlaylists?.data?.playList?.tracks;
+  const handleClickTogglePlayPause = () => {
+    setStatePlaying((state) => {
+      return !state;
+    });
+  };
   return (
     <div className={styles.mainPlaylist}>
       <div className={styles.mainPlaylistBtn}>
-        <span>
-          <FontAwesomeIcon className={styles.iconPlay} icon={faCirclePlay} />
-        </span>
+        {statePlaying ? (
+          <span>
+            <FontAwesomeIcon
+              onClick={() => handleClickTogglePlayPause()}
+              className={styles.iconPlay}
+              icon={faCirclePause}
+            />
+          </span>
+        ) : (
+          <span>
+            <FontAwesomeIcon
+              onClick={() => handleClickTogglePlayPause()}
+              className={styles.iconPlay}
+              icon={faCirclePlay}
+            />
+          </span>
+        )}
         <span>
           <FontAwesomeIcon icon={faHeart} />
         </span>

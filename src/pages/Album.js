@@ -23,26 +23,34 @@ export default function Album() {
   const getIdForUrl = (id) => {
     setIdForUrl(id);
   };
-  const getIsPlaying = (isPlaying) => {
-    setIsPlaying(isPlaying);
+  const getIsPlaying = (state) => {
+    setIsPlaying(state);
   };
+  const getStatePlaying = (state) => {
+    setIsPlaying(state);
+  };
+
   return (
     <div>
       <Frames
         backgroundHeader={backgroundColor}
         idForUrl={idForUrl}
-        getIsPlaying={getIsPlaying}
-        stateAlbum={stateAlbum}
+        getIsPlaying={isPlaying}
       >
         <div className={styles.album}>
           <div
             className={styles.headerAlbum}
             style={{ backgroundColor: backgroundColor }}
           >
-            <HeaderAlbum stateAlbum={stateAlbum} />
+            <HeaderAlbum />
           </div>
           <div className={styles.mainAlbum}>
-            <MainAlbum getIdForUrl={getIdForUrl} stateAlbum={stateAlbum} />
+            <MainAlbum
+              getIdForUrl={getIdForUrl}
+              getStatePlaying={getStatePlaying}
+              getIsPlaying={getIsPlaying}
+              statePlaying={isPlaying}
+            />
           </div>
         </div>
       </Frames>

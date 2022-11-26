@@ -17,6 +17,7 @@ import {
   faVolumeHigh,
   faVolumeXmark,
 } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 export default function Footer(props) {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -27,7 +28,6 @@ export default function Footer(props) {
   const [isAutoPlay, setIsAutoPlay] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [isShuffle, setIsShuffle] = useState(false);
-  const [numberIncrease, setNumberIncrease] = useState(1);
   const audioRef = useRef();
   const inputDurationRef = useRef();
   const dispatch = useDispatch();
@@ -37,16 +37,18 @@ export default function Footer(props) {
   const stateListTracksPlaying = useSelector(
     (state) => state.listTrackPlayingReducer
   );
-
+  const stateAlbumTracks = useSelector((state) => state.albumReducer);
+  const statePlaylistTracks = useSelector((state) => state.playlistsReducer);
   const currentlyPlaying = stateCurrentlyPlaying?.data?.items;
   const listTrackPlaying = stateListTracksPlaying?.data?.listTracksPlaying;
-  const currentlyPreviewUrl = currentlyPlaying?.previewUrl;
-  const idCurrently = currentlyPlaying?.id;
-  const tracks = listTrackPlaying;
-
-  // const stateAlbum = props?.stateAlbum;
-  // const tracks = stateAlbum?.data?.tracks?.items;
-  // const urlFormTracks = props?.idForUrl;
+  const dataAlbumTracks = stateAlbumTracks?.data?.tracks;
+  const dataPlaylistTracks = statePlaylistTracks?.data?.playList.tracks;
+  // console.log("listTrackPlaying", currentlyPlaying.artists);
+  // console.log("dataAlbumTracks", dataAlbumTracks);
+  // console.log("dataPlaylistTracks", dataPlaylistTracks);
+  const tracks = dataAlbumTracks ? dataAlbumTracks : listTrackPlaying;
+  const urlFormTracks = props?.idForUrl;
+  const statePlay = props?.getIsPlaying;
 
   useEffect(() => {
     dispatch(getPlayer()).then((valuePlayer) => {
@@ -56,10 +58,6 @@ export default function Footer(props) {
     });
   }, []);
 
-  // console.log("currentlyPlaying", currentlyPlaying);
-  // console.log("stateListTrackPlaying", listTrackPlaying);
-  // console.log("trackCurrent", trackCurrent);
-
   function getTrackCurrent() {
     const indexTrackCurrent = listTrackPlaying?.findIndex(
       (value) => value?.id === currentlyPlaying?.id
@@ -67,19 +65,16 @@ export default function Footer(props) {
     setTrackCurrent(indexTrackCurrent);
   }
 
-  // useEffect(() => {
-  //   tracks?.map((value, index) => {
-  //     if (urlFormTracks === null) {
-  //       setIsPlaying(false);
-  //       setIsAutoPlay(false);
-  //     }
-  //     if (urlFormTracks && value?.id === urlFormTracks?.ids) {
-  //       setTrackCurrent(index);
-  //       setIsPlaying(true);
-  //       setIsAutoPlay(true);
-  //     }
-  //   });
-  // }, [urlFormTracks]);
+  useEffect(() => {
+    if (statePlay === false) {
+      setIsPlaying(false);
+      setIsAutoPlay(false);
+    } else if (statePlay === true) {
+      setTrackCurrent(urlFormTracks);
+      setIsPlaying(true);
+      setIsAutoPlay(true);
+    }
+  }, [statePlay]);
 
   useEffect(() => {
     const audioEl = audioRef?.current?.audioEl.current;
@@ -108,9 +103,11 @@ export default function Footer(props) {
   };
 
   const handleClickBackward = () => {
-    if (trackCurrent > 0) {
+    if (isShuffle) {
+      setTrackCurrent(Math.floor(Math.random() * tracks.length));
+    } else if (trackCurrent > 0) {
       setTrackCurrent((value) => {
-        return value - numberIncrease;
+        return value - 1;
       });
     }
     setIsAutoPlay(true);
@@ -118,9 +115,11 @@ export default function Footer(props) {
   };
 
   const handleClickForward = () => {
-    if (trackCurrent < tracks.length - 1) {
+    if (isShuffle) {
+      setTrackCurrent(Math.floor(Math.random() * tracks.length));
+    } else if (trackCurrent < tracks.length - 1) {
       setTrackCurrent((value) => {
-        return value + numberIncrease;
+        return value + 1;
       });
     }
     setIsAutoPlay(true);
@@ -128,18 +127,32 @@ export default function Footer(props) {
   };
 
   const handleClickShuffle = () => {
-    // setIsShuffle((value) => !value);
-    // console.log(tracks.length);
-    // setNumberIncrease(Math.floor(Math.random() * tracks.length));
+    setIsShuffle((value) => !value);
   };
+
   return (
     <div className={styles.footer}>
       <div className={styles.footerUser}>
         <div className={styles.currentlyPlaying}>
-          <img src={currentlyPlaying?.image} alt="My Tam" />
-          <div>
-            <h6>{currentlyPlaying?.title}</h6>
-            <p>{currentlyPlaying?.artists}</p>
+          <div className={styles.inforCurrentPlaying}>
+            <img
+              src={tracks[trackCurrent]?.image || currentlyPlaying?.image}
+              alt={tracks[trackCurrent]?.title || currentlyPlaying?.title}
+            />
+            <div>
+              <h6>{tracks[trackCurrent]?.title || currentlyPlaying?.title}</h6>
+              {currentlyPlaying?.artists &&
+                currentlyPlaying?.artists?.map((value, index) => {
+                  return (
+                    <span key={value.id}>
+                      <Link to={`/artist/${value.id}`}>
+                        {" "}
+                        {index && index > 0 ? ", " + value.name : value.name}
+                      </Link>
+                    </span>
+                  );
+                })}
+            </div>
           </div>
           <div className={styles.iconButton}>
             <button>
@@ -154,7 +167,10 @@ export default function Footer(props) {
         <div className={styles.audio}>
           <div className={styles.buttonPlayers}>
             <button onClick={() => handleClickShuffle()}>
-              <FontAwesomeIcon icon={faShuffle} />
+              <FontAwesomeIcon
+                icon={faShuffle}
+                style={isShuffle && { color: "#1ed760" }}
+              />
             </button>
             <button onClick={() => handleClickBackward()}>
               <FontAwesomeIcon icon={faBackwardStep} />
@@ -189,7 +205,9 @@ export default function Footer(props) {
             </button>
             <ReactAudioPlayer
               ref={audioRef}
-              src={tracks[trackCurrent]?.previewUrl || currentlyPreviewUrl}
+              src={
+                tracks[trackCurrent]?.previewUrl || currentlyPlaying?.previewUrl
+              }
               volume={volume / 100}
               loop={isLoop}
               muted={isMuted}
@@ -209,6 +227,7 @@ export default function Footer(props) {
               }}
               // onCanPlay={(value) => {
               //   console.log(value);
+
               // }}
             />
           </div>

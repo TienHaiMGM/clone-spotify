@@ -39,6 +39,7 @@ const listTrackPlayingSlice = createSlice({
       .addCase(getListTrackPlaying.fulfilled, (state, action) => {
         state.loading = false;
         const dataListTracks = action.payload;
+        console.log("test", dataListTracks);
         const listTracksPlaying = action.payload.tracks.items;
         const listTrack = [];
         switch (dataListTracks.type) {
@@ -49,7 +50,7 @@ const listTrackPlayingSlice = createSlice({
                 id: value.track.id,
                 type: value.track.type,
                 image: value.track.album.images[0].url,
-                artists: value.track.artists[0].name,
+                artists: value.track.artists,
                 duration: value.track["duration_ms"],
                 previewUrl: value.track["preview_url"],
               });

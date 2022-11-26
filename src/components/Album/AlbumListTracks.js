@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock, faPause, faPlay } from "@fortawesome/free-solid-svg-icons";
 import styles from "../../css/Album/MainAlbum.module.css";
@@ -8,23 +8,22 @@ import { Link } from "react-router-dom";
 export default function AlbumListTracks(props) {
   const [isPlaying, setIsPlaying] = useState(false);
   const dataTracks = props.dataTracks;
-  const number = props.number;
-  const tracks = {
-    name: dataTracks.name,
-    ids: dataTracks.id,
-    type: dataTracks.type,
-    previewUrl: dataTracks["preview_url"],
-    duration: dataTracks["duration_ms"],
-    artist: dataTracks.artists[0].name,
-    artistId: dataTracks.artists[0].id,
-  };
+  const number = props.number + 1;
+  const statePlayingCurrent = props.statePlaying;
+  console.log("dataTracks", dataTracks.artists);
+  useEffect(() => {
+    setIsPlaying(statePlayingCurrent);
+  }, [statePlayingCurrent]);
+  console.log(statePlayingCurrent);
   const handleClickPlay = () => {
-    props.getIdForUrl(tracks);
     setIsPlaying(true);
+    props.getIdForUrl(props.number);
+    props.getIsPlaying(true);
   };
   const handleClickPause = () => {
-    props.getIdForUrl(null);
     setIsPlaying(false);
+    props.getIdForUrl(null);
+    props.getIsPlaying(false);
   };
 
   return (
@@ -45,14 +44,16 @@ export default function AlbumListTracks(props) {
         )}
         <p>{number}</p>
         <div className={styles.infoTrack}>
-          <h6>{tracks.name}</h6>
+          <h6>{dataTracks.title}</h6>
           <p>
-            <Link to={`/artist/${tracks.artistId}`}>{tracks.artist}</Link>
+            <Link to={`/artist/${dataTracks.artists[0].id}`}>
+              {dataTracks.artists[0].name}
+            </Link>
           </p>
         </div>
       </div>
       <div className={styles.info}>
-        <p>{convertMsToMinutesSeconds(tracks.duration)}</p>
+        <p>{convertMsToMinutesSeconds(dataTracks.duration)}</p>
       </div>
     </div>
   );
