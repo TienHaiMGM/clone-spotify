@@ -9,7 +9,7 @@ export default function MainYourLibrary() {
   const stateMyPlaylists = useSelector(
     (state) => state.playlistsReducer.data.myPlaylists
   );
-  console.log(stateMyPlaylists);
+
   useEffect(() => {
     dispatch(getMyPlaylists());
   }, []);

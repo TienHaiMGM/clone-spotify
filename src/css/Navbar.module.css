@@ -85,7 +85,15 @@
 /* My Playlist */
 .myPlaylist {
   padding: 1.5em;
+}
+.myPlaylist a {
+  text-decoration: none;
   color: white;
+  cursor: default;
   opacity: 0.8;
-  line-height: 1em;
+  line-height: 1.3em;
+  font-size: 0.9em;
+}
+.myPlaylist a:hover {
+  opacity: 1;
 }

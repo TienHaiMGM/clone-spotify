@@ -1,33 +1,35 @@
-.headerPlaylist{
-    display: flex;
-    flex-direction: row;
+.headerPlaylist {
+  display: flex;
+  flex-direction: row;
+  color: transparent;
 }
 
-.imageHeaderPlaylist{
-    width: 15em;
-    margin-left: 2em;
+.imageHeaderPlaylist {
+  width: 15em;
+  margin-left: 2em;
 }
-.imageHeaderPlaylist img{
-    width: 100%;
-    min-width: 12em;
+.imageHeaderPlaylist img {
+  width: 100%;
+  min-width: 12em;
+  margin-top: 0.5em;
 }
 
 .contentHeaderPlaylist {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    margin-left: 2em;
-    color: white;
-    font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin-left: 2em;
+  color: white;
+  font-weight: bold;
 }
-.contentHeaderPlaylist h1{
-    font-size: 5.5em;
-    font-weight: bolder ;
+.contentHeaderPlaylist h1 {
+  font-size: 5.5em;
+  font-weight: bolder;
 }
 
-.contentHeaderPlaylist p{
-    opacity: 0.8;
+.contentHeaderPlaylist p {
+  opacity: 0.8;
 }
-.contentHeaderPlaylist span{
-    margin-right: 1em;
+.contentHeaderPlaylist span {
+  margin-right: 1em;
 }

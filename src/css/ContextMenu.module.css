@@ -1,0 +1,28 @@
+.contextMenu {
+  color: white;
+  background-color: #282828;
+  padding-top: 10px;
+  padding-right: 10px;
+  position: absolute;
+  border-radius: 5px;
+}
+
+.contextMenu ul {
+  list-style-type: none;
+}
+
+.contextMenu ul li {
+  line-height: 2em;
+  font-size: 0.9em;
+  font-weight: bold;
+  opacity: 0.8;
+  margin-left: -1.5em;
+  box-sizing: border-box;
+  padding: 5px;
+  padding-left: 15px;
+  border-radius: 5px;
+}
+
+.contextMenu ul li:hover {
+  background-color: rgba(138, 132, 132, 0.4);
+}

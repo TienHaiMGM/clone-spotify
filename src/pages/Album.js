@@ -7,7 +7,9 @@ import Frames from "../components/Frames";
 import styles from "../css/Album/Album.module.css";
 import MainAlbum from "../components/Album/MainAlbum";
 import { getAlbum } from "../redux/features/albumSlice";
+import { getColorToLinearColor } from "../utils/randomColor";
 import { getRandomRgba } from "../utils/randomColor";
+
 export default function Album() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [idForUrl, setIdForUrl] = useState();
@@ -15,12 +17,14 @@ export default function Album() {
   const albumId = params.albumId;
   const dispatch = useDispatch();
   const stateAlbum = useSelector((state) => state.albumReducer);
-  const background = "#0b0c10";
+
+  //BackgroundColor
   const backgroundLinear = `linear-gradient(
-    180deg,
-    ${getRandomRgba(0.5)} 10%,
-    rgba(18, 18, 18, 1) 60%
-  )`;
+      180deg,
+      ${getRandomRgba(0.5)} 10%,
+      rgba(18, 18, 18, 1) 60%
+    )`;
+  //BackgroundColor
 
   useEffect(() => {
     dispatch(getAlbum({ albumId }));
@@ -39,7 +43,7 @@ export default function Album() {
   return (
     <div>
       <Frames
-        backgroundHeader={background}
+        backgroundHeader={getColorToLinearColor(backgroundLinear)}
         idForUrl={idForUrl}
         getIsPlaying={isPlaying}
       >

@@ -11,7 +11,6 @@ export default function MainListTracks(props) {
   const [isPlaying, setIsPlaying] = useState(false);
   const number = props.number + 1;
   const tracks = props.tracks;
-
   const handleClickPlay = () => {
     setIsPlaying(true);
     props.getIdForUrl(props.number);

@@ -8,7 +8,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Driver from "driver.js";
 import "driver.js/dist/driver.min.css";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Nav } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
@@ -21,19 +21,74 @@ import {
   popupCreatePlaylist,
 } from "../data/popup";
 import {
+  getMyPlaylists,
   createPlaylist,
   unfollowPlaylist,
   deleteItemsToPlaylist,
 } from "../redux/features/playlistsSlice";
+import ContextMenu from "../components/ContextMenu";
 
 export default function Navbar() {
+  const [namePlaylist, setNamePlaylist] = useState(0);
+  const [anchorPoint, setAnchorPoint] = useState({ x: 0, y: 0 });
+  const [targetContextMenu, setTargetContextMenu] = useState();
+  const [showContextMenu, setShowContextMenu] = useState(false);
   const dispatch = useDispatch();
   const stateLogin = useSelector((state) => state.loginReducer);
   const tokens = stateLogin?.data?.token;
+
+  //Right Click Context Menu
+  useEffect(() => {
+    dispatch(getMyPlaylists());
+    document.addEventListener("contextmenu", (event) => {
+      // event.preventDefault();
+    });
+    const element = document.getElementById("contextMenuRightClick");
+    element?.addEventListener("contextmenu", (event) => {
+      handleContextMenu(event);
+    });
+    document.addEventListener("click", (event) => {
+      handleRemoveContextMenu(event);
+    });
+    return () => {
+      element?.removeEventListener("contextmenu", handleContextMenu);
+      document.removeEventListener("click", handleContextMenu);
+    };
+  }, []);
+
+  const handleContextMenu = (event) => {
+    const nameAttribute = event.target.getAttribute("name");
+    setAnchorPoint({ x: event.pageX, y: event.pageY });
+
+    if (nameAttribute) {
+      setTargetContextMenu(nameAttribute);
+      setShowContextMenu(true);
+    } else {
+      setShowContextMenu(false);
+    }
+  };
+  const handleRemoveContextMenu = (event) => {
+    setShowContextMenu(false);
+  };
+
+  //Right Click Context Menu
+
   const stateMyPlaylist = useSelector(
     (state) => state.playlistsReducer.data.myPlaylists
   );
   console.log("stateMyPlaylist", stateMyPlaylist);
+  useEffect(() => {
+    setNamePlaylist((value) => {
+      const namePlaylistTemp = `My Playlist #${stateMyPlaylist.length + 1}`;
+      const check = stateMyPlaylist?.every((value) => {
+        return value.name !== namePlaylistTemp;
+      });
+      if (check) {
+        return `My Playlist #${stateMyPlaylist.length + 1}`;
+      } else return `My Playlist #${stateMyPlaylist.length + 2}`;
+    });
+  }, [stateMyPlaylist]);
+
   // HANDLE POPUP
   const driverLibrary = new Driver();
   driverLibrary.defineSteps(popupLibrary);
@@ -41,6 +96,7 @@ export default function Navbar() {
   driverLikedSongs.defineSteps(popupLikedSongs);
   const driverCreatePlaylist = new Driver();
   driverCreatePlaylist.defineSteps(popupCreatePlaylist);
+  //Create Name for My Playlist
   const handleClickPopupLibrary = () => {
     if (tokens === null) {
       driverLibrary.start();
@@ -55,9 +111,12 @@ export default function Navbar() {
     if (tokens === null) {
       driverCreatePlaylist.start();
     } else {
+      dispatch(createPlaylist({ namePlaylist })).then((value) => {
+        dispatch(getMyPlaylists());
+      });
       // dispatch(createPlaylist());
       // dispatch(deleteItemsToPlaylist());
-      dispatch(unfollowPlaylist());
+      // dispatch(unfollowPlaylist());
     }
   };
 
@@ -121,11 +180,19 @@ export default function Navbar() {
           </a>
         </div>
       </div>
-      <div className={styles.myPlaylist}>
+      <div id="contextMenuRightClick" className={`${styles.myPlaylist}`}>
         {stateMyPlaylist &&
-          stateMyPlaylist?.map((value) => {
-            return <p key={value.id}>{value.name}</p>;
-          })}
+          stateMyPlaylist?.map((value) => (
+            <Link key={value.id} to={`/playlist/${value.id}`}>
+              <p name={value.id}>{value.name}</p>
+            </Link>
+          ))}
+      </div>
+      <div style={showContextMenu ? { display: "block" } : { display: "none" }}>
+        <ContextMenu
+          anchorPoint={anchorPoint}
+          targetContextMenu={targetContextMenu}
+        />
       </div>
     </div>
   );

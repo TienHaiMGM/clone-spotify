@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 export default function MainPlaylist(props) {
   const [statePlaying, setStatePlaying] = useState(false);
   const statePlaylists = useSelector((state) => state.playlistsReducer);
+  console.log("statePlaylists", statePlaylists);
   const items = statePlaylists?.data?.playList?.tracks;
   const handleClickTogglePlayPause = () => {
     setStatePlaying((state) => {

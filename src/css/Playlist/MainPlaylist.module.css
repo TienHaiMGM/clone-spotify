@@ -1,6 +1,8 @@
 .mainPlaylist {
   padding: 35px;
-  background-color: #51270f;
+  background-color: transparent;
+  border-top: 2px solid rgba(173, 168, 168, 0.3);
+  min-height: 100%;
 }
 
 .mainPlaylistBtn {

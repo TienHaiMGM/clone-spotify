@@ -50,11 +50,11 @@ export const createPlaylist = createAsyncThunk(
   async (arg, thunkApi) => {
     const token = thunkApi.getState().loginReducer.data.token;
     const userID = thunkApi.getState().loginReducer.data.user.id;
-    const numberPlaylist = 50;
+    const namePlaylist = arg.namePlaylist;
     const response = await axios.post(
       `https://api.spotify.com/v1/users/${userID}/playlists`,
       {
-        name: `New Playlist ${numberPlaylist}`,
+        name: namePlaylist,
         description: "New playlist description",
         public: false,
       },
@@ -74,7 +74,7 @@ export const unfollowPlaylist = createAsyncThunk(
   "playList/unfollowPlaylist",
   async (arg, thunkApi) => {
     const token = thunkApi.getState().loginReducer.data.token;
-    const idPlaylist = "4wvxZG5MubqOwaNtSJEUf5";
+    const idPlaylist = arg.idPlaylist;
     const response = await axios.delete(
       `https://api.spotify.com/v1/playlists/${idPlaylist}/followers`,
       {
@@ -167,6 +167,12 @@ const playlistsSlice = createSlice({
             album: value.track.album,
           });
         });
+        const totalDuration = playlists?.tracks?.items?.reduce(
+          (total, value) => {
+            return total + Number(value.track["duration_ms"]);
+          },
+          0
+        );
         const playList = {
           image: playlists?.images[0]?.url,
           name: playlists.name,
@@ -177,8 +183,11 @@ const playlistsSlice = createSlice({
           tracks: trackPlaylist,
           nameOwner: playlists.owner["display_name"],
           followers: playlists.followers.total,
+          totalDuration: totalDuration,
         };
         state.data.playList = playList;
+        console.log("test", playList);
+        console.log("playlist", action.payload);
       })
       .addCase(getPlaylist.rejected, (state, action) => {
         state.loading = false;
@@ -193,7 +202,6 @@ const playlistsSlice = createSlice({
       .addCase(getMyPlaylists.fulfilled, (state, action) => {
         state.loading = false;
         const dataMyPlaylists = action.payload.items;
-        console.log("dataMyPlaylists", dataMyPlaylists);
         const myPlaylists = [];
         dataMyPlaylists.map((value) => {
           myPlaylists.push({

@@ -6,24 +6,28 @@ import HeaderArtist from "../components/Artist/HeaderArtist";
 import MainArtist from "../components/Artist/MainArtist";
 import { useSelector, useDispatch } from "react-redux";
 import { getArtistTrack } from "../redux/features/artistSlice";
+import { getColorToLinearColor } from "../utils/randomColor";
 import { getRandomRgba } from "../utils/randomColor";
 
 export default function Artist() {
   const dispatch = useDispatch();
   const params = useParams();
   const artistId = params.artistId;
-  const background = "#0b0c10";
+
+  //BackgroundColor
   const backgroundLinear = `linear-gradient(
-    180deg,
-    ${getRandomRgba(0.5)} 10%,
-    rgba(18, 18, 18, 1) 60%
-  )`;
+      180deg,
+      ${getRandomRgba(0.5)} 10%,
+      rgba(18, 18, 18, 1) 60%
+    )`;
+  //BackgroundColor
+
   useEffect(() => {
     dispatch(getArtistTrack({ artistId }));
   }, []);
   return (
     <div>
-      <Frames backgroundHeader={background}>
+      <Frames backgroundHeader={getColorToLinearColor(backgroundLinear)}>
         <div className={styles.artist} style={{ background: backgroundLinear }}>
           <div className={styles.headerArtist}>
             <HeaderArtist />

@@ -7,15 +7,24 @@ import HeaderPlaylists from "../components/Playlist/HeaderPlaylists";
 import MainPlaylist from "../components/Playlist/MainPlaylist";
 import styles from "../css/Playlist/Playlist.module.css";
 import { getPlaylist } from "../redux/features/playlistsSlice";
+import { getColorToLinearColor } from "../utils/randomColor";
+import { getRandomRgba } from "../utils/randomColor";
 
 export default function Playlist() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [idForUrl, setIdForUrl] = useState();
   const params = useParams();
   const playlistId = params.playlistId;
-  const backgroundColor = "#e26521";
   const dispatch = useDispatch();
   const statePlaylists = useSelector((state) => state.playlistsReducer);
+
+  //BackgroundColor
+  const backgroundLinear = `linear-gradient(
+    180deg,
+    ${getRandomRgba(0.5)} 10%,
+    rgba(18, 18, 18, 1) 60%
+  )`;
+  //BackgroundColor
 
   const getIdForUrl = (id) => {
     setIdForUrl(id);
@@ -25,18 +34,15 @@ export default function Playlist() {
   };
   useEffect(() => {
     dispatch(getPlaylist({ playlistId }));
-  }, []);
+  }, [playlistId]);
   return (
     <Frames
-      backgroundHeader={backgroundColor}
+      backgroundHeader={getColorToLinearColor(backgroundLinear)}
       idForUrl={idForUrl}
       getIsPlaying={isPlaying}
     >
-      <div className={styles.playlist}>
-        <div
-          className={styles.headerPlaylists}
-          style={{ backgroundColor: backgroundColor }}
-        >
+      <div className={styles.playlist} style={{ background: backgroundLinear }}>
+        <div className={styles.headerPlaylists}>
           <HeaderPlaylists />
         </div>
         <div className={styles.mainPlaylists}>
