@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styles from "../../css/HomePlaylists/Tracks.module.css";
 import { capitalizeFirstLowercaseRest } from "../../utils/convertText";
 
-export default function Tracks(props) {
+export default function InfoTracks(props) {
   const link = `/${props.value.type}/${props.value.id}`;
   return (
     <div className={styles.tracks}>

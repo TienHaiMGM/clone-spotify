@@ -4,13 +4,14 @@
   display: flex;
 }
 .infoArtist {
-  background-color: black;
+  background-color: transparent;
   width: 100%;
   color: white;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   padding-left: 2em;
+  
 }
 .infoArtist h1 {
   font-size: 5rem;

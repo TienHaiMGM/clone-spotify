@@ -7,15 +7,21 @@ import Frames from "../components/Frames";
 import styles from "../css/Album/Album.module.css";
 import MainAlbum from "../components/Album/MainAlbum";
 import { getAlbum } from "../redux/features/albumSlice";
-
+import { getRandomRgba } from "../utils/randomColor";
 export default function Album() {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [idForUrl, setIdForUrl] = useState();
   const params = useParams();
   const albumId = params.albumId;
   const dispatch = useDispatch();
   const stateAlbum = useSelector((state) => state.albumReducer);
-  const backgroundColor = "#3e3e3e";
-  const [idForUrl, setIdForUrl] = useState();
+  const background = "#0b0c10";
+  const backgroundLinear = `linear-gradient(
+    180deg,
+    ${getRandomRgba(0.5)} 10%,
+    rgba(18, 18, 18, 1) 60%
+  )`;
+
   useEffect(() => {
     dispatch(getAlbum({ albumId }));
   }, []);
@@ -33,15 +39,12 @@ export default function Album() {
   return (
     <div>
       <Frames
-        backgroundHeader={backgroundColor}
+        backgroundHeader={background}
         idForUrl={idForUrl}
         getIsPlaying={isPlaying}
       >
-        <div className={styles.album}>
-          <div
-            className={styles.headerAlbum}
-            style={{ backgroundColor: backgroundColor }}
-          >
+        <div className={styles.album} style={{ background: backgroundLinear }}>
+          <div className={styles.headerAlbum}>
             <HeaderAlbum />
           </div>
           <div className={styles.mainAlbum}>

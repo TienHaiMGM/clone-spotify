@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
@@ -9,17 +9,29 @@ import styles from "../css/Playlist/Playlist.module.css";
 import { getPlaylist } from "../redux/features/playlistsSlice";
 
 export default function Playlist() {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [idForUrl, setIdForUrl] = useState();
   const params = useParams();
   const playlistId = params.playlistId;
   const backgroundColor = "#e26521";
   const dispatch = useDispatch();
   const statePlaylists = useSelector((state) => state.playlistsReducer);
-  console.log(statePlaylists);
+
+  const getIdForUrl = (id) => {
+    setIdForUrl(id);
+  };
+  const getIsPlaying = (state) => {
+    setIsPlaying(state);
+  };
   useEffect(() => {
     dispatch(getPlaylist({ playlistId }));
   }, []);
   return (
-    <Frames backgroundHeader={backgroundColor}>
+    <Frames
+      backgroundHeader={backgroundColor}
+      idForUrl={idForUrl}
+      getIsPlaying={isPlaying}
+    >
       <div className={styles.playlist}>
         <div
           className={styles.headerPlaylists}
@@ -28,7 +40,7 @@ export default function Playlist() {
           <HeaderPlaylists />
         </div>
         <div className={styles.mainPlaylists}>
-          <MainPlaylist />
+          <MainPlaylist getIdForUrl={getIdForUrl} getIsPlaying={getIsPlaying} />
         </div>
       </div>
     </Frames>

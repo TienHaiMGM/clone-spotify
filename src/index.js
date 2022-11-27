@@ -16,7 +16,7 @@ import Episode from "./pages/Episode";
 import Track from "./pages/Track";
 import Show from "./pages/Show";
 import Artist from "./pages/Artist";
-import Genre from "./components/Search/Genre";
+import Genre from "./pages/Genre";
 import ResultUserSearch from "./components/Search/ResultUserSearch";
 import ProtectRouter from "./components/ProtectRouter";
 

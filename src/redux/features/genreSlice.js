@@ -1,4 +1,3 @@
-import { faL } from "@fortawesome/free-solid-svg-icons";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -14,7 +13,7 @@ export const getGenre = createAsyncThunk(
     const genreId = arg.genreId;
     const token = thunkApI.getState().loginReducer.data.token;
     const res = await axios.get(
-      `https://api.spotify.com/v1/albums/${genreId}/?country=VN`,
+      `https://api.spotify.com/v1/browse/categories/${genreId}/playlists/?country=VN`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -38,7 +37,18 @@ const genreSlice = createSlice({
       })
       .addCase(getGenre.fulfilled, (state, action) => {
         state.loading = false;
-        console.log(action.payload);
+        const itemsGenre = action.payload.playlists.items;
+        const playlistGenre = [];
+        itemsGenre?.map((value) => {
+          playlistGenre.push({
+            title: value.name,
+            id: value.id,
+            type: value.type,
+            image: value.images[0]?.url,
+            description: value.description,
+          });
+        });
+        state.data.playlistGenre = playlistGenre;
       })
       .addCase(getGenre.rejected, (state, action) => {
         state.loading = false;

@@ -12,7 +12,7 @@ export const getBrowse = createAsyncThunk(
   async (arg, thunkApI) => {
     const token = thunkApI.getState().loginReducer.data.token;
     const res = await axios.get(
-      "https://api.spotify.com/v1/browse/categories?country=US",
+      "https://api.spotify.com/v1/browse/categories?country=US&offset=1",
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -56,6 +56,7 @@ const searchSlice = createSlice({
       })
       .addCase(getBrowse.fulfilled, (state, action) => {
         state.loading = false;
+        console.log(action.payload);
         const browses = action.payload.categories.items;
         const browse = [];
         browses.map((value) => {
@@ -65,8 +66,6 @@ const searchSlice = createSlice({
             image: value.icons[0].url,
           });
         });
-        browse.shift();
-
         state.data.browse = browse;
       })
       .addCase(getBrowse.rejected, (state, action) => {

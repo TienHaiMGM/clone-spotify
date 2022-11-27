@@ -23,7 +23,6 @@ export default function Track() {
     ${getRandomRgba(0.5)} 10%,
     rgba(18, 18, 18, 1) 60%
   )`;
-  console.log(backgroundLinear);
   useEffect(() => {
     dispatch(getTrack({ trackId }));
     dispatch(getAlbumTrack());

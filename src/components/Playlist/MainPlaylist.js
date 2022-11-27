@@ -10,7 +10,7 @@ import React, { useState } from "react";
 import styles from "../../css/Playlist/MainPlaylist.module.css";
 import MainListTracks from "./MainListTracks";
 import { useSelector } from "react-redux";
-export default function MainPlaylist() {
+export default function MainPlaylist(props) {
   const [statePlaying, setStatePlaying] = useState(false);
   const statePlaylists = useSelector((state) => state.playlistsReducer);
   const items = statePlaylists?.data?.playList?.tracks;
@@ -64,7 +64,13 @@ export default function MainPlaylist() {
           {items &&
             items?.map((value, index) => {
               return (
-                <MainListTracks key={index} tracks={value} number={index + 1} />
+                <MainListTracks
+                  getIdForUrl={props.getIdForUrl}
+                  getIsPlaying={props.getIsPlaying}
+                  key={index}
+                  tracks={value}
+                  number={index}
+                />
               );
             })}
         </div>

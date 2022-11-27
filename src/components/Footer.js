@@ -48,7 +48,11 @@ export default function Footer(props) {
   // console.log("listTrackPlaying", currentlyPlaying.artists);
   // console.log("dataAlbumTracks", dataAlbumTracks);
   // console.log("dataPlaylistTracks", dataPlaylistTracks);
-  const tracks = dataAlbumTracks ? dataAlbumTracks : listTrackPlaying;
+  const tracks = dataAlbumTracks
+    ? dataAlbumTracks
+    : dataPlaylistTracks
+    ? dataPlaylistTracks
+    : listTrackPlaying;
   const urlFormTracks = props?.idForUrl;
   const statePlay = props?.getIsPlaying;
 
@@ -231,6 +235,7 @@ export default function Footer(props) {
                 // }}
                 onEnded={(value) => {
                   handleClickForward();
+                  console.log("tienhai");
                 }}
                 // onCanPlay={(value) => {
                 //   console.log(value);

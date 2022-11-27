@@ -21,7 +21,10 @@ function MainSearch() {
           stateBrowse.map((value) => {
             return (
               <Link
-                to={`/genre/${value?.id}`}
+                to={{
+                  pathname: `/genre/${value.id}`,
+                  search: `?name=${value.name}`,
+                }}
                 className={styles.browseSearch}
                 style={{ backgroundColor: getRandomColor() }}
                 key={value.id}

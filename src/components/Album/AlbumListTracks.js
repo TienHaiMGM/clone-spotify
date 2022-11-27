@@ -10,11 +10,10 @@ export default function AlbumListTracks(props) {
   const dataTracks = props.dataTracks;
   const number = props.number + 1;
   const statePlayingCurrent = props.statePlaying;
-  console.log("dataTracks", dataTracks.artists);
   useEffect(() => {
     setIsPlaying(statePlayingCurrent);
   }, [statePlayingCurrent]);
-  console.log(statePlayingCurrent);
+
   const handleClickPlay = () => {
     setIsPlaying(true);
     props.getIdForUrl(props.number);

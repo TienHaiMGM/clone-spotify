@@ -1,0 +1,77 @@
+.mainArtist {
+  background-color: transparent;
+  border-top: 2px solid rgba(173, 168, 168, 0.3);
+  color: white;
+}
+.headerArtistBtn {
+  display: flex;
+  align-items: center;
+  column-gap: 2em;
+  padding: 1.5em;
+}
+
+.iconPlay {
+  font-size: 4rem;
+  color: #1ed760;
+  background-color: black;
+  border-radius: 50%;
+}
+
+.followBtn {
+  background-color: transparent;
+  color: white;
+  border: 1px solid white;
+  width: 100px;
+  border-radius: 5px;
+  font-weight: bold;
+  padding: 5px;
+  font-size: 0.8em;
+}
+.ellipsisIcon {
+  font-size: 1.5em;
+}
+
+.popularTracks {
+  padding: 2em;
+}
+.popularTracks h3 {
+  margin-bottom: 1.5em;
+}
+.track {
+  display: grid;
+  grid-template-columns: 60% 35% 5%;
+  padding: 0.5em;
+}
+.track:hover {
+  background-color: hsla(240, 1%, 76%, 0.34);
+  opacity: 1;
+}
+.track > div {
+  display: flex;
+  flex-direction: row;
+  column-gap: 1em;
+}
+.track img {
+  width: 40px;
+  height: 40px;
+}
+.numberTrack {
+  display: flex;
+  align-items: center;
+  width: 15px;
+}
+.numberTrack span {
+  position: relative;
+  left: 10px;
+  display: none;
+}
+.numberTrack p {
+  margin-top: 10px;
+  margin-left: 5px;
+}
+.numberTrack:hover span {
+  display: block;
+}
+.numberTrack:hover p {
+  display: none;
+}

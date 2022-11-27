@@ -24,7 +24,7 @@ export default function MainAlbum(props) {
       return !state;
     });
   };
-  console.log("statePlaying", statePlaying);
+
   return (
     <div className={styles.mainAlbum}>
       <div className={styles.mainAlbumBtn}>

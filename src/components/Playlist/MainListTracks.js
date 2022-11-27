@@ -8,15 +8,21 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPause, faPlay } from "@fortawesome/free-solid-svg-icons";
 export default function MainListTracks(props) {
-  console.log(props.tracks);
   const [isPlaying, setIsPlaying] = useState(false);
+  const number = props.number + 1;
+  const tracks = props.tracks;
+
   const handleClickPlay = () => {
     setIsPlaying(true);
+    props.getIdForUrl(props.number);
+    props.getIsPlaying(true);
   };
   const handleClickPause = () => {
     setIsPlaying(false);
+    props.getIdForUrl(null);
+    props.getIsPlaying(false);
   };
-  const tracks = props.tracks;
+
   return (
     <div className={styles.mainListTracks}>
       <div className={styles.track}>
@@ -33,7 +39,7 @@ export default function MainListTracks(props) {
             <FontAwesomeIcon icon={faPlay} />
           </span>
         )}
-        <p>{props.number}</p>
+        <p>{number}</p>
         <div className={styles.infoTrack}>
           <img src={tracks.image} alt="" />
           <div>
