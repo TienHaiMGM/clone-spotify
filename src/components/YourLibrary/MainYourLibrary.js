@@ -3,24 +3,29 @@ import styles from "../../css/YourLibrary/YourLibrary.module.css";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getMyPlaylists } from "../../redux/features/playlistsSlice";
+import { getLikedSongs } from "../../redux/features/likedSongsSlice";
 
 export default function MainYourLibrary() {
   const dispatch = useDispatch();
   const stateMyPlaylists = useSelector(
     (state) => state.playlistsReducer.data.myPlaylists
   );
-
+  const libraryLikedSongs = useSelector(
+    (state) => state.likedSongsReducer?.data?.libraryLikedSongs
+  );
+  console.log("stateLikedSongs", libraryLikedSongs);
   useEffect(() => {
     dispatch(getMyPlaylists());
+    dispatch(getLikedSongs());
   }, []);
   return (
     <div className={styles.mainYourLibrary}>
       <h1>Playlists</h1>
       <div className={styles.mainContentLibrary}>
         <div className={styles.likedSongsLibrary}>
-          <p>adele</p>
+          <p>{libraryLikedSongs?.nameLikedSongs}</p>
           <h3>Liked Songs</h3>
-          <span>2liked songs</span>
+          <span>{libraryLikedSongs?.total} liked songs</span>
         </div>
         <div className={styles.myPlaylist}>
           {stateMyPlaylists &&

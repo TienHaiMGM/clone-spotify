@@ -40,18 +40,24 @@ export default function Footer(props) {
     (state) => state.listTrackPlayingReducer
   );
   const stateAlbumTracks = useSelector((state) => state.albumReducer);
-  const statePlaylistTracks = useSelector((state) => state.playlistsReducer);
+  const statePlaylistTrack = useSelector((state) => state.playlistsReducer);
+  const stateArtistTrack = useSelector((state) => state.artistReducer);
+  const stateLikedSongsTrack = useSelector((state) => state.likedSongsReducer);
   const currentlyPlaying = stateCurrentlyPlaying?.data?.items;
   const listTrackPlaying = stateListTracksPlaying?.data?.listTracksPlaying;
   const dataAlbumTracks = stateAlbumTracks?.data?.tracks;
-  const dataPlaylistTracks = statePlaylistTracks?.data?.playList.tracks;
-  // console.log("listTrackPlaying", currentlyPlaying.artists);
-  // console.log("dataAlbumTracks", dataAlbumTracks);
-  // console.log("dataPlaylistTracks", dataPlaylistTracks);
+  const dataPlaylistTracks = statePlaylistTrack?.data?.playList.tracks;
+  const dataArtistTrack = stateArtistTrack?.data.artistTracks;
+  const dataLikedSongs = stateLikedSongsTrack?.data?.listTrackLikedSongs;
+  console.log("dataLikedSongs", dataLikedSongs);
   const tracks = dataAlbumTracks
     ? dataAlbumTracks
     : dataPlaylistTracks
     ? dataPlaylistTracks
+    : dataArtistTrack
+    ? dataArtistTrack
+    : dataLikedSongs
+    ? dataLikedSongs
     : listTrackPlaying;
   const urlFormTracks = props?.idForUrl;
   const statePlay = props?.getIsPlaying;

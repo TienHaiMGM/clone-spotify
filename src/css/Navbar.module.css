@@ -75,9 +75,6 @@
   text-decoration: underline;
 }
 
-/* .showPopup{
-    display: block;
-} */
 .navbar .hidePopup {
   display: none;
 }
@@ -96,4 +93,10 @@
 }
 .myPlaylist a:hover {
   opacity: 1;
+}
+
+.inputType {
+  position: absolute;
+  top: 0;
+  left: 0;
 }

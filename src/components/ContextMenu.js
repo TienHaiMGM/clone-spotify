@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   unfollowPlaylist,
   getMyPlaylists,
+  renamePlaylist,
+  editDetailPlaylist,
 } from "../redux/features/playlistsSlice";
 
 export default function ContextMenu(props) {
@@ -11,11 +13,18 @@ export default function ContextMenu(props) {
   const anchorPointX = props.anchorPoint.x;
   const anchorPointY = props.anchorPoint.y;
   const idPlaylist = props.targetContextMenu;
+  const newName = "tienahi";
+  const newDescription = "mo ta";
 
   const handleClickDelete = () => {
     dispatch(unfollowPlaylist({ idPlaylist })).then((value) => {
       dispatch(getMyPlaylists());
     });
+  };
+  const handleClickRename = () => {};
+  const handleClickCreatePlaylist = () => {};
+  const handleClickEditDetails = () => {
+    dispatch(editDetailPlaylist({ idPlaylist, newName, newDescription }));
   };
   return (
     <div
@@ -23,14 +32,13 @@ export default function ContextMenu(props) {
       style={{ left: anchorPointX, top: anchorPointY }}
     >
       <ul>
-        <li>Add to queue</li>
         <li>Go to playlist radio</li>
         <li>Add to profile</li>
-        <li>Edit details</li>
+        <li onClick={() => handleClickEditDetails()}>Edit details</li>
         <li>Create similar playlist</li>
         <li onClick={() => handleClickDelete()}>Delete</li>
-        <li>Rename</li>
-        <li>Create playlist</li>
+        <li onClick={() => handleClickRename()}>Rename</li>
+        <li onClick={() => handleClickCreatePlaylist()}>Create playlist</li>
         <li>Create folder</li>
         <li>Share</li>
       </ul>

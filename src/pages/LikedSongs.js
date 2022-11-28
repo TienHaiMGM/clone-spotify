@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../css/Frames.css";
 import styles from "../css/LikedSongs/LikedSongs.module.css";
 
@@ -9,7 +9,15 @@ import HeaderLikedSongs from "../components/LikedSongs/HeaderLikedSongs";
 import MainLikedSongs from "../components/LikedSongs/MainLikedSongs";
 
 export default function LikedSongs() {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [idForUrl, setIdForUrl] = useState();
   const backgroundColor = "#412f7e";
+  const getIdForUrl = (id) => {
+    setIdForUrl(id);
+  };
+  const getIsPlaying = (state) => {
+    setIsPlaying(state);
+  };
   return (
     <div className="Frames">
       <nav>
@@ -27,12 +35,15 @@ export default function LikedSongs() {
             <HeaderLikedSongs />
           </div>
           <div className={styles.mainLikedSongs}>
-            <MainLikedSongs />
+            <MainLikedSongs
+              getIdForUrl={getIdForUrl}
+              getIsPlaying={getIsPlaying}
+            />
           </div>
         </div>
       </main>
       <footer>
-        <Footer />
+        <Footer idForUrl={idForUrl} getIsPlaying={isPlaying} />
       </footer>
     </div>
   );

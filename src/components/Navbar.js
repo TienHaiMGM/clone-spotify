@@ -41,7 +41,7 @@ export default function Navbar() {
   useEffect(() => {
     dispatch(getMyPlaylists());
     document.addEventListener("contextmenu", (event) => {
-      // event.preventDefault();
+      event.preventDefault();
     });
     const element = document.getElementById("contextMenuRightClick");
     element?.addEventListener("contextmenu", (event) => {
@@ -72,11 +72,10 @@ export default function Navbar() {
   };
 
   //Right Click Context Menu
-
   const stateMyPlaylist = useSelector(
     (state) => state.playlistsReducer.data.myPlaylists
   );
-  console.log("stateMyPlaylist", stateMyPlaylist);
+
   useEffect(() => {
     setNamePlaylist((value) => {
       const namePlaylistTemp = `My Playlist #${stateMyPlaylist.length + 1}`;

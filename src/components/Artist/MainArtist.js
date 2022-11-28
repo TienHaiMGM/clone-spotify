@@ -76,7 +76,7 @@ export default function MainArtist() {
                     <img src={value.image} alt={value.title} />
                     <p>{value.title}</p>
                   </div>
-                  <p>123123view</p>
+                  <p>{value.popularity} (popularity)</p>
                   <p>{convertMsToMinutesSeconds(value.duration)}</p>
                 </div>
               );

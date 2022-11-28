@@ -1,15 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../../css/LikedSongs/MainLikedSongs.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCirclePlay,
   faCirclePause,
-  faHeart,
-  faEllipsis,
   faClock,
 } from "@fortawesome/free-solid-svg-icons";
-export default function MainLikedSongs() {
+import { useSelector, useDispatch } from "react-redux";
+import MainListLikedSongs from "./MainListLikedSongs";
+import { getLikedSongs } from "../../redux/features/likedSongsSlice";
+
+export default function MainLikedSongs(props) {
   const [statePlaying, setStatePlaying] = useState(false);
+  const dispatch = useDispatch();
+  const listTrackLikedSongs = useSelector(
+    (state) => state.likedSongsReducer?.data?.listTrackLikedSongs
+  );
+  const dataTracks = listTrackLikedSongs;
+  const statePlayingCurrent = props.statePlaying;
+  useEffect(() => {
+    dispatch(getLikedSongs());
+  }, []);
+  useEffect(() => {
+    setStatePlaying(statePlayingCurrent);
+  }, [statePlayingCurrent]);
   const handleClickTogglePlayPause = () => {
     setStatePlaying((state) => {
       return !state;
@@ -35,12 +49,6 @@ export default function MainLikedSongs() {
             />
           </span>
         )}
-        <span>
-          <FontAwesomeIcon icon={faHeart} />
-        </span>
-        <span>
-          <FontAwesomeIcon icon={faEllipsis} />
-        </span>
       </div>
       <div className={styles.listTracks}>
         <div className={styles.headerListTracks}>
@@ -57,12 +65,19 @@ export default function MainLikedSongs() {
           </div>
         </div>
         <div className={styles.itemMainListTracks}>
-          {/* {items &&
-        items?.map((value, index) => {
-          return (
-            <MainListTracks key={index} tracks={value} number={index + 1} />
-          );
-        })} */}
+          {dataTracks &&
+            dataTracks?.map((data, index) => {
+              return (
+                <MainListLikedSongs
+                  key={index}
+                  number={index}
+                  dataTracks={data}
+                  getIdForUrl={props.getIdForUrl}
+                  getIsPlaying={props.getIsPlaying}
+                  statePlaying={statePlaying}
+                />
+              );
+            })}
         </div>
       </div>
     </div>

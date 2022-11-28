@@ -50,8 +50,10 @@ const artistSlice = createSlice({
             artists: value.artists,
             previewUrl: value["preview_url"],
             duration: value["duration_ms"],
+            popularity: value.popularity,
           });
         });
+        console.log("tét", action.payload);
         state.data.artistTracks = artistTracks;
       })
       .addCase(getArtistTrack.rejected, (state, action) => {

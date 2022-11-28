@@ -140,6 +140,58 @@ export const deleteItemsToPlaylist = createAsyncThunk(
     return response.data;
   }
 );
+
+export const renamePlaylist = createAsyncThunk(
+  "playList/renamePlaylist",
+  async (arg, thunkApi) => {
+    const token = thunkApi.getState().loginReducer.data.token;
+    const idPlaylist = arg.idPlaylist;
+    const newName = arg.newName;
+    const response = await axios.put(
+      `https://api.spotify.com/v1/playlists/${idPlaylist}`,
+      {
+        name: "Updated Playlist Name123123123123",
+        description: "Updated playlist description123123123",
+        public: false,
+      },
+      {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response.data;
+  }
+);
+
+export const editDetailPlaylist = createAsyncThunk(
+  "playList/editDetailPlaylist",
+  async (arg, thunkApi) => {
+    const token = thunkApi.getState().loginReducer.data.token;
+    const idPlaylist = arg.idPlaylist;
+    const newName = arg.newName;
+    const newDescription = arg.newDescription;
+    const response = await axios.put(
+      `https://api.spotify.com/v1/playlists/${idPlaylist}`,
+      {
+        name: "Updated Playlist Name123123123123",
+        description: "Updated playlist description123123123",
+        public: false,
+      },
+      {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response.data;
+  }
+);
+
 const playlistsSlice = createSlice({
   name: "playlistsSlice",
   initialState,
@@ -186,8 +238,6 @@ const playlistsSlice = createSlice({
           totalDuration: totalDuration,
         };
         state.data.playList = playList;
-        console.log("test", playList);
-        console.log("playlist", action.payload);
       })
       .addCase(getPlaylist.rejected, (state, action) => {
         state.loading = false;
@@ -267,6 +317,32 @@ const playlistsSlice = createSlice({
         state.loading = false;
       })
       .addCase(deleteItemsToPlaylist.rejected, (state, action) => {
+        state.loading = false;
+        state.error = true;
+      })
+
+      //Rename Playlist
+      .addCase(renamePlaylist.pending, (state, action) => {
+        state.loading = true;
+        state.error = false;
+      })
+      .addCase(renamePlaylist.fulfilled, (state, action) => {
+        state.loading = false;
+      })
+      .addCase(renamePlaylist.rejected, (state, action) => {
+        state.loading = false;
+        state.error = true;
+      })
+
+      //Edit Detail Playlist
+      .addCase(editDetailPlaylist.pending, (state, action) => {
+        state.loading = true;
+        state.error = false;
+      })
+      .addCase(editDetailPlaylist.fulfilled, (state, action) => {
+        state.loading = false;
+      })
+      .addCase(editDetailPlaylist.rejected, (state, action) => {
         state.loading = false;
         state.error = true;
       });
