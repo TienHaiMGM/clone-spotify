@@ -2,10 +2,10 @@
   display: grid;
   grid-template-rows: 27vh 63vh;
   overflow-y: scroll;
-  height: 100%;
   background: linear-gradient(
     180deg,
     rgba(208, 94, 94, 1) 10%,
     rgba(18, 18, 18, 1) 60%
   );
+  height: 100%;
 }

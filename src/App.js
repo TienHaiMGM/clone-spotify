@@ -21,17 +21,18 @@ function App() {
   const stateLogin = useSelector((state) => state.loginReducer);
   const stateCategories = useSelector((state) => state.categoriesReducer);
   const dispatch = useDispatch();
-
+  console.log("token", token);
   useEffect(() => {
     const hash = getTokenFromUrl();
-    window.location.hash = "";
     const _token = hash.access_token;
+    // window.location.hash = "";
 
     if (_token) {
       setToken(_token);
       dispatch(login(_token));
       dispatch(getUsers({ _token }));
     }
+    console.log("token123123", _token);
     dispatch(getCategories());
     dispatch(getCategorie());
     dispatch(getAlbums());

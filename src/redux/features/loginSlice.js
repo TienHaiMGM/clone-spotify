@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { getTokenFromUrl } from "../../data/spotify";
 
 const initialState = {
   loading: false,
@@ -14,6 +13,7 @@ const initialState = {
 export const getUsers = createAsyncThunk(
   "login/users",
   async (arg, thunkAPI) => {
+    console.log("arg", arg);
     const res = await axios.get("https://api.spotify.com/v1/me", {
       headers: {
         Authorization: `Bearer ${arg._token}`,
@@ -32,7 +32,6 @@ const loginSlice = createSlice({
       localStorage.setItem("token", action.payload);
       const token = action.payload;
       state.data.token = token;
-      console.log(token);
     },
     logout: (state, action) => {
       localStorage.removeItem("token");
@@ -51,6 +50,7 @@ const loginSlice = createSlice({
         const user = action.payload;
         state.loading = false;
         state.data.user = user;
+        console.log("action payload", action.payload);
       })
       .addCase(getUsers.rejected, (state, action) => {
         state.loading = false;

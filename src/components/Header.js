@@ -19,6 +19,7 @@ export default function Header(props) {
   const dispatch = useDispatch();
   const token = stateLogin.data.token;
   const user = stateLogin.data.user;
+  console.log("user", user);
   //Detect click outside element and setDropdown(false)
   const useOutsideLarter = (ref) => {
     useEffect(() => {

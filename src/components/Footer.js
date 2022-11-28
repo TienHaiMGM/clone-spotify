@@ -49,7 +49,7 @@ export default function Footer(props) {
   const dataPlaylistTracks = statePlaylistTrack?.data?.playList.tracks;
   const dataArtistTrack = stateArtistTrack?.data.artistTracks;
   const dataLikedSongs = stateLikedSongsTrack?.data?.listTrackLikedSongs;
-  console.log("dataLikedSongs", dataLikedSongs);
+
   const tracks = dataAlbumTracks
     ? dataAlbumTracks
     : dataPlaylistTracks
@@ -156,7 +156,16 @@ export default function Footer(props) {
                 <h6>
                   {tracks[trackCurrent]?.title || currentlyPlaying?.title}
                 </h6>
-                {currentlyPlaying?.artists &&
+                {tracks[trackCurrent]?.artists?.map((value, index) => {
+                  return (
+                    <span key={value.id}>
+                      <Link to={`/artist/${value.id}`}>
+                        {" "}
+                        {index && index > 0 ? ", " + value.name : value.name}
+                      </Link>
+                    </span>
+                  );
+                }) ||
                   currentlyPlaying?.artists?.map((value, index) => {
                     return (
                       <span key={value.id}>
