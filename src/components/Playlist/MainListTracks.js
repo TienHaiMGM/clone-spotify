@@ -1,12 +1,13 @@
+import { faPause, faPlay } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import styles from "../../css/Playlist/MainPlaylist.module.css";
 import {
   convertDaysAdded,
   convertMsToMinutesSeconds,
 } from "../../utils/convertTime";
-import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPause, faPlay } from "@fortawesome/free-solid-svg-icons";
+
 export default function MainListTracks(props) {
   const [isPlaying, setIsPlaying] = useState(false);
   const number = props.number + 1;

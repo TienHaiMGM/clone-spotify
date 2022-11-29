@@ -1,40 +1,43 @@
+/* CSS Main playlist */
 .mainPlaylist {
   padding: 35px;
   background-color: transparent;
-  border-top: 2px solid rgba(173, 168, 168, 0.3);
+  border-top: var(--borderLine);
   min-height: 100%;
+  margin-top: 1em;
 }
-
 .mainPlaylistBtn {
-  color: white;
+  color: var(--text-color);
   font-size: 2em;
   display: flex;
   align-items: center;
   margin-bottom: 0.5em;
 }
-
 .mainPlaylistBtn span {
   margin-right: 1em;
 }
-
 .iconPlay {
   font-size: 4rem;
-  color: #1ed760;
+  color: var(--iconPlay-color);
   background-color: black;
   border-radius: 50%;
 }
 
+/* CSS Header List Tracks*/
 .headerListTracks,
 .mainListTracks {
-  color: white;
-  opacity: 1;
+  color: var(--text-color);
   display: grid;
   grid-template-columns: 45% 55%;
   align-items: center;
 }
 .headerListTracks {
   height: 2em;
-  border-bottom: 1px solid rgba(185, 185, 185, 0.3);
+  border-bottom: var(--borderLine);
+}
+.titleHeader p,
+.track > p {
+  margin-right: 1em;
 }
 .titleHeader {
   display: flex;
@@ -44,30 +47,28 @@
   grid-template-columns: 60% 30% 10%;
 }
 .info a {
-  text-decoration: none;
-  color: white;
+  text-decoration: var(--a-textDecoration);
+  color: var(--subText-color);
 }
 .info a:hover {
-  text-decoration: underline;
-}
-.titleHeader p,
-.track > p {
-  margin-right: 1em;
+  text-decoration: var(--aHover-textDecoration);
 }
 
+/* Item Main List Tracks */
 .itemMainListTracks {
-  margin-top: 2em;
+  margin-top: 1em;
 }
-
 .mainListTracks {
-  color: white;
+  color: var(--text-color);
   padding-left: 15px;
   padding: 5px;
 }
 .mainListTracks:hover {
-  background-color: hsla(240, 1%, 76%, 0.34);
-  opacity: 1;
+  background-color: hsla(0, 0%, 28%, 0.58);
   border-radius: 5px;
+}
+.mainListTracks p {
+  color: var(--subText-color);
 }
 .mainListTracks:hover .track > span {
   display: block;
@@ -75,11 +76,6 @@
 .mainListTracks:hover .track > p {
   display: none;
 }
-
-.mainListTracks p {
-  opacity: 0.8;
-}
-
 .track {
   display: flex;
   align-items: center;
@@ -89,12 +85,6 @@
   display: none;
   margin-right: 1em;
 }
-
-.track {
-  display: flex;
-  align-items: center;
-  height: 50px;
-}
 .infoTrack {
   display: flex;
 }
@@ -103,11 +93,15 @@
   height: 100%;
   margin-right: 1em;
 }
-
-.infoTrack a {
-  text-decoration: none;
-  color: white;
+.infoTrack h6 > a {
+  color: var(--text-color);
+  text-decoration: var(--a-textDecoration);
 }
-.infoTrack a:hover {
-  text-decoration: underline;
+.infoTrack span > a {
+  color: var(--subText-color);
+  text-decoration: var(--a-textDecoration);
+}
+.infoTrack h6 > a:hover,
+.infoTrack span > a:hover {
+  text-decoration: var(--aHover-textDecoration);
 }

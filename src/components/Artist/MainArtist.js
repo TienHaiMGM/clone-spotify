@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import styles from "../../css/Artist/MainArtist.module.css";
-import { useSelector } from "react-redux";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faCirclePlay,
   faCirclePause,
+  faCirclePlay,
   faEllipsis,
   faPause,
   faPlay,
 } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import styles from "../../css/Artist/MainArtist.module.css";
 import { convertMsToMinutesSeconds } from "../../utils/convertTime";
 
 export default function MainArtist() {
@@ -16,7 +16,6 @@ export default function MainArtist() {
   const artistTracks = useSelector(
     (state) => state.artistReducer.data.artistTracks
   );
-  console.log(artistTracks);
   const handleClickTogglePlayPause = () => {
     setStatePlaying((state) => {
       return !state;

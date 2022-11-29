@@ -1,3 +1,4 @@
+/* CSS Main Liked Songs */
 .mainLikedSongs {
   padding: 35px;
   background: rgb(65, 47, 126);
@@ -9,61 +10,60 @@
   );
   min-height: 100%;
 }
-
 .mainLikedSongsBtn {
-  color: white;
+  color: var(--text-color);
   font-size: 2em;
   display: flex;
   align-items: center;
   margin-bottom: 0.5em;
 }
-
 .mainLikedSongsBtn span {
   margin-right: 1em;
 }
-
 .iconPlay {
   font-size: 4rem;
-  color: #1ed760;
+  color: var(--iconPlay-color);
   background-color: black;
   border-radius: 50%;
 }
 
+/* CSS header List Tracks  */
 .headerListTracks,
 .mainListTracks {
-  color: white;
-  opacity: 1;
+  color: var(--text-color);
   display: grid;
   grid-template-columns: 45% 55%;
   align-items: center;
 }
 .headerListTracks {
   height: 2em;
-  border-bottom: 1px solid rgba(185, 185, 185, 0.3);
+  border-bottom: var(--borderLine);
 }
 .titleHeader {
   display: flex;
+  color: var(--subText-color);
 }
 .info {
   display: grid;
   grid-template-columns: 60% 30% 10%;
+  color: var(--subText-color);
 }
 .info a {
   text-decoration: none;
-  color: white;
+  color: var(--subText-color);
 }
 .info a:hover {
-  text-decoration: underline;
+  text-decoration: var(--aHover-textDecoration);
 }
 .titleHeader p,
 .track > p {
   margin-right: 1em;
 }
 
+/* CSS Item Main List Tracks */
 .itemMainListTracks {
   margin-top: 2em;
 }
-
 .mainListTracks {
   color: white;
   padding-left: 15px;
@@ -80,11 +80,6 @@
 .mainListTracks:hover .track > p {
   display: none;
 }
-
-.mainListTracks p {
-  opacity: 0.8;
-}
-
 .track {
   display: flex;
   align-items: center;
@@ -94,25 +89,30 @@
   display: none;
   margin-right: 1em;
 }
-
 .track {
   display: flex;
   align-items: center;
   height: 50px;
 }
+.track p {
+  color: var(--subText-color);
+}
 .infoTrack {
   display: flex;
+}
+.infoTrack span > a {
+  color: var(--subText-color);
+  text-decoration: var(--a-textDecoration);
 }
 .infoTrack img {
   width: 40px;
   height: 100%;
   margin-right: 1em;
 }
-
-.infoTrack a {
-  text-decoration: none;
-  color: white;
+.infoTrack h6 > a {
+  text-decoration: var(--a-textDecoration);
+  color: var(--text-color);
 }
-.infoTrack a:hover {
-  text-decoration: underline;
+.infoTrack h6 > a:hover {
+  text-decoration: var(--aHover-textDecoration);
 }

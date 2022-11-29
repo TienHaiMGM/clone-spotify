@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
@@ -50,6 +50,7 @@ const albumSlice = createSlice({
             duration: value["duration_ms"],
             previewUrl: value["preview_url"],
           });
+          return tracks;
         });
         const album = {
           name: albums.name,

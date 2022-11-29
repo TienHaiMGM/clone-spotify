@@ -65,6 +65,7 @@ const likedSongsSlice = createSlice({
             daysAdd: value["added_at"],
             album: value.track.album,
           });
+          return listTrackLikedSongs;
         });
 
         state.data.listTrackLikedSongs = listTrackLikedSongs;
@@ -77,6 +78,6 @@ const likedSongsSlice = createSlice({
   },
 });
 
-export const {} = likedSongsSlice.actions;
+// export const {} = likedSongsSlice.actions;
 
 export default likedSongsSlice.reducer;

@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Frames from "../components/Frames";
-import styles from "../css/Track/Track.module.css";
 import HeaderTrack from "../components/Track/HeaderTrack";
 import MainTrack from "../components/Track/MainTrack";
+import styles from "../css/Track/Track.module.css";
 import {
-  getTrack,
+  checkUserSavedTracks,
   getAlbumTrack,
   getLyricsTrack,
+  getTrack,
 } from "../redux/features/trackSlice";
-import { useSelector, useDispatch } from "react-redux";
 import { getRandomRgba } from "../utils/randomColor";
 
 export default function Track() {
+  const [isCheckUserSavedTrack, setIsCheckUserSavedTrack] = useState(false);
   const dispatch = useDispatch();
   const stateTrack = useSelector((state) => state.trackReducer);
-  console.log("stateTrack", stateTrack);
   const params = useParams();
   const trackId = params.trackId;
   const backgroundLinear = `linear-gradient(
@@ -27,7 +28,11 @@ export default function Track() {
     dispatch(getTrack({ trackId }));
     dispatch(getAlbumTrack());
     dispatch(getLyricsTrack({ trackId }));
+    dispatch(checkUserSavedTracks({ trackId })).then((value) => {
+      setIsCheckUserSavedTrack(value.payload[0]);
+    });
   }, []);
+
   return (
     <div>
       <Frames>
@@ -36,7 +41,7 @@ export default function Track() {
             <HeaderTrack />
           </div>
           <div className={styles.mainTrack}>
-            <MainTrack />
+            <MainTrack isCheckUserSavedTrack={isCheckUserSavedTrack} />
           </div>
         </div>
       </Frames>

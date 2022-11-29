@@ -3,12 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { useParams } from "react-router-dom";
 import HeaderAlbum from "../components/Album/HeaderAlbum";
+import MainAlbum from "../components/Album/MainAlbum";
 import Frames from "../components/Frames";
 import styles from "../css/Album/Album.module.css";
-import MainAlbum from "../components/Album/MainAlbum";
 import { getAlbum } from "../redux/features/albumSlice";
-import { getColorToLinearColor } from "../utils/randomColor";
-import { getRandomRgba } from "../utils/randomColor";
+import { getColorToLinearColor, getRandomRgba } from "../utils/randomColor";
 
 export default function Album() {
   const [isPlaying, setIsPlaying] = useState(false);

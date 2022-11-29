@@ -1,24 +1,46 @@
 import {
-  faCirclePlay,
   faCirclePause,
+  faCirclePlay,
   faClock,
   faEllipsis,
   faHeart,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from "react";
+import "animate.css";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "../../css/Playlist/MainPlaylist.module.css";
+import {
+  followPlaylist,
+  getMyPlaylists,
+  unfollowPlaylist,
+} from "../../redux/features/playlistsSlice";
 import MainListTracks from "./MainListTracks";
-import { useSelector } from "react-redux";
+
 export default function MainPlaylist(props) {
   const [statePlaying, setStatePlaying] = useState(false);
+  const [isCheckFollow, setIsCheckFollow] = useState(false);
+  const dispatch = useDispatch();
   const statePlaylists = useSelector((state) => state.playlistsReducer);
-  console.log("statePlaylists", statePlaylists);
   const items = statePlaylists?.data?.playList?.tracks;
+  const playlistId = statePlaylists?.data?.playList.id;
+
+  useEffect(() => {
+    setIsCheckFollow(props.isCheckFollow);
+  }, [props.isCheckFollow]);
   const handleClickTogglePlayPause = () => {
     setStatePlaying((state) => {
       return !state;
     });
+  };
+  const handleCLickLiked = () => {
+    if (isCheckFollow) {
+      dispatch(unfollowPlaylist({ playlistId }));
+    } else {
+      dispatch(followPlaylist({ playlistId }));
+    }
+    setIsCheckFollow((value) => !value);
+    dispatch(getMyPlaylists());
   };
   return (
     <div className={styles.mainPlaylist}>
@@ -41,7 +63,16 @@ export default function MainPlaylist(props) {
           </span>
         )}
         <span>
-          <FontAwesomeIcon icon={faHeart} />
+          <FontAwesomeIcon
+            className={
+              isCheckFollow
+                ? "animate__animated animate__headShake"
+                : "animate__bounceOut"
+            }
+            onClick={() => handleCLickLiked()}
+            style={isCheckFollow ? { color: "#1ed760" } : { color: "white" }}
+            icon={faHeart}
+          />
         </span>
         <span>
           <FontAwesomeIcon icon={faEllipsis} />

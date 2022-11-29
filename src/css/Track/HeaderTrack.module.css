@@ -1,3 +1,4 @@
+/* CSS Header Track */
 .headerTrack {
   display: flex;
   flex-direction: row;
@@ -5,7 +6,6 @@
   height: 100%;
   padding: 1.2em;
 }
-
 .imageHeaderTrack {
   width: 15em;
   flex-direction: column;
@@ -16,7 +16,6 @@
   width: 100%;
   min-width: 15em;
 }
-
 .contentHeaderTrack {
   display: flex;
   flex-direction: column;
@@ -30,8 +29,7 @@
   font-size: 3em;
   font-weight: bolder;
 }
-
-.contentHeaderTrack p {
+.contentHeaderTrack div > span {
   opacity: 0.8;
 }
 .contentHeaderTrack span {

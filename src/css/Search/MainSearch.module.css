@@ -1,9 +1,10 @@
+/* CSS main Search */
 .mainSearch {
-  color: white;
+  color: var(--text-color);
 }
 .mainSearch a {
   color: inherit;
-  text-decoration: none;
+  text-decoration: var(--a-textDecoration);
   cursor: pointer;
 }
 .mainSearch h1 {
@@ -11,20 +12,17 @@
 }
 .gridSearch {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 200px);
+  grid-template-columns: var(--track-gridTemplateColumns);
   grid-auto-rows: 1fr;
   row-gap: 25px;
   column-gap: 25px;
 }
-
 .browseSearch {
-  background-color: orange;
-  color: white;
+  color: var(--text-color);
   padding: 15px;
   overflow: hidden;
   border-radius: 10px;
 }
-
 .browseSearch img {
   width: 100px;
   height: 100px;
@@ -34,7 +32,6 @@
   transform: rotate(25deg);
   opacity: 0.8;
 }
-
 .browseSearch h3 {
   font-size: 1.5em;
 }

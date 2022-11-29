@@ -6,13 +6,16 @@ import Frames from "../components/Frames";
 import HeaderPlaylists from "../components/Playlist/HeaderPlaylists";
 import MainPlaylist from "../components/Playlist/MainPlaylist";
 import styles from "../css/Playlist/Playlist.module.css";
-import { getPlaylist } from "../redux/features/playlistsSlice";
-import { getColorToLinearColor } from "../utils/randomColor";
-import { getRandomRgba } from "../utils/randomColor";
+import {
+  checkFollowPlaylist,
+  getPlaylist,
+} from "../redux/features/playlistsSlice";
+import { getColorToLinearColor, getRandomRgba } from "../utils/randomColor";
 
 export default function Playlist() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [idForUrl, setIdForUrl] = useState();
+  const [isCheckFollow, setIsCheckFollow] = useState(false);
   const params = useParams();
   const playlistId = params.playlistId;
   const dispatch = useDispatch();
@@ -34,7 +37,11 @@ export default function Playlist() {
   };
   useEffect(() => {
     dispatch(getPlaylist({ playlistId }));
+    dispatch(checkFollowPlaylist({ playlistId })).then((value) => {
+      setIsCheckFollow(value.payload[0]);
+    });
   }, [playlistId]);
+
   return (
     <Frames
       backgroundHeader={getColorToLinearColor(backgroundLinear)}
@@ -46,7 +53,11 @@ export default function Playlist() {
           <HeaderPlaylists />
         </div>
         <div className={styles.mainPlaylists}>
-          <MainPlaylist getIdForUrl={getIdForUrl} getIsPlaying={getIsPlaying} />
+          <MainPlaylist
+            getIdForUrl={getIdForUrl}
+            getIsPlaying={getIsPlaying}
+            isCheckFollow={isCheckFollow}
+          />
         </div>
       </div>
     </Frames>

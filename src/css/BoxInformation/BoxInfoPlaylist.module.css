@@ -1,0 +1,44 @@
+/* CSS Tracks */
+.boxInfoPlaylist {
+  background-color: #181813;
+  border-radius: 5px;
+  width: 13.188rem;
+  height: 18.813rem;
+  color: white;
+  overflow: hidden;
+  cursor: pointer;
+}
+.boxInfoPlaylist:hover {
+  background-color: #444343;
+}
+
+.boxInfoPlaylist a {
+  text-decoration: var(--a-textDecoration);
+  color: inherit;
+}
+
+.boxInfoPlaylist div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+.boxInfoPlaylist img {
+  margin-bottom: 10px;
+  max-width: 11.25em;
+}
+
+.boxInfoPlaylist h3 {
+  margin-bottom: 10px;
+}
+
+.boxInfoPlaylist p {
+  color: var(--subText-color);
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  display: -webkit-box;
+  word-break: break-word;
+}

@@ -1,3 +1,4 @@
+/* CSS Header */
 .header {
   background-color: #161616;
   width: 100%;
@@ -6,84 +7,61 @@
   grid-template-columns: 10% 40% 50%;
   padding: 10px 0px 10px 20px;
 }
-
 .forwardAndBackward {
   font-size: 1.5em;
-  color: white;
+  color: var(--text-color);
 }
-
 .forwardAndBackward span {
   margin-right: 1em;
 }
 
+/* CSS Header Login*/
 .headerLogin {
   display: flex;
   justify-content: flex-end;
 }
-
-.myHeader {
-  display: flex;
-  justify-content: flex-end;
-  height: 1.5em;
-  margin-right: 2em;
-  margin-top: 0.8em;
-  border-right: 2px solid white;
-}
-
-.myHeader a {
-  margin-right: 2em;
-  color: white;
-  font-weight: bold;
-  opacity: 0.7;
-  text-decoration: none;
-}
-
 .signupAndLogin button {
   margin-right: 2em;
 }
-
 .signUp {
   border: none;
   background-color: transparent;
   font-weight: bold;
   opacity: 0.7;
 }
-
 .signUp:hover {
   opacity: 1;
+  transform: scale(1.1);
 }
-
 .signUp a {
-  text-decoration: none;
-  color: white;
+  text-decoration: var(--a-textDecoration);
+  color: var(--text-color);
 }
-
 .logIn {
   border-radius: 2em;
-  width: 7vw;
+  width: 5vw;
   height: 100%;
   border: none;
   font-weight: bold;
 }
-
 .logIn:hover {
-  width: 7.1vw;
-  height: 103%;
+  transform: scale(1.1);
 }
-
 .logIn a {
-  text-decoration: none;
+  text-decoration: var(--a-textDecoration);
   color: black;
 }
+.logOut {
+  border-top: 1px outset white;
+}
 
-/* Header user */
+/*CSS Header user */
 .headerUser {
   display: flex;
   justify-content: flex-end;
   margin-right: 2em;
   font-weight: bold;
 }
-
 .upgradeBtn {
   border: 1px solid white;
   background-color: transparent;
@@ -94,24 +72,21 @@
   opacity: 0.9;
   margin-right: 2em;
 }
-
 .upgradeBtn:hover {
   background-color: black;
-  width: 6.1em;
-  height: 2.1em;
+  transform: scale(1.1);
   opacity: 1;
 }
-
 .upgradeBtn a {
-  text-decoration: none;
-  color: white;
+  text-decoration: var(--a-textDecoration);
+  color: var(--text-color);
 }
 
+/* CSS Dropdown */
 .dropdown {
   position: relative;
   display: inline-block;
 }
-
 .dropBtn {
   display: flex;
   cursor: pointer;
@@ -145,22 +120,19 @@
   font-weight: lighter;
   opacity: 0.9;
 }
-
 .dropdownContent a {
   font-size: 0.9em;
   color: white;
   padding: 10px 10px 10px 15px;
-  text-decoration: none;
+  text-decoration: var(--a-textDecoration);
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: space-between;
 }
-
+.dropdownContent a:hover {
+  background-color: rgba(138, 132, 132, 0.4);
+}
 .dropdown:visited .iconSortDown {
   transform: rotate(180deg);
-}
-
-.logOut {
-  border-top: 1px outset white;
 }

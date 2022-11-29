@@ -1,3 +1,4 @@
+/* CSS Main Album */
 .mainAlbum {
   padding: 35px;
   background-color: transparent;
@@ -5,7 +6,6 @@
   margin-bottom: 5em;
   min-height: 100%;
 }
-
 .mainAlbumBtn {
   color: white;
   font-size: 2em;
@@ -13,51 +13,56 @@
   align-items: center;
   margin-bottom: 0.5em;
 }
-
 .mainAlbumBtn span {
   margin-right: 1em;
 }
-
 .iconPlay {
   font-size: 4rem;
-  color: #1ed760;
+  color: var(--iconPlay-color);
   background-color: black;
   border-radius: 50%;
 }
 
+/* CSS Header List Tracks*/
 .headerListTracks,
 .mainListTracks {
-  color: white;
-  opacity: 0.8;
+  color: var(--text-color);
   display: grid;
   grid-template-columns: 45% 55%;
   align-items: center;
 }
 .headerListTracks {
   height: 2em;
-  border-bottom: 1px solid rgba(185, 185, 185, 0.3);
+  border-bottom: var(--borderLine);
 }
 .titleHeader {
   display: flex;
 }
-
 .titleHeader p {
   margin-right: 1em;
 }
-
-.itemMainListTracks {
-  margin-top: 2em;
+.info {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 2em;
 }
 
+/* Item Main List Tracks */
+.itemMainListTracks {
+  margin-top: 1em;
+}
 .albumListTracks {
   display: flex;
   justify-content: space-between;
-  color: white;
+  color: var(--text-color);
   padding-left: 15px;
 }
 .albumListTracks:hover {
-  background-color: #3e3e3e;
+  background-color: hsla(0, 0%, 28%, 0.58);
   border-radius: 5px;
+}
+.albumListTracks p {
+  color: var(--subText-color);
 }
 .albumListTracks:hover .track > span {
   display: block;
@@ -65,11 +70,6 @@
 .albumListTracks:hover .track > p {
   display: none;
 }
-
-.albumListTracks p {
-  opacity: 0.8;
-}
-
 .track {
   display: flex;
   align-items: center;
@@ -78,9 +78,6 @@
 .track span {
   display: none;
   margin-right: 1em;
-  /* position: relative;
-  left: 10px;
-  top: -5px; */
 }
 .track > p {
   margin-right: 1em;
@@ -90,17 +87,12 @@
   flex-direction: column;
   line-height: 10px;
 }
+
 .infoTrack a {
   text-decoration: none;
-  color: white;
+  color: var(--subText-color);
   cursor: default;
 }
 .infoTrack a:hover {
-  text-decoration: underline;
-}
-
-.info {
-  display: flex;
-  justify-content: flex-end;
-  margin-right: 2em;
+  text-decoration: var(--aHover-textDecoration);
 }

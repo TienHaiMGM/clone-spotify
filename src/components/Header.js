@@ -19,7 +19,7 @@ export default function Header(props) {
   const dispatch = useDispatch();
   const token = stateLogin.data.token;
   const user = stateLogin.data.user;
-  console.log("user", user);
+
   //Detect click outside element and setDropdown(false)
   const useOutsideLarter = (ref) => {
     useEffect(() => {
@@ -124,23 +124,6 @@ export default function Header(props) {
         </div>
       ) : (
         <div className={styles.headerLogin}>
-          <div className={styles.myHeader}>
-            <a
-              href="https://www.spotify.com/vn-vi/premium/?utm_source=app&utm_medium=desktop&utm_campaign=upgrade"
-              target="blank"
-            >
-              Premium
-            </a>
-            <a href="https://support.spotify.com/vn-vi/" target="blank">
-              Support
-            </a>
-            <a
-              href="https://www.spotify.com/vn-vi/download/windows/"
-              target="blank"
-            >
-              Download
-            </a>
-          </div>
           <div className={styles.signupAndLogin}>
             <button className={styles.signUp} type="button">
               <a href="https://www.spotify.com/vn-vi/signup?forward_url=https%3A%2F%2Fopen.spotify.com%2F">

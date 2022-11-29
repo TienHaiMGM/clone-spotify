@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
-import styles from "../../css/LikedSongs/MainLikedSongs.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faCirclePlay,
   faCirclePause,
+  faCirclePlay,
   faClock,
 } from "@fortawesome/free-solid-svg-icons";
-import { useSelector, useDispatch } from "react-redux";
-import MainListLikedSongs from "./MainListLikedSongs";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import styles from "../../css/LikedSongs/MainLikedSongs.module.css";
 import { getLikedSongs } from "../../redux/features/likedSongsSlice";
+import MainListLikedSongs from "./MainListLikedSongs";
 
 export default function MainLikedSongs(props) {
   const [statePlaying, setStatePlaying] = useState(false);

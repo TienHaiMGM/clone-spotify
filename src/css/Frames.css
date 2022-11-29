@@ -1,3 +1,4 @@
+/* CSS Frames */
 .Frames {
   display: grid;
   grid-template-areas:
@@ -5,24 +6,21 @@
     "nav main"
     "foot foot";
   grid-template-rows: 7vh 84vh 9vh;
-  grid-template-columns: 22vw 78vw;
+  grid-template-columns: 22vmax 78vmax;
   overflow: hidden;
 }
-
 .Frames > nav {
   grid-area: nav;
+  z-index: 3;
 }
-
 .Frames > header {
   grid-area: head;
   z-index: 2;
 }
-
 .Frames > main {
   grid-area: main;
   z-index: 1;
 }
-
 .Frames > footer {
   grid-area: foot;
   z-index: 2;

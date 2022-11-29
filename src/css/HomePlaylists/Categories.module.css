@@ -1,12 +1,13 @@
+/* CSS Categories */
 .categories h1 {
-  color: white;
+  color: var(--text-color);
   font-size: 1.5em;
   margin-bottom: 1rem;
   margin-left: 2em;
 }
 .categories > div {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 200px);
+  grid-template-columns: var(--track-gridTemplateColumns);
   column-gap: 1em;
   justify-content: center;
   margin-bottom: 2em;

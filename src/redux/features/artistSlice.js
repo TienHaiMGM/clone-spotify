@@ -26,6 +26,25 @@ export const getArtistTrack = createAsyncThunk(
   }
 );
 
+export const getArtist = createAsyncThunk(
+  "track/getArtist",
+  async (arg, thunkApI) => {
+    // const trackId = arg.trackId;
+    const token = thunkApI.getState().loginReducer.data.token;
+    const artistId = arg.artistId;
+    const res = await axios.get(
+      `https://api.spotify.com/v1/artists/${artistId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return res.data;
+  }
+);
+
 const artistSlice = createSlice({
   name: "artists",
   initialState,
@@ -52,17 +71,39 @@ const artistSlice = createSlice({
             duration: value["duration_ms"],
             popularity: value.popularity,
           });
+          return artistTracks;
         });
-        console.log("tét", action.payload);
         state.data.artistTracks = artistTracks;
       })
       .addCase(getArtistTrack.rejected, (state, action) => {
+        state.loading = false;
+        state.error = true;
+      })
+
+      //Get Artist
+      .addCase(getArtist.pending, (state, action) => {
+        state.loading = true;
+        state.error = false;
+      })
+      .addCase(getArtist.fulfilled, (state, action) => {
+        state.loading = false;
+        const dataArtist = action.payload;
+        const infoArtist = {
+          name: dataArtist.name,
+          id: dataArtist.id,
+          type: dataArtist.type,
+          image: dataArtist.images[0].url,
+          totalFollowers: dataArtist.followers.total,
+        };
+        state.data.infoArtist = infoArtist;
+      })
+      .addCase(getArtist.rejected, (state, action) => {
         state.loading = false;
         state.error = true;
       });
   },
 });
 
-export const {} = artistSlice.actions;
+// export const {} = artistSlice.actions;
 
 export default artistSlice.reducer;

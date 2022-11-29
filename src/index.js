@@ -38,7 +38,7 @@ const router = createBrowserRouter([
     element: <Genre />,
   },
   {
-    path: "/collection/playlists",
+    path: "/collection/:typePlayer",
     element: (
       <ProtectRouter>
         <YourLibrary />,

@@ -37,7 +37,7 @@ export const getArtists = createAsyncThunk(
   async (arg, thunkApI) => {
     const token = thunkApI.getState().loginReducer.data.token;
     const res = await axios.get(
-      "https://api.spotify.com/v1/artists?ids=1vCWHaC5f2uS3yhpwWbIA6,06HL4z0CvFAxyc27GXpf02,4dpARuHxo51G3z768sgnrY,41MozSoPIsD1dJM0CLPjZF,53XhwfbYqKCa1cC15pYq2q,1CWwyDPjCowRTO4p6A7r6g",
+      "https://api.spotify.com/v1/artists?ids=0aNyWetkjBvIdZvJY00yEa,1LEtM3AleYg1xabW6CRkpi,4dpARuHxo51G3z768sgnrY,75Ki5hBCOpDtKGoFyTvLxP,7vk5e3vY1uw9plTHJAMwjN,1CWwyDPjCowRTO4p6A7r6g",
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -54,7 +54,7 @@ export const getCategorie = createAsyncThunk(
   async (arg, thunkApI) => {
     const token = thunkApI.getState().loginReducer.data.token;
     const trending = await axios.get(
-      "https://api.spotify.com/v1/browse/categories/0JQ5DAqbMKFQIL0AXnG5AK/playlists?country=VN&limit=6",
+      "https://api.spotify.com/v1/browse/categories/0JQ5DAqbMKFQIL0AXnG5AK/playlists?offset=10&limit=6",
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -63,7 +63,7 @@ export const getCategorie = createAsyncThunk(
       }
     );
     const mood = await axios.get(
-      "https://api.spotify.com/v1/browse/categories/0JQ5DAqbMKFzHmL4tf05da/playlists?country=VN&limit=3",
+      "https://api.spotify.com/v1/browse/categories/0JQ5DAqbMKFzHmL4tf05da/playlists?offset=5&limit=4",
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -128,6 +128,7 @@ const categoriesSlice = createSlice({
             id: item.id,
             type: item.type,
           });
+          return artist;
         });
         state.data.artists = artist;
       })
@@ -154,6 +155,7 @@ const categoriesSlice = createSlice({
             id: item.id,
             type: item.type,
           });
+          return trendingItem;
         });
         const moodItem = [];
         mood.playlists.items.map((item) => {
@@ -164,6 +166,7 @@ const categoriesSlice = createSlice({
             id: item.id,
             type: item.type,
           });
+          return moodItem;
         });
 
         state.data.categories.trending = trendingItem;
@@ -190,6 +193,7 @@ const categoriesSlice = createSlice({
             id: item.id,
             type: item.type,
           });
+          return album;
         });
         state.loading = false;
         state.data.albums = album;
@@ -201,6 +205,6 @@ const categoriesSlice = createSlice({
   },
 });
 
-export const {} = categoriesSlice.actions;
+// export const {} = categoriesSlice.actions;
 
 export default categoriesSlice.reducer;

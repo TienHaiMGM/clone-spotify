@@ -1,6 +1,7 @@
+/* CSS Main Genre */
 .mainGenre {
   padding: 2em;
-  color: white;
+  color: var(--text-color);
   background: #0a0a0a;
   height: 100%;
 }
@@ -11,28 +12,24 @@
 }
 .gridTracks {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 200px);
+  grid-template-columns: var(--track-gridTemplateColumns);
   column-gap: 1.5em;
   row-gap: 2em;
 }
 .tracks {
-  background-color: #333131;
+  background-color: #161616;
   border-radius: 5px;
   width: 12em;
   height: 18em;
-  color: white;
-  overflow: hidden;
   cursor: pointer;
 }
 .tracks:hover {
-  background-color: #444343;
+  background-color: hsla(0, 0%, 28%, 0.58);
 }
-
 .tracks a {
-  text-decoration: none;
+  text-decoration: var(--a-textDecoration);
   color: inherit;
 }
-
 .tracks div {
   display: flex;
   flex-direction: column;
@@ -50,7 +47,11 @@
 .tracks h6 {
   margin-bottom: 10px;
 }
-
 .tracks p {
-  opacity: 0.8;
+  color: var(--subText-color);
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  display: -webkit-box;
+  word-break: break-word;
 }

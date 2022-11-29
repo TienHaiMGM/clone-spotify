@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from "react";
-import styles from "../../css/Search/ResultUserSearch.module.css";
-import Frames from "../Frames";
-import Categories from "../HomePlaylists/Categories";
-import Songs from "./Songs";
-import { useSelector, useDispatch } from "react-redux";
-import "../../css/Frames.css";
-import Navbar from "../Navbar";
-import Header from "../Header";
-import Footer from "../Footer";
-import InputSearch from "./InputSearch";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import "../../css/Frames.css";
+import styles from "../../css/Search/ResultUserSearch.module.css";
 import { getSearch } from "../../redux/features/searchSlice";
+import Footer from "../Footer";
+import Header from "../Header";
+import Categories from "../HomePlaylists/Categories";
+import Navbar from "../Navbar";
+import InputSearch from "./InputSearch";
+import Songs from "./Songs";
 
 export default function ResultUserSearch() {
   const stateResultUserSearch = useSelector((state) => state.searchReducer);

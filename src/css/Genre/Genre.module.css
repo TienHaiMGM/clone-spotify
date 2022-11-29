@@ -1,9 +1,10 @@
+/* CSS Genre */
 .genre {
   display: grid;
   grid-template-rows: 20vh 80vh;
   overflow-y: scroll;
   height: 100%;
-  background: #121212;
+  background-color: #161616;
 }
 .headerGenre {
   display: flex;
@@ -12,7 +13,7 @@
   padding: 2em;
 }
 .headerGenre h1 {
-  color: white;
+  color: var(--text-color);
   font-size: 6em;
   font-weight: bold;
 }

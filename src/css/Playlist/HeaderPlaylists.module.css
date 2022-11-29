@@ -1,9 +1,9 @@
+/* CSS Header Playlist */
 .headerPlaylist {
   display: flex;
   flex-direction: row;
   color: transparent;
 }
-
 .imageHeaderPlaylist {
   width: 15em;
   margin-left: 2em;
@@ -11,22 +11,25 @@
 .imageHeaderPlaylist img {
   width: 100%;
   min-width: 12em;
-  margin-top: 0.5em;
+  max-height: 15em;
 }
-
 .contentHeaderPlaylist {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   margin-left: 2em;
-  color: white;
+  color: var(--text-color);
   font-weight: bold;
 }
 .contentHeaderPlaylist h1 {
-  font-size: 5.5em;
+  font-size: 4.5vmax;
   font-weight: bolder;
+  word-spacing: -10px;
+  letter-spacing: -1px;
 }
-
+.contentHeaderPlaylist h6 {
+  margin-bottom: -10px;
+}
 .contentHeaderPlaylist p {
   opacity: 0.8;
 }

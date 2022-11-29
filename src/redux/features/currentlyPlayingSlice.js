@@ -69,6 +69,6 @@ const currentlyPlayingSlice = createSlice({
   },
 });
 
-export const {} = currentlyPlayingSlice.actions;
+// export const {} = currentlyPlayingSlice.actions;
 
 export default currentlyPlayingSlice.reducer;

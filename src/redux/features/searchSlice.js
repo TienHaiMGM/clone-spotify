@@ -65,6 +65,7 @@ const searchSlice = createSlice({
             name: value.name,
             image: value.icons[0].url,
           });
+          return browse;
         });
         state.data.browse = browse;
       })
@@ -91,6 +92,7 @@ const searchSlice = createSlice({
             images: value.images[0].url,
             artists: value.artists[0].name,
           });
+          return dataAlbums;
         });
 
         const dataArtists = [];
@@ -101,6 +103,7 @@ const searchSlice = createSlice({
             type: value.type,
             images: value?.images[0]?.url,
           });
+          return dataArtists;
         });
 
         const dataPlaylists = [];
@@ -112,6 +115,7 @@ const searchSlice = createSlice({
             images: value.images[0].url,
             description: value.owner["display_name"],
           });
+          return dataPlaylists;
         });
 
         const dataTracks = [];
@@ -124,6 +128,7 @@ const searchSlice = createSlice({
             artists: value.artists[0].name,
             duration: value["duration_ms"],
           });
+          return dataTracks;
         });
         const dataSearch = {
           dataAlbums: dataAlbums,
@@ -132,7 +137,6 @@ const searchSlice = createSlice({
           dataTracks: dataTracks,
         };
         state.data.resultSearch = dataSearch;
-        console.log(action.payload);
       })
 
       .addCase(getSearch.rejected, (state, action) => {
@@ -142,6 +146,6 @@ const searchSlice = createSlice({
   },
 });
 
-export const {} = searchSlice.actions;
+// export const {} = searchSlice.actions;
 
 export default searchSlice.reducer;

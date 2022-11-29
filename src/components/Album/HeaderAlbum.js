@@ -1,10 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import styles from "../../css/Album/HeaderAlbum.module.css";
 import {
   convertDateToYear,
   convertMsToHoursMinutes,
 } from "../../utils/convertTime";
-import { useSelector } from "react-redux";
 
 export default function HeaderAlbum() {
   const dataAlbumTracks = useSelector((state) => state.albumReducer);

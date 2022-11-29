@@ -10,6 +10,7 @@ import trackSlice from "./features/trackSlice";
 import listTrackPlayingSlice from "./features/listTrackPlayingSlice";
 import artistSlice from "./features/artistSlice";
 import likedSongsSlice from "./features/likedSongsSlice";
+import librarySlice from "./features/librarySlice";
 
 export default configureStore({
   reducer: {
@@ -24,5 +25,6 @@ export default configureStore({
     listTrackPlayingReducer: listTrackPlayingSlice,
     artistReducer: artistSlice,
     likedSongsReducer: likedSongsSlice,
+    libraryReducer: librarySlice,
   },
 });

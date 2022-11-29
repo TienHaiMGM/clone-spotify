@@ -1,6 +1,6 @@
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { createUseStyles } from "react-jss";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +11,7 @@ const useStyles = createUseStyles({
     display: "flex",
     padding: "0.7em",
     backgroundColor: "white",
-    width: "60%",
+    maxWidth: "60%",
     height: "2.5em",
     borderRadius: "2em",
     "& input": {

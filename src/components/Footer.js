@@ -1,23 +1,23 @@
-import React, { useEffect, useState, useRef } from "react";
-import styles from "../css/Footer.module.css";
-import ReactAudioPlayer from "react-audio-player";
-import { useSelector, useDispatch } from "react-redux";
-import { getPlayer } from "../redux/features/currentlyPlayingSlice";
-import { getListTrackPlaying } from "../redux/features/listTrackPlayingSlice";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faHeart,
-  faImage,
+  faBackwardStep,
   faCirclePause,
   faCirclePlay,
-  faShuffle,
   faForwardStep,
-  faBackwardStep,
+  faHeart,
+  faImage,
   faRotate,
+  faShuffle,
   faVolumeHigh,
   faVolumeXmark,
 } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useEffect, useRef, useState } from "react";
+import ReactAudioPlayer from "react-audio-player";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import styles from "../css/Footer.module.css";
+import { getPlayer } from "../redux/features/currentlyPlayingSlice";
+import { getListTrackPlaying } from "../redux/features/listTrackPlayingSlice";
 
 export default function Footer(props) {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -59,9 +59,9 @@ export default function Footer(props) {
     : dataLikedSongs
     ? dataLikedSongs
     : listTrackPlaying;
+
   const urlFormTracks = props?.idForUrl;
   const statePlay = props?.getIsPlaying;
-
   useEffect(() => {
     dispatch(getPlayer()).then((valuePlayer) => {
       dispatch(getListTrackPlaying()).then((valueListTrack) => {
@@ -244,18 +244,9 @@ export default function Footer(props) {
                     100;
                   setDurations(valueTime);
                 }}
-                // onAbort={(value) => {
-                //   setIsAutoPlay(true);
-                //   console.log(value);
-                // }}
                 onEnded={(value) => {
                   handleClickForward();
-                  console.log("tienhai");
                 }}
-                // onCanPlay={(value) => {
-                //   console.log(value);
-
-                // }}
               />
             </div>
             <div className={styles.buttonDuration}>

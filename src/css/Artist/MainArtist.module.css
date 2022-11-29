@@ -1,7 +1,8 @@
+/* CSS Main Artist */
 .mainArtist {
   background-color: transparent;
-  border-top: 2px solid rgba(173, 168, 168, 0.3);
-  color: white;
+  border-top: var(--borderLine);
+  color: var(--text-color);
   min-height: 100%;
 }
 .headerArtistBtn {
@@ -10,14 +11,12 @@
   column-gap: 2em;
   padding: 1.5em;
 }
-
 .iconPlay {
   font-size: 4rem;
-  color: #1ed760;
+  color: var(--iconPlay-color);
   background-color: black;
   border-radius: 50%;
 }
-
 .followBtn {
   background-color: transparent;
   color: white;
@@ -32,6 +31,7 @@
   font-size: 1.5em;
 }
 
+/* CSS Content Main Artist */
 .popularTracks {
   padding: 2em;
 }
@@ -44,8 +44,7 @@
   padding: 0.5em;
 }
 .track:hover {
-  background-color: hsla(240, 1%, 76%, 0.34);
-  opacity: 1;
+  background-color: hsla(0, 0%, 28%, 0.58);
 }
 .track > div {
   display: flex;

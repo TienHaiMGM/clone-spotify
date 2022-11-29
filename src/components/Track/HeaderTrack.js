@@ -9,7 +9,7 @@ import {
 export default function HeaderTrack() {
   const stateTrack = useSelector((state) => state?.trackReducer);
   const track = stateTrack?.data?.track;
-  console.log(stateTrack);
+
   return (
     <div className={styles.headerTrack}>
       <div className={styles.imageHeaderTrack}>

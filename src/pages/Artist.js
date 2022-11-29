@@ -1,13 +1,12 @@
 import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import Frames from "../components/Frames";
-import styles from "../css/Artist/Artist.module.css";
 import HeaderArtist from "../components/Artist/HeaderArtist";
 import MainArtist from "../components/Artist/MainArtist";
-import { useSelector, useDispatch } from "react-redux";
-import { getArtistTrack } from "../redux/features/artistSlice";
-import { getColorToLinearColor } from "../utils/randomColor";
-import { getRandomRgba } from "../utils/randomColor";
+import Frames from "../components/Frames";
+import styles from "../css/Artist/Artist.module.css";
+import { getArtist, getArtistTrack } from "../redux/features/artistSlice";
+import { getColorToLinearColor, getRandomRgba } from "../utils/randomColor";
 
 export default function Artist() {
   const dispatch = useDispatch();
@@ -24,6 +23,7 @@ export default function Artist() {
 
   useEffect(() => {
     dispatch(getArtistTrack({ artistId }));
+    dispatch(getArtist({ artistId }));
   }, []);
   return (
     <div>

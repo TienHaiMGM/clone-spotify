@@ -1,40 +1,45 @@
-.tracks{
-    background-color: #333131;
-    border-radius: 5px;
-    width: 12em;
-    height: 18em;
-    color: white;
-    overflow: hidden;
-    cursor: pointer;
+/* CSS Tracks */
+.tracks {
+  background-color: #333131;
+  border-radius: 5px;
+  width: 12em;
+  height: 18em;
+  color: white;
+  overflow: hidden;
+  cursor: pointer;
 }
-.tracks:hover{
-    background-color: #444343;
+.tracks:hover {
+  background-color: #444343;
 }
 
-.tracks a{
-    text-decoration: none;
-    color: inherit;
+.tracks a {
+  text-decoration: var(--a-textDecoration);
+  color: inherit;
 }
 
 .tracks div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 15px;
-    margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 15px;
+  margin-bottom: 15px;
 }
-.tracks img{
-    margin-bottom: 10px;
-    width: 160px;
-    width: 160px;
-}
-
-.tracks h6{
-    margin-bottom: 10px;
+.tracks img {
+  margin-bottom: 10px;
+  width: 160px;
+  width: 160px;
 }
 
-.tracks p{
-    opacity: 0.8;
+.tracks h6 {
+  margin-bottom: 10px;
 }
 
+.tracks p {
+  color: var(--subText-color);
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  display: -webkit-box;
+  word-break: break-word;
+}

@@ -10,6 +10,14 @@ export default function HomePlaylists() {
     <div className={styles.playlists}>
       <div>
         {" "}
+        <Categories name="Albums" type={stateCategories.data.albums} />
+      </div>
+      <div>
+        {" "}
+        <Categories name="Artist" type={stateCategories.data.artists} />
+      </div>
+      <div>
+        {" "}
         <Categories name="Mood" type={stateCategories.data.categories.mood} />
       </div>
       <div>
@@ -18,14 +26,6 @@ export default function HomePlaylists() {
           name="Trending"
           type={stateCategories.data.categories.trending}
         />
-      </div>
-      <div>
-        {" "}
-        <Categories name="Albums" type={stateCategories.data.albums} />
-      </div>
-      <div>
-        {" "}
-        <Categories name="Artist" type={stateCategories.data.artists} />
       </div>
     </div>
   );

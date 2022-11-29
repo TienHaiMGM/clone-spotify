@@ -54,6 +54,7 @@ const listTrackPlayingSlice = createSlice({
                 duration: value.track["duration_ms"],
                 previewUrl: value.track["preview_url"],
               });
+              return listTrack;
             });
             state.data.listTracksPlaying = listTrack;
             break;
@@ -68,6 +69,7 @@ const listTrackPlayingSlice = createSlice({
                 duration: value["duration_ms"],
                 previewUrl: value["preview_url"],
               });
+              return listTrack;
             });
             state.data.listTracksPlaying = listTrack;
             break;
@@ -82,6 +84,6 @@ const listTrackPlayingSlice = createSlice({
   },
 });
 
-export const {} = listTrackPlayingSlice.actions;
+// export const {} = listTrackPlayingSlice.actions;
 
 export default listTrackPlayingSlice.reducer;

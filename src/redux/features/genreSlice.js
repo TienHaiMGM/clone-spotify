@@ -47,6 +47,7 @@ const genreSlice = createSlice({
             image: value.images[0]?.url,
             description: value.description,
           });
+          return playlistGenre;
         });
         state.data.playlistGenre = playlistGenre;
       })
@@ -57,6 +58,6 @@ const genreSlice = createSlice({
   },
 });
 
-export const {} = genreSlice.actions;
+// export const {} = genreSlice.actions;
 
 export default genreSlice.reducer;

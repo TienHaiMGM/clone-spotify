@@ -1,6 +1,6 @@
 import React from "react";
-import { Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 
 export default function ProtectRouter(props) {
   const token = useSelector((state) => state.loginReducer.data.token);

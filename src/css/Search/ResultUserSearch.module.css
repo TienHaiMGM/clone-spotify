@@ -1,11 +1,11 @@
+/*CSS Result User Search*/
 .resultUserSearch {
   background-color: #121212;
-  color: white;
+  color: var(--text-color);
   padding: 40px;
   height: 100%;
   overflow-y: scroll;
 }
-
 .headerContent {
   display: grid;
   grid-template-columns: 35% 65%;
@@ -22,7 +22,6 @@
   padding: 20px;
 }
 .resultInfo:hover {
-  opacity: 1;
   background-color: #2e2e2e;
 }
 .resultInfo h1 {
@@ -42,11 +41,11 @@
   border-radius: 50%;
   margin-bottom: 1.5em;
 }
-
 .mainContent {
   margin-left: -1.5em;
 }
-/* Styles for SONGS */
+
+/* Styles SONGS */
 .songs {
   display: grid;
 }

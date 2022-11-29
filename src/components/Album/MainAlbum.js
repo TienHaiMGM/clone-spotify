@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import {
   faCirclePause,
   faCirclePlay,
@@ -7,9 +6,10 @@ import {
   faHeart,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import styles from "../../css/Album/MainAlbum.module.css";
 import AlbumListTracks from "./AlbumListTracks";
-import { useSelector } from "react-redux";
 
 export default function MainAlbum(props) {
   const [statePlaying, setStatePlaying] = useState(false);

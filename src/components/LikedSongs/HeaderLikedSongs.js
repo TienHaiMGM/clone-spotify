@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "../../css/LikedSongs/HeaderLikedSongs.module.css";
-import { useSelector } from "react-redux";
 
 export default function HeaderLikedSongs() {
   return (

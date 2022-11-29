@@ -1,3 +1,4 @@
+/* CSS Header Liked Songs */
 .headerLikedSongs {
   display: flex;
   flex-direction: row;
@@ -17,7 +18,7 @@
   flex-direction: column;
   justify-content: flex-end;
   margin-left: 2em;
-  color: white;
+  color: var(--text-color);
   font-weight: bold;
 }
 .contentHeaderLikedSongs h1 {

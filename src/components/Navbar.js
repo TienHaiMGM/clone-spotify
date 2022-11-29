@@ -1,47 +1,54 @@
 import {
+  faFileImage,
   faHouse,
   faMagnifyingGlass,
   faPlus,
   faShieldHeart,
   faTableList,
+  faX
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Driver from "driver.js";
 import "driver.js/dist/driver.min.css";
 import React, { useEffect, useState } from "react";
 import { Nav } from "react-bootstrap";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import AlbumPlaceHolder from "../assets/images/AlbumPlaceHolder.png";
 import Logo from "../assets/images/Logo.png";
+import ContextMenu from "../components/ContextMenu";
 import styles from "../css/Navbar.module.css";
 import "../css/PopupLogin.css";
 import {
-  popupLibrary,
-  popupLikedSongs,
-  popupCreatePlaylist,
+  popupCreatePlaylist, popupLibrary,
+  popupLikedSongs
 } from "../data/popup";
 import {
-  getMyPlaylists,
-  createPlaylist,
-  unfollowPlaylist,
-  deleteItemsToPlaylist,
+  createPlaylist, editDetailPlaylist, editImagePlaylist, getMyPlaylists
 } from "../redux/features/playlistsSlice";
-import ContextMenu from "../components/ContextMenu";
 
 export default function Navbar() {
   const [namePlaylist, setNamePlaylist] = useState(0);
   const [anchorPoint, setAnchorPoint] = useState({ x: 0, y: 0 });
   const [targetContextMenu, setTargetContextMenu] = useState();
   const [showContextMenu, setShowContextMenu] = useState(false);
+  const [showEditDetail, setShowEditDetail] = useState(false);
+  const [editNamePlaylist, setEditNamePlaylist] = useState("");
+  const [editDescriptionPlaylist, setEditDescriptionPlaylist] = useState("");
+  const [urlEditImagePlaylist, setUrlEditImagePlaylist] = useState();
+  const [base64ImagePlaylist, setBase64ImagePlaylist] = useState();
   const dispatch = useDispatch();
   const stateLogin = useSelector((state) => state.loginReducer);
   const tokens = stateLogin?.data?.token;
+  const statePlaylist = useSelector(
+    (state) => state.playlistsReducer.data.playList
+  );
 
-  //Right Click Context Menu
+  /*Right Click Context Menu*/
   useEffect(() => {
     dispatch(getMyPlaylists());
     document.addEventListener("contextmenu", (event) => {
-      event.preventDefault();
+      // event.preventDefault();
     });
     const element = document.getElementById("contextMenuRightClick");
     element?.addEventListener("contextmenu", (event) => {
@@ -59,7 +66,6 @@ export default function Navbar() {
   const handleContextMenu = (event) => {
     const nameAttribute = event.target.getAttribute("name");
     setAnchorPoint({ x: event.pageX, y: event.pageY });
-
     if (nameAttribute) {
       setTargetContextMenu(nameAttribute);
       setShowContextMenu(true);
@@ -71,7 +77,6 @@ export default function Navbar() {
     setShowContextMenu(false);
   };
 
-  //Right Click Context Menu
   const stateMyPlaylist = useSelector(
     (state) => state.playlistsReducer.data.myPlaylists
   );
@@ -95,7 +100,7 @@ export default function Navbar() {
   driverLikedSongs.defineSteps(popupLikedSongs);
   const driverCreatePlaylist = new Driver();
   driverCreatePlaylist.defineSteps(popupCreatePlaylist);
-  //Create Name for My Playlist
+
   const handleClickPopupLibrary = () => {
     if (tokens === null) {
       driverLibrary.start();
@@ -117,6 +122,49 @@ export default function Navbar() {
       // dispatch(deleteItemsToPlaylist());
       // dispatch(unfollowPlaylist());
     }
+  };
+
+  //Edit Name + description + image cho playlist
+  useEffect(() => {
+    setEditNamePlaylist(statePlaylist.name);
+    setEditDescriptionPlaylist(statePlaylist.description);
+  }, [statePlaylist]);
+
+  const handleClickSubmit = () => {
+    setShowEditDetail(false);
+    dispatch(
+      editImagePlaylist({ base64ImagePlaylist, targetContextMenu })
+    ).then((value) => {
+      dispatch(getMyPlaylists());
+    });
+    dispatch(
+      editDetailPlaylist({
+        targetContextMenu,
+        editNamePlaylist,
+        editDescriptionPlaylist,
+      })
+    ).then((value) => {
+      dispatch(getMyPlaylists());
+    });
+  };
+  //get thong tin de show tu ben context menu
+  const getShowEditDetail = (value) => {
+    setShowEditDetail(value);
+  };
+
+  //Xu ly image duoc upload
+  const handleOnchangeUploadImage = (value) => {
+    const url = window.URL.createObjectURL(value);
+    setUrlEditImagePlaylist(url);
+    getBase64(value);
+  };
+  const getBase64 = (file) => {
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      const base64String = reader.result.replace("data:image/jpeg;base64,", "");
+      setBase64ImagePlaylist(base64String);
+    };
   };
 
   return (
@@ -191,7 +239,72 @@ export default function Navbar() {
         <ContextMenu
           anchorPoint={anchorPoint}
           targetContextMenu={targetContextMenu}
+          getShowEditDetail={getShowEditDetail}
         />
+      </div>
+      <div style={showEditDetail ? { display: "block" } : { display: "none" }}>
+        <div className={styles.blurBackground}></div>
+        <div className={styles.editDetails}>
+          <div>
+            <h1>Edit Details</h1>
+            <span
+              onClick={() => setShowEditDetail(false)}
+              className={styles.iconX}
+            >
+              <FontAwesomeIcon icon={faX} />
+            </span>
+          </div>
+          <div>
+            <div className={styles.editImage}>
+              <img
+                className={styles.imageHolder}
+                src={urlEditImagePlaylist || AlbumPlaceHolder}
+                alt=""
+              />
+              <span className={styles.chooseImage}>
+                <label htmlFor="uploadImage">
+                  <FontAwesomeIcon
+                    className={styles.iconFileImage}
+                    icon={faFileImage}
+                  />
+                  <p>Choose Photo</p>
+                </label>
+                <input
+                  onChange={(e) => handleOnchangeUploadImage(e.target.files[0])}
+                  id="uploadImage"
+                  type="file"
+                  value=""
+                  // accept="image/png, image/jpeg"
+                />
+              </span>
+            </div>
+            <form>
+              <input
+                onChange={(e) => setEditNamePlaylist(e.target.value)}
+                className={styles.editName}
+                type="text"
+                placeholder="New Name Playlist"
+                value={editNamePlaylist || ""}
+              />
+              <textarea
+                onChange={(e) => setEditDescriptionPlaylist(e.target.value)}
+                className={styles.editDescription}
+                rows="3"
+                cols="35"
+                value={editDescriptionPlaylist || ""}
+                placeholder="New playlist description"
+              />
+              <button onClick={() => handleClickSubmit()} type="submit">
+                Save
+              </button>
+            </form>
+          </div>
+          <p>
+            By proceeding, you agree to give Spotify access to the image you
+            choose to upload. Please make sure you have the right to upload the
+            image.
+          </p>
+        </div>
       </div>
     </div>
   );

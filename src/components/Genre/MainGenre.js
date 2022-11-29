@@ -1,7 +1,7 @@
 import React from "react";
-import styles from "../../css/Genre/MainGenre.module.css";
-import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import styles from "../../css/Genre/MainGenre.module.css";
 
 export default function MainGenre(props) {
   const statePlaylistGenre = useSelector(

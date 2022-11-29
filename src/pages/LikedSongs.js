@@ -4,9 +4,9 @@ import styles from "../css/LikedSongs/LikedSongs.module.css";
 
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import Navbar from "../components/Navbar";
 import HeaderLikedSongs from "../components/LikedSongs/HeaderLikedSongs";
 import MainLikedSongs from "../components/LikedSongs/MainLikedSongs";
+import Navbar from "../components/Navbar";
 
 export default function LikedSongs() {
   const [isPlaying, setIsPlaying] = useState(false);

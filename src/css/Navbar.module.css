@@ -1,82 +1,48 @@
+/* CSS Nav bar */
 .sideBar {
   background-color: black;
   height: 100%;
 }
 .navbar {
   background-color: #000000;
-  height: 40%;
+  max-height: 25em;
   width: 100%;
   padding: 1.5em;
   border-bottom: 1px solid rgba(155, 155, 155, 0.3);
 }
-
 .navbar img {
   width: 45%;
   min-width: 6em;
   background-color: black;
 }
-
 .menu {
   display: flex;
   flex-direction: column;
 }
-
 .menu div {
   display: flex;
   flex-direction: column;
 }
-
 .menu .headMenu {
   margin-bottom: 2em;
 }
-
 .menuLink {
   display: flex;
   margin-top: 1em;
-  text-decoration: none;
-  color: white;
-}
-
-.menuLink {
   font-size: 1.5em;
   font-weight: bold;
-  opacity: 0.7;
+  text-decoration: var(--a-textDecoration);
+  color: var(--subText-color);
 }
-
 .menuLink:hover {
-  opacity: 1;
-  color: white;
+  color: var(--text-color);
 }
-
 .menuLink:active {
-  opacity: 1;
-  color: white;
   font-size: 1.4em;
 }
-
 .menuLink span {
   margin-left: 1em;
   font-size: 1rem;
-}
-
-.footNav {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  bottom: 7em;
-}
-
-.footNav a {
-  text-decoration: none;
-  color: white;
-  opacity: 0.7;
-}
-.footNav a:hover {
-  text-decoration: underline;
-}
-
-.navbar .hidePopup {
-  display: none;
 }
 
 /* My Playlist */
@@ -85,18 +51,148 @@
 }
 .myPlaylist a {
   text-decoration: none;
-  color: white;
+  color: var(--subText-color);
   cursor: default;
-  opacity: 0.8;
   line-height: 1.3em;
   font-size: 0.9em;
 }
 .myPlaylist a:hover {
-  opacity: 1;
+  color: var(--text-color);
 }
-
 .inputType {
   position: absolute;
   top: 0;
   left: 0;
+}
+
+/* CSS Foot Nav */
+.footNav {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  bottom: 7em;
+}
+.footNav a {
+  text-decoration: var(--a-textDecoration);
+  color: var(--subText-color);
+}
+.footNav a:hover {
+  text-decoration: var(--aHover-textDecoration);
+}
+.navbar .hidePopup {
+  display: none;
+}
+
+/* CSS Edit detail */
+.editDetails {
+  position: absolute;
+  top: 30vh;
+  left: 37vw;
+  background-color: #282828;
+  opacity: 1;
+  z-index: 10px;
+  color: white;
+  width: 35em;
+  height: 24em;
+  border-radius: 5px;
+  padding: 1.5em;
+}
+.blurBackground {
+  height: 100vh;
+  width: 100vw;
+  background-color: black;
+  opacity: 0.5;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.editDetails h1 {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 1em;
+}
+.editDetails div {
+  display: flex;
+  gap: 1.5em;
+}
+.editDetails input,
+.editDetails textarea {
+  border: none;
+  outline: none;
+  border-radius: 2px;
+  width: 100%;
+  padding-left: 10px;
+  color: white;
+  background-color: #3e3e3e;
+}
+.editName {
+  margin-bottom: 1.5em;
+  height: 2.5em;
+}
+.editDescription {
+  height: 7.1em;
+  text-align: start;
+  padding-top: 10px;
+  resize: none;
+}
+.editDetails div {
+  display: flex;
+  justify-content: space-between;
+}
+.editDetails .iconX:hover {
+  transform: scale(1.2);
+}
+.editDetails button {
+  border-radius: 50px;
+  width: 100px;
+  height: 50px;
+  color: black;
+  font-weight: bold;
+  border: none;
+  float: right;
+  margin: 5px 0;
+}
+.editDetails button:hover {
+  transform: scale(1.1);
+}
+.editDetails p {
+  font-size: 0.8em;
+  font-weight: bold;
+}
+/* CSS Edit Image */
+.editImage {
+  max-width: 170px;
+}
+.editImage img {
+  min-width: 180px;
+  max-height: 180px;
+}
+.chooseImage {
+  display: none;
+  position: relative;
+}
+.iconFileImage {
+  position: absolute;
+  top: 30px;
+  left: -140px;
+  font-size: 5em;
+}
+.chooseImage p {
+  position: absolute;
+  top: 120px;
+  left: -150px;
+}
+.editImage:hover .chooseImage {
+  display: block;
+}
+.editImage:hover .imageHolder {
+  visibility: hidden;
+}
+.chooseImage input {
+  position: absolute;
+  top: 5px;
+  left: -200px;
+  width: 180px;
+  height: 180px;
+  opacity: 0;
 }

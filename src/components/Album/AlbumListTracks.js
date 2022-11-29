@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import { faPause, faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClock, faPause, faPlay } from "@fortawesome/free-solid-svg-icons";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import styles from "../../css/Album/MainAlbum.module.css";
 import { convertMsToMinutesSeconds } from "../../utils/convertTime";
-import { Link } from "react-router-dom";
 
 export default function AlbumListTracks(props) {
   const [isPlaying, setIsPlaying] = useState(false);

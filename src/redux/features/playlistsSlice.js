@@ -13,10 +13,10 @@ const initialState = {
 export const getPlaylist = createAsyncThunk(
   "playList/getPlaylist",
   async (arg, thunkApI) => {
-    const idPlaylist = arg.playlistId;
+    const playlistId = arg.playlistId;
     const token = thunkApI.getState().loginReducer.data.token;
     const res = await axios.get(
-      `https://api.spotify.com/v1/playlists/${idPlaylist}?country=VN`,
+      `https://api.spotify.com/v1/playlists/${playlistId}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -70,13 +70,58 @@ export const createPlaylist = createAsyncThunk(
   }
 );
 
+export const checkFollowPlaylist = createAsyncThunk(
+  "playList/checkFollowPlaylist",
+  async (arg, thunkApi) => {
+    const token = thunkApi.getState().loginReducer.data.token;
+    const userID = thunkApi.getState().loginReducer.data.user.id;
+    const playlistId = arg.playlistId;
+    const response = await axios.get(
+      `https://api.spotify.com/v1/playlists/${playlistId}/followers/contains`,
+      {
+        params: {
+          ids: userID,
+        },
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response.data;
+  }
+);
+
+export const followPlaylist = createAsyncThunk(
+  "playList/followPlaylist",
+  async (arg, thunkApi) => {
+    const token = thunkApi.getState().loginReducer.data.token;
+    const playlistId = arg.playlistId;
+    const response = await axios.put(
+      `https://api.spotify.com/v1/playlists/${playlistId}/followers`,
+      {
+        public: true,
+      },
+      {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response.status;
+  }
+);
+
 export const unfollowPlaylist = createAsyncThunk(
   "playList/unfollowPlaylist",
   async (arg, thunkApi) => {
     const token = thunkApi.getState().loginReducer.data.token;
-    const idPlaylist = arg.idPlaylist;
+    const playlistId = arg.playlistId;
     const response = await axios.delete(
-      `https://api.spotify.com/v1/playlists/${idPlaylist}/followers`,
+      `https://api.spotify.com/v1/playlists/${playlistId}/followers`,
       {
         headers: {
           Accept: "application/json",
@@ -93,14 +138,14 @@ export const addItemsToPlaylist = createAsyncThunk(
   "playList/addItemsToPlaylist",
   async (arg, thunkApi) => {
     const token = thunkApi.getState().loginReducer.data.token;
-    const idPlaylist = "4wvxZG5MubqOwaNtSJEUf5";
+    const playlistId = "39Sj6AZIlcSslxMkFTXeVy";
     const idTrack = "3zYBfVC5Fo17ICTMJwqNKP";
-    const res = await axios.post(
-      `https://api.spotify.com/v1/playlists/${idPlaylist}/tracks`,
+    const response = await axios.post(
+      `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
       "",
       {
         params: {
-          position: "1",
+          position: "0",
           uris: `spotify:track:${idTrack}`,
         },
         headers: {
@@ -110,7 +155,7 @@ export const addItemsToPlaylist = createAsyncThunk(
         },
       }
     );
-    return res.data;
+    return response.data;
   }
 );
 
@@ -118,10 +163,10 @@ export const deleteItemsToPlaylist = createAsyncThunk(
   "playList/deleteItemsToPlaylist",
   async (arg, thunkApi) => {
     const token = thunkApi.getState().loginReducer.data.token;
-    const idPlaylist = "4wvxZG5MubqOwaNtSJEUf5";
+    const playlistId = "4wvxZG5MubqOwaNtSJEUf5";
     const idTrack = "3zYBfVC5Fo17ICTMJwqNKP";
     const response = await axios.delete(
-      `https://api.spotify.com/v1/playlists/${idPlaylist}/tracks`,
+      `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
       {
         headers: {
           Accept: "application/json",
@@ -145,13 +190,14 @@ export const renamePlaylist = createAsyncThunk(
   "playList/renamePlaylist",
   async (arg, thunkApi) => {
     const token = thunkApi.getState().loginReducer.data.token;
-    const idPlaylist = arg.idPlaylist;
+    const playlistId = arg.playlistId;
     const newName = arg.newName;
+    const newDescription = arg.description;
     const response = await axios.put(
-      `https://api.spotify.com/v1/playlists/${idPlaylist}`,
+      `https://api.spotify.com/v1/playlists/${playlistId}`,
       {
-        name: "Updated Playlist Name123123123123",
-        description: "Updated playlist description123123123",
+        name: newName,
+        description: newDescription,
         public: false,
       },
       {
@@ -170,20 +216,41 @@ export const editDetailPlaylist = createAsyncThunk(
   "playList/editDetailPlaylist",
   async (arg, thunkApi) => {
     const token = thunkApi.getState().loginReducer.data.token;
-    const idPlaylist = arg.idPlaylist;
-    const newName = arg.newName;
-    const newDescription = arg.newDescription;
+    const playlistId = arg.targetContextMenu;
+    const editNamePlaylist = arg.editNamePlaylist;
+    const editDescriptionPlaylist = arg.editDescriptionPlaylist;
     const response = await axios.put(
-      `https://api.spotify.com/v1/playlists/${idPlaylist}`,
+      `https://api.spotify.com/v1/playlists/${playlistId}`,
       {
-        name: "Updated Playlist Name123123123123",
-        description: "Updated playlist description123123123",
+        name: editNamePlaylist,
+        description: editDescriptionPlaylist,
         public: false,
       },
       {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response.data;
+  }
+);
+
+export const editImagePlaylist = createAsyncThunk(
+  "playList/editImagePlaylist",
+  async (arg, thunkApi) => {
+    const token = thunkApi.getState().loginReducer.data.token;
+    const playlistId = arg.targetContextMenu;
+    const base64ImagePlaylist = arg.base64ImagePlaylist;
+    const response = await axios.put(
+      `https://api.spotify.com/v1/playlists/${playlistId}/images`,
+      base64ImagePlaylist,
+      {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "image/jpeg",
           Authorization: `Bearer ${token}`,
         },
       }
@@ -218,6 +285,7 @@ const playlistsSlice = createSlice({
             daysAdd: value["added_at"],
             album: value.track.album,
           });
+          return trackPlaylist;
         });
         const totalDuration = playlists?.tracks?.items?.reduce(
           (total, value) => {
@@ -261,6 +329,7 @@ const playlistsSlice = createSlice({
             nameOwner: value.owner["display_name"],
             image: value?.images[0]?.url,
           });
+          return myPlaylists;
         });
         state.data.myPlaylists = myPlaylists;
       })
@@ -278,6 +347,34 @@ const playlistsSlice = createSlice({
         state.loading = false;
       })
       .addCase(createPlaylist.rejected, (state, action) => {
+        state.loading = false;
+        state.error = true;
+      })
+
+      //Check Follow Playlist
+      .addCase(checkFollowPlaylist.pending, (state, action) => {
+        state.loading = true;
+        state.error = false;
+      })
+      .addCase(checkFollowPlaylist.fulfilled, (state, action) => {
+        state.loading = false;
+        const checkFollowPlaylist = action.payload[0];
+        state.data.checkFollowPlaylist = checkFollowPlaylist;
+      })
+      .addCase(checkFollowPlaylist.rejected, (state, action) => {
+        state.loading = false;
+        state.error = true;
+      })
+
+      //Follow Playlist
+      .addCase(followPlaylist.pending, (state, action) => {
+        state.loading = true;
+        state.error = false;
+      })
+      .addCase(followPlaylist.fulfilled, (state, action) => {
+        state.loading = false;
+      })
+      .addCase(followPlaylist.rejected, (state, action) => {
         state.loading = false;
         state.error = true;
       })
@@ -345,10 +442,23 @@ const playlistsSlice = createSlice({
       .addCase(editDetailPlaylist.rejected, (state, action) => {
         state.loading = false;
         state.error = true;
+      })
+
+      //Edit Image Playlist
+      .addCase(editImagePlaylist.pending, (state, action) => {
+        state.loading = true;
+        state.error = false;
+      })
+      .addCase(editImagePlaylist.fulfilled, (state, action) => {
+        state.loading = false;
+      })
+      .addCase(editImagePlaylist.rejected, (state, action) => {
+        state.loading = false;
+        state.error = true;
       });
   },
 });
 
-export const {} = playlistsSlice.actions;
+// export const {} = playlistsSlice.actions;
 
 export default playlistsSlice.reducer;
