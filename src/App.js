@@ -32,7 +32,6 @@ function App() {
       dispatch(login(_token));
       dispatch(getUsers({ _token }));
     }
-
     dispatch(getCategories());
     dispatch(getCategorie());
     dispatch(getAlbums());

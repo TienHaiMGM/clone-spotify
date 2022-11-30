@@ -5,7 +5,7 @@ import {
   faPlus,
   faShieldHeart,
   faTableList,
-  faX
+  faX,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Driver from "driver.js";
@@ -20,11 +20,15 @@ import ContextMenu from "../components/ContextMenu";
 import styles from "../css/Navbar.module.css";
 import "../css/PopupLogin.css";
 import {
-  popupCreatePlaylist, popupLibrary,
-  popupLikedSongs
+  popupCreatePlaylist,
+  popupLibrary,
+  popupLikedSongs,
 } from "../data/popup";
 import {
-  createPlaylist, editDetailPlaylist, editImagePlaylist, getMyPlaylists
+  createPlaylist,
+  editDetailPlaylist,
+  editImagePlaylist,
+  getMyPlaylists,
 } from "../redux/features/playlistsSlice";
 
 export default function Navbar() {
@@ -43,12 +47,16 @@ export default function Navbar() {
   const statePlaylist = useSelector(
     (state) => state.playlistsReducer.data.playList
   );
+  useEffect(() => {
+    if (tokens) {
+      dispatch(getMyPlaylists());
+    }
+  }, [tokens]);
 
   /*Right Click Context Menu*/
   useEffect(() => {
-    dispatch(getMyPlaylists());
     document.addEventListener("contextmenu", (event) => {
-      // event.preventDefault();
+      event.preventDefault();
     });
     const element = document.getElementById("contextMenuRightClick");
     element?.addEventListener("contextmenu", (event) => {
@@ -80,7 +88,6 @@ export default function Navbar() {
   const stateMyPlaylist = useSelector(
     (state) => state.playlistsReducer.data.myPlaylists
   );
-
   useEffect(() => {
     setNamePlaylist((value) => {
       const namePlaylistTemp = `My Playlist #${stateMyPlaylist.length + 1}`;
@@ -152,7 +159,7 @@ export default function Navbar() {
     setShowEditDetail(value);
   };
 
-  //Xu ly image duoc upload
+  //Xu ly image uploaded
   const handleOnchangeUploadImage = (value) => {
     const url = window.URL.createObjectURL(value);
     setUrlEditImagePlaylist(url);

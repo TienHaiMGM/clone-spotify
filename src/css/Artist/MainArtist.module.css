@@ -62,8 +62,10 @@
 }
 .numberTrack span {
   position: relative;
-  left: 10px;
+  left: 8px;
+  top: 10px;
   display: none;
+  height: 50px;
 }
 .numberTrack p {
   margin-top: 10px;

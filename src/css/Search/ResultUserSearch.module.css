@@ -17,6 +17,10 @@
 .topResult {
   margin-right: 2em;
 }
+.topResult a {
+  text-decoration: var(--a-textDecoration);
+  color: var(--text-color);
+}
 .resultInfo {
   background-color: #181818;
   padding: 20px;

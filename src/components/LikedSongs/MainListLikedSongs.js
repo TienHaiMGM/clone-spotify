@@ -7,9 +7,13 @@ import {
   convertDaysAdded,
   convertMsToMinutesSeconds,
 } from "../../utils/convertTime";
+import { setPlaying } from "../../redux/features/currentlyPlayingSlice";
+import { useDispatch } from "react-redux";
 
 export default function MainListLikedSongs(props) {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [idPlaying, setIdPlaying] = useState(null);
+  const dispatch = useDispatch();
   const tracks = props?.dataTracks;
   const number = props.number + 1;
   const statePlayingCurrent = props.statePlaying;
@@ -17,32 +21,25 @@ export default function MainListLikedSongs(props) {
     setIsPlaying(statePlayingCurrent);
   }, [statePlayingCurrent]);
 
-  const handleClickPlay = () => {
-    setIsPlaying(true);
-    props.getIdForUrl(props.number);
-    props.getIsPlaying(true);
+  useEffect(() => {
+    dispatch(setPlaying({ id: idPlaying, isPlaying: isPlaying }));
+  }, [isPlaying, idPlaying]);
+
+  const handleClickTogglePlayPause = (id) => {
+    if (isPlaying === false) {
+      setIsPlaying(true);
+      setIdPlaying(id);
+    } else {
+      setIsPlaying(false);
+    }
   };
-  const handleClickPause = () => {
-    setIsPlaying(false);
-    props.getIdForUrl(null);
-    props.getIsPlaying(false);
-  };
+
   return (
     <div className={styles.mainListTracks}>
       <div className={styles.track}>
-        {isPlaying ? (
-          <span onClick={() => handleClickPause()}>
-            <FontAwesomeIcon icon={faPause} />
-          </span>
-        ) : (
-          <span
-            onClick={() => {
-              handleClickPlay();
-            }}
-          >
-            <FontAwesomeIcon icon={faPlay} />
-          </span>
-        )}
+        <span onClick={() => handleClickTogglePlayPause(tracks.id)}>
+          <FontAwesomeIcon icon={isPlaying ? faPause : faPlay} />
+        </span>
         <p>{number}</p>
         <div className={styles.infoTrack}>
           <img src={tracks.image} alt="" />

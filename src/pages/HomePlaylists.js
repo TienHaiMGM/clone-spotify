@@ -5,7 +5,6 @@ import styles from "../css/HomePlaylists/HomePlaylists.module.css";
 
 export default function HomePlaylists() {
   const stateCategories = useSelector((state) => state.categoriesReducer);
-
   return (
     <div className={styles.playlists}>
       <div>

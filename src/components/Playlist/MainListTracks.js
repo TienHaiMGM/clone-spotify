@@ -1,44 +1,41 @@
 import { faPause, faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styles from "../../css/Playlist/MainPlaylist.module.css";
 import {
   convertDaysAdded,
   convertMsToMinutesSeconds,
 } from "../../utils/convertTime";
+import { setPlaying } from "../../redux/features/currentlyPlayingSlice";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function MainListTracks(props) {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [idPlaying, setIdPlaying] = useState(null);
+  const dispatch = useDispatch();
   const number = props.number + 1;
   const tracks = props.tracks;
-  const handleClickPlay = () => {
-    setIsPlaying(true);
-    props.getIdForUrl(props.number);
-    props.getIsPlaying(true);
-  };
-  const handleClickPause = () => {
-    setIsPlaying(false);
-    props.getIdForUrl(null);
-    props.getIsPlaying(false);
+
+  useEffect(() => {
+    dispatch(setPlaying({ id: idPlaying, isPlaying: isPlaying }));
+  }, [isPlaying, idPlaying]);
+
+  const handleClickTogglePlayPause = (id) => {
+    if (isPlaying === false) {
+      setIsPlaying(true);
+      setIdPlaying(id);
+    } else {
+      setIsPlaying(false);
+    }
   };
 
   return (
     <div className={styles.mainListTracks}>
       <div className={styles.track}>
-        {isPlaying ? (
-          <span onClick={() => handleClickPause()}>
-            <FontAwesomeIcon icon={faPause} />
-          </span>
-        ) : (
-          <span
-            onClick={() => {
-              handleClickPlay();
-            }}
-          >
-            <FontAwesomeIcon icon={faPlay} />
-          </span>
-        )}
+        <span onClick={() => handleClickTogglePlayPause(tracks.id)}>
+          <FontAwesomeIcon icon={isPlaying ? faPause : faPlay} />
+        </span>
         <p>{number}</p>
         <div className={styles.infoTrack}>
           <img src={tracks.image} alt="" />

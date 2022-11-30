@@ -10,10 +10,10 @@ const initialState = {
 export const getAlbum = createAsyncThunk(
   "album/getAlbum",
   async (arg, thunkApI) => {
-    const albumId = arg.albumId;
     const token = thunkApI.getState().loginReducer.data.token;
+    const albumId = arg.albumId;
     const res = await axios.get(
-      `https://api.spotify.com/v1/albums/${albumId}/?country=VN`,
+      `https://api.spotify.com/v1/albums/${albumId}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,

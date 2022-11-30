@@ -9,46 +9,44 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "../../css/LikedSongs/MainLikedSongs.module.css";
 import { getLikedSongs } from "../../redux/features/likedSongsSlice";
 import MainListLikedSongs from "./MainListLikedSongs";
+import { setPlaying } from "../../redux/features/currentlyPlayingSlice";
 
-export default function MainLikedSongs(props) {
-  const [statePlaying, setStatePlaying] = useState(false);
+export default function MainLikedSongs() {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [idPlaying, setIdPlaying] = useState(null);
   const dispatch = useDispatch();
   const listTrackLikedSongs = useSelector(
     (state) => state.likedSongsReducer?.data?.listTrackLikedSongs
   );
   const dataTracks = listTrackLikedSongs;
-  const statePlayingCurrent = props.statePlaying;
+  const currentlyPlaying = useSelector(
+    (state) => state.currentlyPlayingReducer.data.playing
+  );
+
   useEffect(() => {
     dispatch(getLikedSongs());
   }, []);
+
   useEffect(() => {
-    setStatePlaying(statePlayingCurrent);
-  }, [statePlayingCurrent]);
+    currentlyPlaying.isPlaying ? setIsPlaying(true) : setIsPlaying(false);
+  }, [currentlyPlaying.isPlaying]);
   const handleClickTogglePlayPause = () => {
-    setStatePlaying((state) => {
-      return !state;
+    setIsPlaying((value) => {
+      dispatch(setPlaying({ id: idPlaying, isPlaying: !value }));
+      return !value;
     });
   };
+
   return (
     <div className={styles.mainLikedSongs}>
       <div className={styles.mainLikedSongsBtn}>
-        {statePlaying ? (
-          <span>
-            <FontAwesomeIcon
-              onClick={() => handleClickTogglePlayPause()}
-              className={styles.iconPlay}
-              icon={faCirclePause}
-            />
-          </span>
-        ) : (
-          <span>
-            <FontAwesomeIcon
-              onClick={() => handleClickTogglePlayPause()}
-              className={styles.iconPlay}
-              icon={faCirclePlay}
-            />
-          </span>
-        )}
+        <span>
+          <FontAwesomeIcon
+            onClick={() => handleClickTogglePlayPause()}
+            className={styles.iconPlay}
+            icon={isPlaying ? faCirclePause : faCirclePlay}
+          />
+        </span>
       </div>
       <div className={styles.listTracks}>
         <div className={styles.headerListTracks}>
@@ -72,9 +70,6 @@ export default function MainLikedSongs(props) {
                   key={index}
                   number={index}
                   dataTracks={data}
-                  getIdForUrl={props.getIdForUrl}
-                  getIsPlaying={props.getIsPlaying}
-                  statePlaying={statePlaying}
                 />
               );
             })}

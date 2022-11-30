@@ -16,11 +16,12 @@ import ReactAudioPlayer from "react-audio-player";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styles from "../css/Footer.module.css";
-import { getPlayer } from "../redux/features/currentlyPlayingSlice";
+import { getPlayer, setPlaying } from "../redux/features/currentlyPlayingSlice";
 import { getListTrackPlaying } from "../redux/features/listTrackPlayingSlice";
 
 export default function Footer(props) {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [idPlaying, setIdPlaying] = useState(null);
   const [isLoop, setIsLoop] = useState(false);
   const [volume, setVolume] = useState(10);
   const [durations, setDurations] = useState(0);
@@ -28,6 +29,7 @@ export default function Footer(props) {
   const [isAutoPlay, setIsAutoPlay] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [isShuffle, setIsShuffle] = useState(false);
+
   const audioRef = useRef();
   const inputDurationRef = useRef();
   const dispatch = useDispatch();
@@ -39,6 +41,9 @@ export default function Footer(props) {
   const stateListTracksPlaying = useSelector(
     (state) => state.listTrackPlayingReducer
   );
+  const trackCurrentlyPlaying = useSelector(
+    (state) => state.currentlyPlayingReducer.data.playing
+  );
   const stateAlbumTracks = useSelector((state) => state.albumReducer);
   const statePlaylistTrack = useSelector((state) => state.playlistsReducer);
   const stateArtistTrack = useSelector((state) => state.artistReducer);
@@ -49,44 +54,16 @@ export default function Footer(props) {
   const dataPlaylistTracks = statePlaylistTrack?.data?.playList.tracks;
   const dataArtistTrack = stateArtistTrack?.data.artistTracks;
   const dataLikedSongs = stateLikedSongsTrack?.data?.listTrackLikedSongs;
-
-  const tracks = dataAlbumTracks
-    ? dataAlbumTracks
-    : dataPlaylistTracks
-    ? dataPlaylistTracks
-    : dataArtistTrack
-    ? dataArtistTrack
-    : dataLikedSongs
-    ? dataLikedSongs
-    : listTrackPlaying;
-
-  const urlFormTracks = props?.idForUrl;
-  const statePlay = props?.getIsPlaying;
+  const tracks =
+    dataAlbumTracks ||
+    dataPlaylistTracks ||
+    dataArtistTrack ||
+    dataLikedSongs ||
+    listTrackPlaying;
   useEffect(() => {
-    dispatch(getPlayer()).then((valuePlayer) => {
-      dispatch(getListTrackPlaying()).then((valueListTrack) => {
-        getTrackCurrent();
-      });
-    });
-  }, []);
-
-  function getTrackCurrent() {
-    const indexTrackCurrent = listTrackPlaying?.findIndex(
-      (value) => value?.id === currentlyPlaying?.id
-    );
-    setTrackCurrent(indexTrackCurrent);
-  }
-
-  useEffect(() => {
-    if (statePlay === false) {
-      setIsPlaying(false);
-      setIsAutoPlay(false);
-    } else if (statePlay === true) {
-      setTrackCurrent(urlFormTracks);
-      setIsPlaying(true);
-      setIsAutoPlay(true);
-    }
-  }, [statePlay]);
+    trackCurrentlyPlaying.isPlaying ? setIsPlaying(true) : setIsPlaying(false);
+    getTrackCurrent();
+  }, [trackCurrentlyPlaying.isPlaying]);
 
   useEffect(() => {
     const audioEl = audioRef?.current?.audioEl.current;
@@ -97,8 +74,18 @@ export default function Footer(props) {
     }
   }, [isPlaying]);
 
+  const getTrackCurrent = () => {
+    const indexTrackCurrent = tracks?.findIndex(
+      (value) => value?.id === trackCurrentlyPlaying?.id
+    );
+    setTrackCurrent((value) => {
+      return indexTrackCurrent;
+    });
+  };
+
   const handleTogglePlayPause = () => {
     setIsPlaying((value) => {
+      dispatch(setPlaying({ id: idPlaying, isPlaying: !value }));
       return !value;
     });
   };
@@ -204,12 +191,7 @@ export default function Footer(props) {
                 className={styles.buttonPlay}
               >
                 <FontAwesomeIcon
-                  style={isPlaying && { display: "none" }}
-                  icon={faCirclePlay}
-                />
-                <FontAwesomeIcon
-                  style={!isPlaying && { display: "none" }}
-                  icon={faCirclePause}
+                  icon={isPlaying ? faCirclePause : faCirclePlay}
                 />
               </button>
               <button onClick={() => handleClickForward()}>

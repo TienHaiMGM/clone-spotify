@@ -4,43 +4,38 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "../../css/Album/MainAlbum.module.css";
 import { convertMsToMinutesSeconds } from "../../utils/convertTime";
+import { useSelector, useDispatch } from "react-redux";
+import { setPlaying } from "../../redux/features/currentlyPlayingSlice";
 
 export default function AlbumListTracks(props) {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [idPlaying, setIdPlaying] = useState(null);
+  const dispatch = useDispatch();
   const dataTracks = props.dataTracks;
   const number = props.number + 1;
-  const statePlayingCurrent = props.statePlaying;
-  useEffect(() => {
-    setIsPlaying(statePlayingCurrent);
-  }, [statePlayingCurrent]);
+  const currentlyPlaying = useSelector(
+    (state) => state.currentlyPlayingReducer.data.playing
+  );
 
-  const handleClickPlay = () => {
-    setIsPlaying(true);
-    props.getIdForUrl(props.number);
-    props.getIsPlaying(true);
-  };
-  const handleClickPause = () => {
-    setIsPlaying(false);
-    props.getIdForUrl(null);
-    props.getIsPlaying(false);
+  useEffect(() => {
+    dispatch(setPlaying({ id: idPlaying, isPlaying: isPlaying }));
+  }, [isPlaying, idPlaying]);
+  const handleClickTogglePlayPause = (id) => {
+    if (isPlaying === false) {
+      setIsPlaying(true);
+      setIdPlaying(id);
+    } else {
+      setIsPlaying(false);
+    }
+    console.log("event", id);
   };
 
   return (
     <div className={styles.albumListTracks}>
       <div className={styles.track}>
-        {isPlaying ? (
-          <span onClick={() => handleClickPause()}>
-            <FontAwesomeIcon icon={faPause} />
-          </span>
-        ) : (
-          <span
-            onClick={() => {
-              handleClickPlay();
-            }}
-          >
-            <FontAwesomeIcon icon={faPlay} />
-          </span>
-        )}
+        <span onClick={() => handleClickTogglePlayPause(dataTracks.id)}>
+          <FontAwesomeIcon icon={isPlaying ? faPause : faPlay} />
+        </span>
         <p>{number}</p>
         <div className={styles.infoTrack}>
           <h6>{dataTracks.title}</h6>

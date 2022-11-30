@@ -82,6 +82,7 @@ const searchSlice = createSlice({
       .addCase(getSearch.fulfilled, (state, action) => {
         state.loading = false;
         const search = action.payload;
+        console.log("search", search);
 
         const dataAlbums = [];
         search?.albums?.items?.map((value) => {
@@ -126,6 +127,7 @@ const searchSlice = createSlice({
             type: value.type,
             images: value.album.images[0].url,
             artists: value.artists[0].name,
+            idArtists: value.artists[0].id,
             duration: value["duration_ms"],
           });
           return dataTracks;

@@ -7,6 +7,10 @@ const initialState = {
   data: {
     items: {},
     player: {},
+    playing: {
+      id: null,
+      isPlaying: false,
+    },
   },
 };
 
@@ -27,7 +31,12 @@ export const getPlayer = createAsyncThunk(
 const currentlyPlayingSlice = createSlice({
   name: "currentlyPlayingSlice",
   initialState,
-  reducers: {},
+  reducers: {
+    setPlaying: (state, action) => {
+      state.data.playing.id = action.payload.id;
+      state.data.playing.isPlaying = action.payload.isPlaying;
+    },
+  },
   extraReducers: (builder) => {
     builder
       //Player
@@ -69,6 +78,6 @@ const currentlyPlayingSlice = createSlice({
   },
 });
 
-// export const {} = currentlyPlayingSlice.actions;
+export const { setPlaying } = currentlyPlayingSlice.actions;
 
 export default currentlyPlayingSlice.reducer;

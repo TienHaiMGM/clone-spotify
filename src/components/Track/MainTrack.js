@@ -13,24 +13,44 @@ import {
   removeUserSavedTracks,
   saveTracksForUser,
 } from "../../redux/features/trackSlice";
+import AlertSuccessSave from "../AlertSuccessSave";
+import { setPlaying } from "../../redux/features/currentlyPlayingSlice";
 
 export default function MainTrack(props) {
   const [statePlaying, setStatePlaying] = useState(false);
   const [isCheckUserSavedTrack, setIsCheckUserSavedTrack] = useState(false);
   const [responseStatus, setResponseStatus] = useState("");
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [idPlaying, setIdPlaying] = useState(null);
   const dispatch = useDispatch();
   const stateTrack = useSelector((state) => state.trackReducer);
   const lyricsTrack = stateTrack?.data?.lyrics;
   const trackId = stateTrack?.data?.track?.id;
+
+  useEffect(() => {
+    dispatch(setPlaying({ id: idPlaying, isPlaying: isPlaying }));
+  }, [isPlaying]);
+
+  const handleClickTogglePlayPause = (id) => {
+    if (isPlaying === false) {
+      setIsPlaying(true);
+      setIdPlaying(id);
+    } else {
+      setIsPlaying(false);
+    }
+  };
   useEffect(() => {
     setIsCheckUserSavedTrack(props.isCheckUserSavedTrack);
   }, [props.isCheckUserSavedTrack]);
 
-  const handleClickTogglePlayPause = () => {
-    setStatePlaying((state) => {
-      return !state;
-    });
-  };
+  useEffect(() => {
+    const responseTime = setTimeout(() => {
+      setResponseStatus("");
+    }, 3000);
+    return () => {
+      clearTimeout(responseTime);
+    };
+  }, [responseStatus]);
 
   const handleCLickLiked = () => {
     if (isCheckUserSavedTrack) {
@@ -46,32 +66,19 @@ export default function MainTrack(props) {
         }
       });
     }
-    setTimeout(() => {
-      setResponseStatus("");
-    }, 3000);
     setIsCheckUserSavedTrack((value) => !value);
   };
 
   return (
     <div className={styles.mainTrack}>
       <div className={styles.mainTrackBtn}>
-        {statePlaying ? (
-          <span>
-            <FontAwesomeIcon
-              onClick={() => handleClickTogglePlayPause()}
-              className={styles.iconPlay}
-              icon={faCirclePause}
-            />
-          </span>
-        ) : (
-          <span>
-            <FontAwesomeIcon
-              onClick={() => handleClickTogglePlayPause()}
-              className={styles.iconPlay}
-              icon={faCirclePlay}
-            />
-          </span>
-        )}
+        <span>
+          <FontAwesomeIcon
+            onClick={() => handleClickTogglePlayPause()}
+            className={styles.iconPlay}
+            icon={isPlaying ? faCirclePause : faCirclePlay}
+          />
+        </span>
         <span>
           <FontAwesomeIcon
             className={
@@ -99,9 +106,10 @@ export default function MainTrack(props) {
           : "Lyrics is available in spotify"}
       </div>
       {responseStatus !== "" && (
-        <div className={`${styles.alertSuccess} `}>
-          <span>{responseStatus} to Your Liked Songs</span>
-        </div>
+        <AlertSuccessSave
+          responseStatus={responseStatus}
+          type={"Liked Songs"}
+        />
       )}
     </div>
   );

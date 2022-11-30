@@ -10,6 +10,7 @@ import Categories from "../HomePlaylists/Categories";
 import Navbar from "../Navbar";
 import InputSearch from "./InputSearch";
 import Songs from "./Songs";
+import { Link } from "react-router-dom";
 
 export default function ResultUserSearch() {
   const stateResultUserSearch = useSelector((state) => state.searchReducer);
@@ -18,6 +19,7 @@ export default function ResultUserSearch() {
   const dataPlaylists =
     stateResultUserSearch?.data?.resultSearch?.dataPlaylists;
   const dataTracks = stateResultUserSearch?.data?.resultSearch?.dataTracks;
+  console.log("stateResultUserSearch", stateResultUserSearch);
   const dispatch = useDispatch();
   const params = useParams();
   const inputSearch = params.searchId;
@@ -41,14 +43,16 @@ export default function ResultUserSearch() {
             <div className={styles.headerContent}>
               <div className={styles.topResult}>
                 <h4>Top Result</h4>
-                <div className={styles.resultInfo}>
-                  <img
-                    src={dataTracks && dataTracks[0].images}
-                    alt={dataTracks && dataTracks[0].title}
-                  />
-                  <h1>{dataTracks && dataTracks[0].title}</h1>
-                  <p>{dataTracks && dataTracks[0].artists}</p>
-                </div>
+                <Link to={`/artist/${dataTracks && dataTracks[0].idArtists}`}>
+                  <div className={styles.resultInfo}>
+                    <img
+                      src={dataTracks && dataTracks[0].images}
+                      alt={dataTracks && dataTracks[0].title}
+                    />
+                    <h1>{dataTracks && dataTracks[0].title}</h1>
+                    <p>{dataTracks && dataTracks[0].artists}</p>
+                  </div>
+                </Link>
               </div>
               <div className={styles.songs}>
                 <h4>Songs</h4>
