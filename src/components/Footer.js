@@ -60,19 +60,11 @@ export default function Footer(props) {
     dataArtistTrack ||
     dataLikedSongs ||
     listTrackPlaying;
+
   useEffect(() => {
     trackCurrentlyPlaying.isPlaying ? setIsPlaying(true) : setIsPlaying(false);
     getTrackCurrent();
   }, [trackCurrentlyPlaying.isPlaying]);
-
-  useEffect(() => {
-    const audioEl = audioRef?.current?.audioEl.current;
-    if (isPlaying) {
-      audioEl?.play();
-    } else {
-      audioEl?.pause();
-    }
-  }, [isPlaying]);
 
   const getTrackCurrent = () => {
     const indexTrackCurrent = tracks?.findIndex(
@@ -82,6 +74,14 @@ export default function Footer(props) {
       return indexTrackCurrent;
     });
   };
+  useEffect(() => {
+    const audioEl = audioRef?.current?.audioEl.current;
+    if (isPlaying) {
+      audioEl?.play();
+    } else {
+      audioEl?.pause();
+    }
+  }, [isPlaying]);
 
   const handleTogglePlayPause = () => {
     setIsPlaying((value) => {

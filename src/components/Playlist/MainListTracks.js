@@ -19,7 +19,7 @@ export default function MainListTracks(props) {
 
   useEffect(() => {
     dispatch(setPlaying({ id: idPlaying, isPlaying: isPlaying }));
-  }, [isPlaying, idPlaying]);
+  }, [isPlaying, idPlaying, dispatch]);
 
   const handleClickTogglePlayPause = (id) => {
     if (isPlaying === false) {
@@ -29,7 +29,6 @@ export default function MainListTracks(props) {
       setIsPlaying(false);
     }
   };
-
   return (
     <div className={styles.mainListTracks}>
       <div className={styles.track}>

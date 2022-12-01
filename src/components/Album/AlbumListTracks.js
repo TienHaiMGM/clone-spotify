@@ -19,7 +19,8 @@ export default function AlbumListTracks(props) {
 
   useEffect(() => {
     dispatch(setPlaying({ id: idPlaying, isPlaying: isPlaying }));
-  }, [isPlaying, idPlaying]);
+  }, [isPlaying, idPlaying, dispatch]);
+
   const handleClickTogglePlayPause = (id) => {
     if (isPlaying === false) {
       setIsPlaying(true);
@@ -27,7 +28,6 @@ export default function AlbumListTracks(props) {
     } else {
       setIsPlaying(false);
     }
-    console.log("event", id);
   };
 
   return (

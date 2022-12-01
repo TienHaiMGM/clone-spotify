@@ -21,7 +21,6 @@ import {
 export default function MainAlbum(props) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [idPlaying, setIdPlaying] = useState(null);
-  const [isSavedTrack, setIsSavedTrack] = useState(false);
   const [isCheckUserSaved, setIsCheckUserSaved] = useState(false);
   const [responseStatus, setResponseStatus] = useState("");
   const dispatch = useDispatch();
@@ -49,7 +48,8 @@ export default function MainAlbum(props) {
         setIsCheckUserSaved(value.payload[0]);
       });
     }
-  }, [typePlayer, idPlayer]);
+  }, [dispatch, idPlayer, typePlayer]);
+
   const handleCLickLiked = () => {
     if (isCheckUserSaved) {
       dispatch(removeUserSaved({ typePlayer, idPlayer })).then((value) => {

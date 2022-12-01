@@ -81,6 +81,7 @@ export default function Navbar() {
       setShowContextMenu(false);
     }
   };
+
   const handleRemoveContextMenu = (event) => {
     setShowContextMenu(false);
   };
